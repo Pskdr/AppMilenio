@@ -2,14 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MilenioApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/bluedark</item>
     </style>
 
     <style name="Theme.MilenioApp" parent="Base.Theme.MilenioApp" />
+
     <style name="Theme.MilenioApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.MilenioApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.MilenioApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

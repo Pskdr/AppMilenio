@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#2F68A1</color>
+    <color name="colorPrimaryDark">#0e1076</color>
+    <color name="colorAccent">#2F6699</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#7A7A7A</color>
+    <color name="greylight">#D3D3D3</color>
+    <color name="greenLigth">#ddf7d2</color>
+    <color name="background">#F3F1F1</color>
+    <color name="blueground">#0044AA</color>
+    <color name="bluelight">#CFE2F3</color>
+    <color name="bluedark">#2F6699</color>
+    <color name="greenlight">#70C656</color>
+    <color name="greendark">#53933F</color>
+    <color name="orangelight">#F3AE1B</color>
+    <color name="orangedark">#BB6008</color>
+    <color name="black">#000000</color>
+    <color name="green">#6ABDA6</color>
+    <color name="Beige">#BAF9F9F3</color>
+    <color name="purple_500">#2F68A1</color>
+    <color name="greenfoot">#00FF38</color>
+    <color name="beige">#fff6ed</color>
+    <color name="blueking">#00B2FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="green2">#C46ABDA6</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#34ABFA</color>
+    <color name="blueligth2">#CFE2F3</color>
 </resources>
