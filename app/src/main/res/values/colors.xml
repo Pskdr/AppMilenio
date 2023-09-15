@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2F68A1</color>
+    <color name="blueNav">#27343F</color>
     <color name="colorPrimaryDark">#0e1076</color>
     <color name="colorAccent">#2F6699</color>
     <color name="white">#FFFFFF</color>

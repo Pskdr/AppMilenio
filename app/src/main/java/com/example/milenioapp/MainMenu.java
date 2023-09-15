@@ -46,6 +46,10 @@ public class MainMenu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        fab.setVisibility(View.INVISIBLE);
+
+        setActionBarTitle("Hola, Olga");
     }
 
     @Override
@@ -61,4 +65,8 @@ public class MainMenu extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
 }

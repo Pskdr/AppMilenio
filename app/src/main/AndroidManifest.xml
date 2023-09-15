@@ -16,11 +16,6 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="."
-            android:exported="false"
-            android:label="@string/title_"
-            android:theme="@style/Theme.MilenioApp" />
-        <activity
             android:name=".MainMenu"
             android:exported="false"
             android:label="@string/title_activity_main_menu"
