@@ -9,17 +9,35 @@
         android:id="@+id/nav_home"
         android:name="com.example.milenioapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_crearClienteFragment2"
+            app:destination="@id/crearClienteFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.milenioapp.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_gallery_to_cronogramaServicios"
+            app:destination="@id/cronogramaServicios" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.milenioapp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/crearClienteFragment2"
+        android:name="com.example.milenioapp.ui.home.crearCliente.CrearClienteFragment"
+        android:label="fragment_crear_cliente"
+        tools:layout="@layout/fragment_crear_cliente" />
+    <fragment
+        android:id="@+id/cronogramaServicios"
+        android:name="com.example.milenioapp.CronogramaServicios"
+        android:label="fragment_cronograma_servicios"
+        tools:layout="@layout/fragment_cronograma_servicios" />
 </navigation>
