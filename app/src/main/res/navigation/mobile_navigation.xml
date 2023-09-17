@@ -13,11 +13,14 @@
         <action
             android:id="@+id/action_nav_home_to_crearClienteFragment2"
             app:destination="@id/crearClienteFragment2" />
+        <action
+            android:id="@+id/action_nav_home_to_empresaDetalleFragment"
+            app:destination="@id/empresaDetalleFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.milenioapp.ui.gallery.GalleryFragment"
+        android:name="com.example.milenioapp.ui.cronogramaServicios.CalendarioCronogramaFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -27,17 +30,22 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.milenioapp.ui.slideshow.SlideshowFragment"
+        android:name="com.example.milenioapp.ui.tecnicos.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/crearClienteFragment2"
         android:name="com.example.milenioapp.ui.home.crearCliente.CrearClienteFragment"
-        android:label="fragment_crear_cliente"
+        android:label="Crear Cliente"
         tools:layout="@layout/fragment_crear_cliente" />
     <fragment
         android:id="@+id/cronogramaServicios"
-        android:name="com.example.milenioapp.CronogramaServicios"
-        android:label="fragment_cronograma_servicios"
+        android:name="com.example.milenioapp.ui.cronogramaServicios.CronogramaServicios"
+        android:label="Cronograma de servicios"
         tools:layout="@layout/fragment_cronograma_servicios" />
+    <fragment
+        android:id="@+id/empresaDetalleFragment"
+        android:name="com.example.milenioapp.ui.home.empresa.EmpresaDetalleFragment"
+        android:label="fragment_empresa_detalle"
+        tools:layout="@layout/fragment_empresa_detalle" />
 </navigation>

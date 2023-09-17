@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.gallery;
+package com.example.milenioapp.ui.cronogramaServicios;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.MainMenu;
@@ -25,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class GalleryFragment extends Fragment {
+public class CalendarioCronogramaFragment extends Fragment {
 
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
@@ -37,7 +36,7 @@ public class GalleryFragment extends Fragment {
     int mesActual = 0;
     int añoActual = 0;
 
-    Button btnIzquierda, btnDerecha;
+    TextView btnIzquierda, btnDerecha;
 
     final ArrayList<String> daysholidays = new ArrayList<>();
 
@@ -148,7 +147,7 @@ public class GalleryFragment extends Fragment {
         String month = numeroAmes(mesActual);
         calendar.getTime().toString();
 
-        tvFecha.setText(monthTraductor(month) +" "+ añoActual);
+        tvFecha.setText(añoActual    +" \n"+ monthTraductor(month));
 
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
         //Log.d("month", diasRegistro(daysInMonth)+ "");
@@ -234,11 +233,6 @@ public class GalleryFragment extends Fragment {
     public void buscarFechaNovedad(String month, ArrayList<String> daysInMonth)  {
 
         Utilities utilities = new Utilities();
-        ArrayList<String> prueba = new ArrayList<>();
-        for(int i = 1; i<daysInMonth.size(); i++){
-            Log.d("pskprueba", "buscarFechaNovedad: "+daysInMonth.get(i));
-        }
-
         mes = utilities.split(month, 0);
         mes = monthTraductor(mes);
         mes = utilities.getMes(mes);
@@ -254,6 +248,8 @@ public class GalleryFragment extends Fragment {
             }
         }, month, arrayFinal, getContext());
         RecyclerView.LayoutManager layoutManager = new CustomGridLayoutManager(getContext(), 7);
+
+        daysholidays.clear();
 
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);

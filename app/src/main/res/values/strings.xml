@@ -16,4 +16,8 @@
     <string name="izquierda">«</string>
     <string name="derecha">»</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crear">Crear ▼</string>
+    <string name="historialzservicios">Historial de servicios ▼</string>
+    <string name="ver"><u>Ver</u></string>
+    <string name="enviaremail"><u>Enviar por email</u></string>
 </resources>

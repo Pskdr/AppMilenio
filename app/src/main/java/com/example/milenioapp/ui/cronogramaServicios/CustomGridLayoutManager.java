@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.gallery;
+package com.example.milenioapp.ui.cronogramaServicios;
 
 import android.content.Context;
 
