@@ -30,9 +30,13 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.milenioapp.ui.tecnicos.SlideshowFragment"
+        android:name="com.example.milenioapp.ui.tecnicos.MisTecnicosFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_asignarServicioFragment"
+            app:destination="@id/asignarServicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/crearClienteFragment2"
         android:name="com.example.milenioapp.ui.home.crearCliente.CrearClienteFragment"
@@ -48,4 +52,9 @@
         android:name="com.example.milenioapp.ui.home.empresa.EmpresaDetalleFragment"
         android:label="fragment_empresa_detalle"
         tools:layout="@layout/fragment_empresa_detalle" />
+    <fragment
+        android:id="@+id/asignarServicioFragment"
+        android:name="com.example.milenioapp.ui.tecnicos.AsignarServicioFragment"
+        android:label="fragment_asignar_servicio"
+        tools:layout="@layout/fragment_asignar_servicio" />
 </navigation>

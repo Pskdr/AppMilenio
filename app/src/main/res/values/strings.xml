@@ -20,4 +20,5 @@
     <string name="historialzservicios">Historial de servicios ▼</string>
     <string name="ver"><u>Ver</u></string>
     <string name="enviaremail"><u>Enviar por email</u></string>
+    <string name="cronograma"><u>Ver cronograma servicios</u></string>
 </resources>
