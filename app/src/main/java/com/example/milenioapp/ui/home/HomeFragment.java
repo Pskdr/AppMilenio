@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
     AdapterEmpresa adapterEmpresa;
 
     private void llenarEmpresas() {
+        empresas.clear();
         empresas.add(new Empresa(0, "PLAFA"));
         empresas.add(new Empresa(1, "Empresa random 1"));
         empresas.add(new Empresa(2, "Empresa random 2"));

@@ -51,8 +51,8 @@ public class AsignarServicioFragment extends Fragment {
         btnEmpresa.setOnClickListener(view1 -> {
 
             llenarAdapter();
-            String finalText = "Seleccionar empresa                                   ";
-            if(!abierto) {
+            String finalText = "Seleccionar empresa ";
+            if(abierto) {
                 finalText += "►";
             }else{
                 finalText += "▼";

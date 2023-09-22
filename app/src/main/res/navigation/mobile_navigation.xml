@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.milenioapp.ui.tecnicos.MisTecnicosFragment"
-        android:label="@string/menu_slideshow"
+        android:label=" "
         tools:layout="@layout/fragment_slideshow" >
         <action
             android:id="@+id/action_nav_slideshow_to_asignarServicioFragment"
@@ -55,6 +55,6 @@
     <fragment
         android:id="@+id/asignarServicioFragment"
         android:name="com.example.milenioapp.ui.tecnicos.AsignarServicioFragment"
-        android:label="fragment_asignar_servicio"
+        android:label=" "
         tools:layout="@layout/fragment_asignar_servicio" />
 </navigation>

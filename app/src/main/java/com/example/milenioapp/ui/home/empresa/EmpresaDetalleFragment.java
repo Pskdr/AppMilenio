@@ -23,6 +23,7 @@ public class EmpresaDetalleFragment extends Fragment {
     private Button btnCrear;
     private ArrayList<Empresa> empresaArrayList = new ArrayList<>();
     private RecyclerView rvOpciones;
+    boolean abierto = false;
     public EmpresaDetalleFragment() {
         // Required empty public constructor
     }
@@ -38,7 +39,16 @@ public class EmpresaDetalleFragment extends Fragment {
         rvOpciones.setLayoutManager(new LinearLayoutManager(getContext()));
 
         btnCrear.setOnClickListener(view1 -> {
+
             desplegarAdapter();
+            String finalText = "Crear ";
+            if(abierto) {
+                finalText += "►";
+            }else{
+                finalText += "▼";
+            }
+            rvOpciones.setVisibility(View.VISIBLE);
+            btnCrear.setText(finalText);
         });
 
         ((MainMenu)getActivity()).setActionBarTitle("Cliente: Empresa#");
@@ -53,10 +63,16 @@ public class EmpresaDetalleFragment extends Fragment {
         empresaArrayList.add(new Empresa(2, "Fomato de inspección #2 planta"));
         empresaArrayList.add(new Empresa(3, "Fomato de arreglos locativos"));
         empresaArrayList.add(new Empresa(4, "Fomato de desinfección"));
+        abierto = true;
 
         adapterEmpresa = new AdapterEmpresa(new AdapterEmpresa.onItemListener() {
             @Override
             public void onItemClick(int position) {
+                abierto = false;
+                rvOpciones.setVisibility(View.GONE);
+
+                String finalText = "Crear ▼";
+                btnCrear.setText(finalText);
 
             }
         },empresaArrayList);

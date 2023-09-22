@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.perseo.dmr.perseoapp"
+        applicationId "com.milenioapp"
         minSdk 26
         targetSdkVersion 33
         versionCode 49

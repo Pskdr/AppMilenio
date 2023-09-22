@@ -127,7 +127,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/et_style_dia"
             android:layout_width="match_parent"
-            android:text="Seleccionar empresa                                   ▼"
+            android:text="Seleccionar empresa ▼"
             android:layout_height="wrap_content"
             />
 
