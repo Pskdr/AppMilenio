@@ -51,10 +51,19 @@
         android:id="@+id/empresaDetalleFragment"
         android:name="com.example.milenioapp.ui.home.empresa.EmpresaDetalleFragment"
         android:label="fragment_empresa_detalle"
-        tools:layout="@layout/fragment_empresa_detalle" />
+        tools:layout="@layout/fragment_empresa_detalle" >
+        <action
+            android:id="@+id/action_empresaDetalleFragment_to_ordenInspeccionFragment"
+            app:destination="@id/ordenInspeccionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/asignarServicioFragment"
         android:name="com.example.milenioapp.ui.tecnicos.AsignarServicioFragment"
         android:label=" "
         tools:layout="@layout/fragment_asignar_servicio" />
+    <fragment
+        android:id="@+id/ordenInspeccionFragment"
+        android:name="com.example.milenioapp.ui.ordenes.OrdenInspeccionFragment"
+        android:label="fragment_orden_inspeccion"
+        tools:layout="@layout/fragment_orden_inspeccion" />
 </navigation>

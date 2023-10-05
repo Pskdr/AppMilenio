@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ordenes.OrdenInspeccionFragment">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:background="@color/blueMilenio"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="200px">
+        <LinearLayout
+            android:layout_weight="33"
+            android:layout_width="0dp"
+            android:background="@drawable/et_style_header"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_margin="20dp"
+                android:background="@drawable/logo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="33"
+            android:layout_width="0dp"
+            android:background="@drawable/et_style_header"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Inspeccion General y Diagnostico"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="33"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:background="@drawable/et_style_header"
+                android:textColor="@color/white"
+                android:text="Código FO-GS-03"
+                android:layout_width="match_parent"
+                android:layout_weight="25"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:textColor="@color/white"
+                android:text="Código FO-GS-03"
+                android:background="@drawable/et_style_header"
+                android:layout_width="match_parent"
+                android:layout_weight="25"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:textColor="@color/white"
+                android:text="Fecha 20/04/2020"
+                android:background="@drawable/et_style_header"
+                android:layout_width="match_parent"
+                android:layout_weight="25"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:textColor="@color/white"
+                android:text="Página 1-1"
+                android:background="@drawable/et_style_header"
+                android:layout_width="match_parent"
+                android:layout_weight="25"
+                android:layout_height="0dp"/>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvInspección"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inspección N° 03-23"/>
+
+
+</LinearLayout>

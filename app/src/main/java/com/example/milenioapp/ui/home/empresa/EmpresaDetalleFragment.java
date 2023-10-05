@@ -3,6 +3,7 @@ package com.example.milenioapp.ui.home.empresa;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ViewKt;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,6 +74,9 @@ public class EmpresaDetalleFragment extends Fragment {
 
                 String finalText = "Crear ▼";
                 btnCrear.setText(finalText);
+
+                Bundle bundle = new Bundle();
+                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_ordenInspeccionFragment, bundle);
 
             }
         },empresaArrayList);
