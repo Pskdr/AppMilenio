@@ -6,12 +6,13 @@
     <color name="colorAccent">#2F6699</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#7A7A7A</color>
+    <color name="greyligth">#D9D9D9</color>
     <color name="greylight">#D3D3D3</color>
     <color name="greenLigth">#ddf7d2</color>
     <color name="background">#F3F1F1</color>
     <color name="blueground">#0044AA</color>
     <color name="bluelight">#CFE2F3</color>
-    <color name="bluedark">#2F6699</color>
+    <color name="bluedark">#D9D9D9</color>
     <color name="blueMilenio">#5885AC</color>
     <color name="greenlight">#70C656</color>
     <color name="greendark">#53933F</color>

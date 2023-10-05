@@ -21,4 +21,7 @@
     <string name="ver"><u>Ver</u></string>
     <string name="enviaremail"><u>Enviar por email</u></string>
     <string name="cronograma"><u>Ver cronograma servicios</u></string>
+    <string name="firmacompañante"><u>Firma acompañante</u></string>
+    <string name="firmaoperario"><u>Firma operario técnico</u></string>
+    <string name="editarcorreo"><u>Editar correo electrónico</u></string>
 </resources>
