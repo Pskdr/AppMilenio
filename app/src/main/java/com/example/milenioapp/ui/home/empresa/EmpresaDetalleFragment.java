@@ -14,6 +14,8 @@ import android.widget.Button;
 
 import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
+import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.ui.home.AdapterEmpresa;
 import com.example.milenioapp.ui.home.Empresa;
 
@@ -52,11 +54,34 @@ public class EmpresaDetalleFragment extends Fragment {
             btnCrear.setText(finalText);
         });
 
-        ((MainMenu)getActivity()).setActionBarTitle("Cliente: Empresa#");
+        Bundle bundle = getArguments();
+
+        long id = bundle.getLong("id",-1);
+        if(id != -1){
+
+            traerCliente(id);
+
+        }
+
         return view;
     }
 
-    AdapterEmpresa adapterEmpresa;
+    private Cliente cliente;
+    private void traerCliente(long id) {
+
+        new Thread(() -> {
+
+            cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
+
+            getActivity().runOnUiThread(() -> {
+
+                ((MainMenu)getActivity()).setActionBarTitle("Cliente: "+cliente.getNombre());
+            });
+
+        }).start();
+    }
+
+    AdapterOrdenes adapterEmpresa;
     private void desplegarAdapter() {
         empresaArrayList.clear();
         empresaArrayList.add(new Empresa(0, "Fomato de orden"));
@@ -66,7 +91,7 @@ public class EmpresaDetalleFragment extends Fragment {
         empresaArrayList.add(new Empresa(4, "Fomato de desinfección"));
         abierto = true;
 
-        adapterEmpresa = new AdapterEmpresa(new AdapterEmpresa.onItemListener() {
+        adapterEmpresa = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
             @Override
             public void onItemClick(int position) {
                 abierto = false;

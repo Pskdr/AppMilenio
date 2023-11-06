@@ -3,8 +3,10 @@ package com.example.milenioapp.ui.tecnicos;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.ui.home.Empresa;
+import com.example.milenioapp.ui.utilidades.Utilities;
 
 import java.util.ArrayList;
 
@@ -22,11 +25,13 @@ public class AdapterTecnico extends RecyclerView.Adapter<AdapterTecnico.ViewHold
     private final AdapterTecnico.onItemListener onItemListener;
     ArrayList<Tecnico> tecnicoArraylist;
     ArrayList<Tecnico> copiaListaDatos;
+    private MisTecnicosFragment instancia;
 
-    public AdapterTecnico(AdapterTecnico.onItemListener onItemListener, ArrayList<Tecnico> arrayList) {
+    public AdapterTecnico(AdapterTecnico.onItemListener onItemListener, ArrayList<Tecnico> arrayList,MisTecnicosFragment instancia) {
         this.onItemListener = onItemListener;
         this.tecnicoArraylist = arrayList;
         this.copiaListaDatos = new ArrayList<>(arrayList);
+        this.instancia = instancia;
     }
 
     @NonNull
@@ -41,7 +46,15 @@ public class AdapterTecnico extends RecyclerView.Adapter<AdapterTecnico.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
-        holder.tvAgregarTarea.setText(tecnicoArraylist.get(position).getNombre());
+        Utilities utilities = new Utilities();
+        holder.tvNombreTecnico.setText(tecnicoArraylist.get(position).getNombre());
+        holder.tvAgregarTarea.setOnClickListener((v -> {
+            instancia.agregarTarea(tecnicoArraylist.get(holder.getAdapterPosition()).getId());
+        }));
+        holder.tvEditarTecnico.setOnClickListener((v -> {
+            instancia.editarTecnico(tecnicoArraylist.get(holder.getAdapterPosition()).getId());
+        }));
+        holder.ivEmpleado.setImageBitmap(utilities.stringToBitMap(tecnicoArraylist.get(holder.getAdapterPosition()).getFoto()));
     }
 
     @Override
@@ -95,9 +108,11 @@ public class AdapterTecnico extends RecyclerView.Adapter<AdapterTecnico.ViewHold
 
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvAgregarTarea, tvEditarTecnico;
+        private final Button tvAgregarTarea, tvEditarTecnico;
         private final CardView cvCliente;
+        private final ImageView ivEmpleado;
         private final AdapterTecnico.onItemListener onItemListener;
+        private TextView tvNombreTecnico;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterTecnico.onItemListener onItemListener) {
             super(itemView);
@@ -105,6 +120,8 @@ public class AdapterTecnico extends RecyclerView.Adapter<AdapterTecnico.ViewHold
             tvAgregarTarea = itemView.findViewById(R.id.tvAgregarTarea);
             tvEditarTecnico = itemView.findViewById(R.id.tvEditarTecnico);
             cvCliente = itemView.findViewById(R.id.cvCliente);
+            tvNombreTecnico = itemView.findViewById(R.id.tvNombreTecnico);
+            ivEmpleado = itemView.findViewById(R.id.ivEmpleado);
 
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);

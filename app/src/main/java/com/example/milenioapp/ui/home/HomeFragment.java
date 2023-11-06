@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
+import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Cliente;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class HomeFragment extends Fragment {
 
     private TextView btnCrearCliente;
     private RecyclerView rvEmpresas;
-    private ArrayList<Empresa> empresas = new ArrayList<>();
+    private ArrayList<Cliente> empresas;
     private SearchView svEmpresas;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,8 +37,7 @@ public class HomeFragment extends Fragment {
         rvEmpresas.setLayoutManager(new LinearLayoutManager(getContext()));
 
         svEmpresas = view.findViewById(R.id.svEmpresas);
-
-        llenarEmpresas();
+        traerClientes();
 
         btnCrearCliente.setOnClickListener(view1 -> {
             Bundle bundle = new Bundle();
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
                     adapterEmpresa.getFilter().filter(newText);
                     adapterEmpresa.notifyDataSetChanged();
                 }else{
-                    llenarEmpresas();
+                    traerClientes();
                 }
 
                 return false;
@@ -65,21 +66,31 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void traerClientes() {
+        new Thread(() -> {
+
+            empresas = (ArrayList<Cliente>) AppDataBase.getInstance(getContext()).getClienteDAO().getAll();
+
+            getActivity().runOnUiThread(() -> {
+
+                llenarEmpresas();
+
+            });
+
+        }).start();
+    }
+
     AdapterEmpresa adapterEmpresa;
 
     private void llenarEmpresas() {
-        empresas.clear();
-        empresas.add(new Empresa(0, "PLAFA"));
-        empresas.add(new Empresa(1, "Empresa random 1"));
-        empresas.add(new Empresa(2, "Empresa random 2"));
-        empresas.add(new Empresa(3, "Empresa random 3"));
-        empresas.add(new Empresa(4, "Empresa random 4"));
 
         adapterEmpresa = new AdapterEmpresa(new AdapterEmpresa.onItemListener() {
             @Override
             public void onItemClick(int position) {
 
                 Bundle bundle = new Bundle();
+                bundle.putLong("id",
+                        empresas.get(position).getId());
                 ViewKt.findNavController(getView()).navigate(R.id.action_nav_home_to_empresaDetalleFragment, bundle);
             }
         }, empresas);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.milenioapp.R;
 import com.example.milenioapp.ui.home.AdapterEmpresa;
 import com.example.milenioapp.ui.home.Empresa;
+import com.example.milenioapp.ui.home.empresa.AdapterOrdenes;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class AsignarServicioFragment extends Fragment {
     private TextView tvTecnico, tvCronogramaServicios;
     TextInputEditText tifecha, tiHora, tiDescripcion, tiNota;
 
-    private AdapterEmpresa adapterEmpresa;
+    private AdapterOrdenes adapterEmpresa;
     private ArrayList<Empresa> empresaArrayList = new ArrayList<>();
     private Button btnEmpresa, btnAsignarServicio;
     boolean abierto = false;
@@ -76,7 +77,7 @@ public class AsignarServicioFragment extends Fragment {
         empresaArrayList.add(new Empresa(4, "Fomato de desinfección"));
         abierto = true;
 
-        adapterEmpresa = new AdapterEmpresa(new AdapterEmpresa.onItemListener() {
+        adapterEmpresa = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
             @Override
             public void onItemClick(int position) {
                 btnEmpresa.setText(empresaArrayList.get(position).getNombre());

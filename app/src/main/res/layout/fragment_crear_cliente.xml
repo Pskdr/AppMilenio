@@ -1,149 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.crearCliente.CrearClienteFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear Cliente"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        />
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="20dp"
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Nombre en RUT"
-        app:errorTextColor="@color/black">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiRut"
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear Cliente"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:textSize="20dp"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="Nombre en RUT"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="NIT"
-        app:errorTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiRut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiNit"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="NIT"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiNit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Direccion"
-        app:errorTextColor="@color/black">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiDireccion"
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="Direccion"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Telefono"
-        app:errorTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiTelefono"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="Telefono"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Nombre contacto"
-        app:errorTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiNombre"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="Nombre contacto"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Sede"
-        app:errorTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiSede"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="Sede"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputOutlinedStyle"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="E-mail"
-        app:errorTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiSede"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiMail"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:textColor="@color/black" />
+            android:background="@color/white"
+            android:hint="E-mail"
+            app:errorTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/btnCrear"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Crear"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnCrear"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Crear"/>
+        </LinearLayout>
+
+</ScrollView>

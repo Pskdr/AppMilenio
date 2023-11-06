@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.home;
+package com.example.milenioapp.ui.home.empresa;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.entity.Cliente;
+import com.example.milenioapp.ui.home.Empresa;
 
 import java.util.ArrayList;
 
 
-public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.ViewHolderCliente> implements Filterable {
+public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHolderCliente> implements Filterable {
 
-    private final AdapterEmpresa.onItemListener onItemListener;
-    ArrayList<Cliente> empresaArrayList;
-    ArrayList<Cliente> copiaListaDatos;
+    private final AdapterOrdenes.onItemListener onItemListener;
+    ArrayList<Empresa> empresaArrayList;
+    ArrayList<Empresa> copiaListaDatos;
 
-    public AdapterEmpresa(AdapterEmpresa.onItemListener onItemListener, ArrayList<Cliente> arrayList) {
+    public AdapterOrdenes(AdapterOrdenes.onItemListener onItemListener, ArrayList<Empresa> arrayList) {
         this.onItemListener = onItemListener;
         this.empresaArrayList = arrayList;
         this.copiaListaDatos = new ArrayList<>(arrayList);
@@ -57,7 +58,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.ViewHold
     private final Filter empresaFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Cliente> listaFiltrada = new ArrayList<>();
+            ArrayList<Empresa> listaFiltrada = new ArrayList<>();
 
             if(charSequence == null || charSequence.length() == 0){
                 listaFiltrada.addAll(copiaListaDatos);
@@ -66,7 +67,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.ViewHold
             }else{
                 String filterpattern = charSequence.toString().toLowerCase().trim();
 
-                for(Cliente empresa : copiaListaDatos){
+                for(Empresa empresa : copiaListaDatos){
                     if(empresa.getNombre().toLowerCase().contains(filterpattern)) {
                         listaFiltrada.add(empresa);
                     }
@@ -82,7 +83,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.ViewHold
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             empresaArrayList.clear();
-            empresaArrayList.addAll((ArrayList<Cliente>)filterResults.values);
+            empresaArrayList.addAll((ArrayList<Empresa>)filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -97,9 +98,9 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.ViewHold
 
         private final TextView tvEmpresa;
         private final CardView cvCliente;
-        private final AdapterEmpresa.onItemListener onItemListener;
+        private final AdapterOrdenes.onItemListener onItemListener;
 
-        public ViewHolderCliente(@NonNull View itemView, AdapterEmpresa.onItemListener onItemListener) {
+        public ViewHolderCliente(@NonNull View itemView, AdapterOrdenes.onItemListener onItemListener) {
             super(itemView);
 
             tvEmpresa = itemView.findViewById(R.id.tvEmpresa);

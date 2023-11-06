@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_nav_slideshow_to_asignarServicioFragment"
             app:destination="@id/asignarServicioFragment" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_crearEmpleadoFragment"
+            app:destination="@id/crearEmpleadoFragment" />
     </fragment>
     <fragment
         android:id="@+id/crearClienteFragment2"
@@ -66,4 +69,9 @@
         android:name="com.example.milenioapp.ui.ordenes.OrdenInspeccionFragment"
         android:label="fragment_orden_inspeccion"
         tools:layout="@layout/fragment_orden_inspeccion" />
+    <fragment
+        android:id="@+id/crearEmpleadoFragment"
+        android:name="com.example.milenioapp.ui.tecnicos.crearTecnico.CrearEmpleadoFragment"
+        android:label="Crear empleado"
+        tools:layout="@layout/fragment_crear_empleado" />
 </navigation>
