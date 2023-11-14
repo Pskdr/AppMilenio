@@ -101,7 +101,7 @@ public class EmpresaDetalleFragment extends Fragment {
                 btnCrear.setText(finalText);
 
                 Bundle bundle = new Bundle();
-                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_ordenInspeccionFragment, bundle);
+                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
 
             }
         },empresaArrayList);

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -49,7 +51,20 @@ public class MainMenu extends AppCompatActivity {
 
         fab.setVisibility(View.INVISIBLE);
 
-        setActionBarTitle("Hola, Olga");
+
+        obtenerUsuario();
+    }
+
+    private void obtenerUsuario() {
+        new Thread(() -> {
+
+            Usuario usuario = AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().getUser();
+
+            runOnUiThread(() ->{
+                setActionBarTitle("Hola, "+usuario.getCorreo());
+            });
+
+        }).start();
     }
 
     @Override

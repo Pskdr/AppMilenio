@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if(usuario != null){
                     Intent intent = new Intent(MainActivity.this, MainMenu.class);
-
                     Bundle miBundle = new Bundle();
                     miBundle.putString("device", strDevice);
                     miBundle.putLong("id",usuario.getId());
