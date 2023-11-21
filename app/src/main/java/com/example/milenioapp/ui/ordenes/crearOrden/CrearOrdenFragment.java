@@ -11,11 +11,14 @@ import android.view.ViewGroup;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.ui.home.Empresa;
+import com.example.milenioapp.database.entity.Orden;
+import com.example.milenioapp.database.entity.Zona;
+
+import java.util.List;
 
 public class CrearOrdenFragment extends Fragment {
 
-    private Cliente empresa;
+    private Cliente cliente;
 
     public CrearOrdenFragment() {
         // Required empty public constructor
@@ -29,19 +32,50 @@ public class CrearOrdenFragment extends Fragment {
 
         Bundle bundle = getArguments();
         long id = bundle.getLong("id",-1);
+        long idOrden = bundle.getLong("idOrden",-1);
 
-        if(id != -1){
+        if(idOrden != -1){
+            obtenerEmpresa(id, idOrden);
+        }else{
             obtenerEmpresa(id);
+            traerZonasDefault();
         }
 
         return view;
+    }
+
+    private void traerZonasDefault() {
+        new Thread(() -> {
+
+            List<Zona> zonaList = AppDataBase.getInstance(getContext()).getZonaDAO().getByTypeDefault(cliente.getIdTipo());
+
+            getActivity().runOnUiThread(() ->{
+
+
+
+            });
+
+        }).start();
     }
 
     private void obtenerEmpresa(long id) {
 
         new Thread(() -> {
 
-            empresa = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
+            cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
+
+            getActivity().runOnUiThread(() -> {
+                traerZonasDefault();
+            });
+
+        }).start();
+    }
+    private void obtenerEmpresa(long id, long idOrden) {
+
+        new Thread(() -> {
+
+            cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
+            Orden orden = AppDataBase.getInstance(getContext()).getOrdenDAO().getByid(idOrden);
 
         }).start();
     }

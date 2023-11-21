@@ -16,8 +16,9 @@ public class Cliente {
     private String nombreContacto;
     private String sede;
     private String email;
+    private long idTipo;
 
-    public Cliente( String nombre, String NIT, String direccion, String telefono, String nombreContacto, String sede, String email) {
+    public Cliente( String nombre, String NIT, String direccion, String telefono, String nombreContacto, String sede, String email, long idTipo) {
         this.nombre = nombre;
         this.NIT = NIT;
         this.direccion = direccion;
@@ -25,6 +26,15 @@ public class Cliente {
         this.nombreContacto = nombreContacto;
         this.sede = sede;
         this.email = email;
+        this.idTipo = idTipo;
+    }
+
+    public long getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(long idTipo) {
+        this.idTipo = idTipo;
     }
 
     public long getId() {
