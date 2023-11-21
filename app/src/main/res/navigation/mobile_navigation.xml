@@ -79,7 +79,7 @@
         tools:layout="@layout/fragment_crear_empleado" />
     <fragment
         android:id="@+id/crearOrdenFragment"
-        android:name="com.example.milenioapp.CrearOrdenFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment"
         android:label="fragment_crear_orden"
         tools:layout="@layout/fragment_crear_orden" />
 </navigation>
