@@ -16,7 +16,7 @@ public class Orden {
     private long idUsuario;
     private String seria;
 
-    public Orden( long idEmpleado, long fechaInicio, long fechaUsuario, long idCebadero, long idFactura, long idUsuario, String seria) {
+    public Orden( long idEmpleado, long fechaInicio, long fechaUsuario, long idCebadero,long idFactura, long idUsuario, String seria) {
         this.idEmpleado = idEmpleado;
         this.fechaInicio = fechaInicio;
         this.fechaUsuario = fechaUsuario;

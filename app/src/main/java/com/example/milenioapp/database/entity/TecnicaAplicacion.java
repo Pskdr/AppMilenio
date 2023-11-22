@@ -1,9 +1,14 @@
 package com.example.milenioapp.database.entity;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 @Entity(tableName = "TecnicasAplicacion")
 public class TecnicaAplicacion {
+    @PrimaryKey
+    @NonNull
     private long id;
     private String tecnica;
     private String ingrediente;

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:padding="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -20,64 +19,84 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_height="wrap_content">
-
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="95"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_weight="30"
-                    android:layout_height="wrap_content"
-                    android:text="Zona "/>
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_weight="30"
-                    android:layout_height="wrap_content"
-                    android:text="Tecnica "/>
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_weight="40"
-                    android:layout_height="wrap_content"
-                    android:text="Ingrediente activo:"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="Zona "/>
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:layout_height="wrap_content"
+                        android:text="Tecnica "/>
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="Ingrediente activo:"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvZona"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="ZONA DE PRUEBA"/>
+                    <Spinner
+                        android:id="@+id/spinnerTecnica"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvIngrediente"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                </LinearLayout>
+
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvZona"
-                    android:layout_width="0dp"
-                    android:layout_weight="30"
-                    android:layout_height="wrap_content"
-                    android:text="ZONA DE PRUEBA"/>
-                <Spinner
-                    android:id="@+id/spinnerTecnica"
-                    android:layout_width="0dp"
-                    android:layout_weight="30"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_weight="40"
-                    android:layout_height="wrap_content"
-                    android:text="INGREDIENTE"/>
+            <TextView
+                android:id="@+id/tvBorrar"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:textColor="@color/white"
+                android:background="@drawable/et_style_button"
+                android:layout_width="30dp"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:text="X"/>
 
-            </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
 
 
