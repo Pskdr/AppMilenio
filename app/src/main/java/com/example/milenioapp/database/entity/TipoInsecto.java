@@ -8,9 +8,19 @@ public class TipoInsecto {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String descripcion;
+    private String abreviado;
 
-    public TipoInsecto( String descripcion) {
+    public TipoInsecto( String descripcion, String abreviado) {
         this.descripcion = descripcion;
+        this.abreviado = abreviado;
+    }
+
+    public String getAbreviado() {
+        return abreviado;
+    }
+
+    public void setAbreviado(String abreviado) {
+        this.abreviado = abreviado;
     }
 
     public long getId() {

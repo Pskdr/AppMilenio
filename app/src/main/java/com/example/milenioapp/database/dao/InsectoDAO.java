@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface InsectoDAO {
     @Query("select * from insectos where idTipoInsecto = :idTipoInsecto")
     List<Insecto> getByTipo(long idTipoInsecto);
 
+    @Query("select id,descripcion,idTipoInsecto from insectos where idTipoInsecto = :idTipoInsecto")
+    List<AgregarObjeto> getByTipoMostrar(long idTipoInsecto);
     @Insert
     void insert(Insecto insecto);
     @Update

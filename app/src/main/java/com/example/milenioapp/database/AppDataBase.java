@@ -11,6 +11,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
+import com.example.milenioapp.database.dao.CebaderoDAO;
 import com.example.milenioapp.database.dao.ClienteDAO;
 import com.example.milenioapp.database.dao.EmpleadoDAO;
 import com.example.milenioapp.database.dao.EstadoCebaderoDAO;
@@ -21,6 +22,7 @@ import com.example.milenioapp.database.dao.TecnicaAplicacionDAO;
 import com.example.milenioapp.database.dao.TipoInsectoDAO;
 import com.example.milenioapp.database.dao.UsuarioDAO;
 import com.example.milenioapp.database.dao.ZonaDAO;
+import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.Empleado;
 import com.example.milenioapp.database.entity.EstadoCebadero;
@@ -33,7 +35,7 @@ import com.example.milenioapp.database.entity.Usuario;
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
-        EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class},
+        EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class},
         version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
@@ -51,6 +53,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract ClienteDAO getClienteDAO();
     public abstract ZonaDAO getZonaDAO();
     public abstract TecnicaAplicacionDAO getTecnicaAplicacionDAO();
+    public abstract CebaderoDAO getCebaderoDAO();
 
 
     public static AppDataBase getInstance(Context context) {

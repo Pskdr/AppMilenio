@@ -1,5 +1,6 @@
 package com.example.milenioapp;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -82,6 +83,13 @@ public class MainMenu extends AppCompatActivity {
     }
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    public void noGirarPantalla() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+    }
+    public void girarPantallaNormal() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
     }
 
 }

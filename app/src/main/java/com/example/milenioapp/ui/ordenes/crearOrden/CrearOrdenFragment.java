@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
@@ -29,11 +30,17 @@ public class CrearOrdenFragment extends Fragment {
     }
     long idOrden,id;
     RecyclerView rvZonas;
+
+    private Button btnAgregarEspecie, btnAgregarZonas, btnAgregarCebaderos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_crear_orden, container, false);
+
+        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
+        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
+        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
 
         rvZonas = view.findViewById(R.id.rvZonas);
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));

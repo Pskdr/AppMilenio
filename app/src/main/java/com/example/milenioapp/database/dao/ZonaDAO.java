@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
 
 import java.util.List;
 
@@ -29,4 +30,7 @@ public interface ZonaDAO {
 
     @Query("select * from zonas where idTipo = :idTipo and defalt = 'S'")
     List<Zona> getByTypeDefault(long idTipo);
+
+    @Query("select id, descripcion, -1 from zonas")
+    List<AgregarObjeto> getAll();
 }
