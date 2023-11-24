@@ -61,7 +61,7 @@ public class MainMenu extends AppCompatActivity {
             Usuario usuario = AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().getUser();
 
             runOnUiThread(() ->{
-                setActionBarTitle("Hola, "+usuario.getCorreo());
+                setActionBarTitle("Hola, "+usuario.getNombre());
             });
 
         }).start();

@@ -13,13 +13,23 @@ public class Usuario {
     private long id;
     @NonNull
     private String correo;
+    private String nombre;
     @NonNull
     private String password;
 
-    public Usuario(long id, @NonNull String correo, @NonNull String password) {
+    public Usuario(long id, @NonNull String correo,String nombre, @NonNull String password) {
         this.id = id;
         this.correo = correo;
+        this.nombre = nombre;
         this.password = password;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @NonNull

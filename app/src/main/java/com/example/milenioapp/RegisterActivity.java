@@ -17,12 +17,13 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView tvIniciarSesion;
     private String strDevice = "";
     private Button btnRegistrarse;
-    private TextInputEditText tiCorreo, tiPassword, tiConfirmPassword;
+    private TextInputEditText tiCorreo,tiNombre, tiPassword, tiConfirmPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        tiNombre = findViewById(R.id.tiNombre);
         tiCorreo = findViewById(R.id.tiCorreo);
         tiPassword = findViewById(R.id.tiPassword);
         tiConfirmPassword = findViewById(R.id.tiConfirmPassword);
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrarse.setOnClickListener(view -> {
             Intent intent = new Intent(RegisterActivity.this, MainMenu.class);
             if(validarDatos()){
-                Usuario usuario = new Usuario(0,tiCorreo.getText().toString(),tiPassword.getText().toString());
+                Usuario usuario = new Usuario(0,tiCorreo.getText().toString(),tiNombre.getText().toString(),tiPassword.getText().toString());
                 new Thread(() -> {
                     AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insert(usuario);
                     runOnUiThread(() -> {
@@ -72,6 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
         if(tiConfirmPassword.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(),"La contraseña es obligatoria.",Toast.LENGTH_LONG).show();
             tiConfirmPassword.setError("Este campo es obligatorio");
+            return false;
+        }
+        if(tiNombre.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"El nombre es obligatorio.",Toast.LENGTH_LONG).show();
+            tiNombre.setError("Este campo es obligatorio");
             return false;
         }
 
