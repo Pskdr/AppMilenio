@@ -48,6 +48,8 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     private TextView tvEncargado;
     private String tipo;
 
+    private TextView tvTipode;
+
     public CustomDialogAgregarFragment(ArrayList<AgregarObjeto> itemArray,
                                         CrearOrdenFragment materialesFragment, String tipo) {
         this.materialArray = itemArray;
@@ -65,6 +67,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
         svCodigo = view.findViewById(R.id.svCodigoBuscar);
         spinner = view.findViewById(R.id.spinnerTipo);
         lyTipo = view.findViewById(R.id.lyTipo);
+        tvTipode = view.findViewById(R.id.tvTipode);
 
         rvMaterialesAll.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -103,6 +106,8 @@ public class CustomDialogAgregarFragment extends DialogFragment {
 
         switch (tipo){
             case "E":
+                lyTipo.setVisibility(View.VISIBLE);
+                tvTipode.setText("Tipo de especie:");
                     ArrayList<TipoInsecto> tipoInsecto = new ArrayList<>();
                     tipoInsecto.add(new TipoInsecto("Volador","V"));
                     tipoInsecto.add(new TipoInsecto("Terrestre","T"));
@@ -148,8 +153,11 @@ public class CustomDialogAgregarFragment extends DialogFragment {
 
                 break;
             case "Z":
+                lyTipo.setVisibility(View.GONE);
                 break;
             case "C":
+                lyTipo.setVisibility(View.VISIBLE);
+                tvTipode.setText("Tipo de cebadero/trampa");
                 break;
             default:
                 break;
