@@ -1,8 +1,6 @@
 package com.example.milenioapp.ui.ordenes.crearOrden;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Cebadero;
+import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.TipoInsecto;
+import com.example.milenioapp.database.entity.Zona;
 
 import java.util.ArrayList;
 
@@ -34,18 +35,12 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     RecyclerView rvMaterialesAll;
     Button btnCerrar;
     ArrayList<AgregarObjeto> itemArrayList = new ArrayList<>();
-    ArrayList<AgregarObjeto> copiaMaterialArrayList = new ArrayList<>();
     ArrayList<AgregarObjeto> materialArray;
     MaterialAdapterDialog materialAdapterDialog;
-    CrearOrdenFragment instanciaInicial;
-    CrearOrdenFragment instancia1;
-    SearchView svItem, svCodigo;
-    long consecutivo, contrato;
+    CrearOrdenFragment instancia;
+    SearchView svCodigo;
     private Spinner spinner;
-    private String estacion, serial;
-    private SharedPreferences preferences;
     private LinearLayout lyTipo;
-    private TextView tvEncargado;
     private String tipo;
 
     private TextView tvTipode;
@@ -53,9 +48,11 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     public CustomDialogAgregarFragment(ArrayList<AgregarObjeto> itemArray,
                                         CrearOrdenFragment materialesFragment, String tipo) {
         this.materialArray = itemArray;
-        this.instanciaInicial = materialesFragment;
+        this.instancia = materialesFragment;
         this.tipo = tipo;
     }
+
+
 
     @Nullable
     @Override
@@ -70,9 +67,6 @@ public class CustomDialogAgregarFragment extends DialogFragment {
         tvTipode = view.findViewById(R.id.tvTipode);
 
         rvMaterialesAll.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        preferences = getActivity().getSharedPreferences("DATAPERSEO", Context.MODE_PRIVATE);
-        contrato = preferences.getLong("contrato",0);
 
         svCodigo.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -108,57 +102,53 @@ public class CustomDialogAgregarFragment extends DialogFragment {
             case "E":
                 lyTipo.setVisibility(View.VISIBLE);
                 tvTipode.setText("Tipo de especie:");
-                    ArrayList<TipoInsecto> tipoInsecto = new ArrayList<>();
-                    tipoInsecto.add(new TipoInsecto("Volador","V"));
-                    tipoInsecto.add(new TipoInsecto("Terrestre","T"));
-                    ArrayAdapter<TipoInsecto> arrayAdapter = new ArrayAdapter<TipoInsecto>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoInsecto){
+                ArrayList<TipoInsecto> tipoInsecto = new ArrayList<>();
+                tipoInsecto.add(new TipoInsecto("Volador","V"));
+                tipoInsecto.add(new TipoInsecto("Terrestre","T"));
+                ArrayAdapter<TipoInsecto> arrayAdapter = new ArrayAdapter<TipoInsecto>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoInsecto){
 
-                        @NonNull
-                        @Override
-                        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                            TextView label = (TextView) super.getView(position, convertView, parent);
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
 
-                            TipoInsecto estadoActividad = getItem(position);
-                            label.setHint(estadoActividad.getDescripcion());
-                            label.setText(estadoActividad.getDescripcion());
+                        TipoInsecto estadoActividad = getItem(position);
+                        label.setHint(estadoActividad.getDescripcion());
+                        label.setText(estadoActividad.getDescripcion());
 
-                            return label;
-                        }
+                        return label;
+                    }
 
-                        @Override
-                        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                            TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
-                            TipoInsecto estadoActividad = getItem(position);
-                            label.setText(estadoActividad.getDescripcion());
+                        TipoInsecto estadoActividad = getItem(position);
+                        label.setText(estadoActividad.getDescripcion());
 
-                            return label;
-                        }
-                    };
+                        return label;
+                    }
+                };
 
-                    spinner.setAdapter(arrayAdapter);
+                spinner.setAdapter(arrayAdapter);
 
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            tipoInsectoSeleccionado = (TipoInsecto) adapterView.getSelectedItem();
-                        }
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        tipoInsectoSeleccionado = (TipoInsecto) adapterView.getSelectedItem();
+                    }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                        }
-                    });
+                    }
+                });
 
 
-                break;
-            case "Z":
-                lyTipo.setVisibility(View.GONE);
                 break;
             case "C":
-                lyTipo.setVisibility(View.VISIBLE);
-                tvTipode.setText("Tipo de cebadero/trampa");
-                break;
+            case "Z":
+                lyTipo.setVisibility(View.GONE);
             default:
                 break;
         }
@@ -189,12 +179,9 @@ public class CustomDialogAgregarFragment extends DialogFragment {
                         if(tipoInsectoSeleccionado == null){
                             return;
                         }
-
                         itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getInsectoDAO().getByTipoMostrar(tipoInsectoSeleccionado.getId());
                         break;
                     case "Z":
-
-
                         itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getZonaDAO().getAll();
                         break;
                     case "C":
@@ -220,17 +207,21 @@ public class CustomDialogAgregarFragment extends DialogFragment {
 
 
     private void listarRecyclerView(){
-        materialAdapterDialog = new MaterialAdapterDialog(copiaMaterialArrayList, new MaterialAdapterDialog.onItemListener() {
+        materialAdapterDialog = new MaterialAdapterDialog(itemArrayList, new MaterialAdapterDialog.onItemListener() {
             @Override
             public void onItemClick(int position)
             {
                 switch (tipo){
                     case "E":
-
+                        Insecto insecto = new Insecto(itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo());
+                        insecto.setId(itemArrayList.get(position).getId());
+                            instancia.agregarInsecto(insecto);
                         break;
                     case "Z":
+                        instancia.agregarZona(new Zona(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),"N",itemArrayList.get(position).getIdTipo()));
                         break;
                     case "C":
+                        instancia.agregarCebadero(new Cebadero(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo()));
                         break;
                     default:
                         break;
