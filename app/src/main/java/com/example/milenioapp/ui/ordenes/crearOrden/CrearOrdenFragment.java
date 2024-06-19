@@ -13,8 +13,10 @@ import android.widget.Button;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
 
@@ -54,7 +56,6 @@ public class CrearOrdenFragment extends Fragment {
             obtenerEmpresa(id, idOrden);
         }else{
             obtenerEmpresa(id);
-            traerZonasDefault();
         }
 
         return view;
@@ -107,6 +108,22 @@ public class CrearOrdenFragment extends Fragment {
             cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
             Orden orden = AppDataBase.getInstance(getContext()).getOrdenDAO().getByid(idOrden);
 
+
+            getActivity().runOnUiThread(() -> {
+
+
+
+            });
+
         }).start();
+    }
+
+    public void agregarInsecto(Insecto insecto) {
+    }
+
+    public void agregarZona(Zona n) {
+    }
+
+    public void agregarCebadero(Cebadero cebadero) {
     }
 }

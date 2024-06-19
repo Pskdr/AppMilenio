@@ -36,7 +36,7 @@ import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class},
-        version = 1, exportSchema = false)
+        version = 2, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
 
@@ -58,7 +58,9 @@ public abstract class AppDataBase extends RoomDatabase {
 
     public static AppDataBase getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context, AppDataBase.class, Constants.DATABASE_NAME).build();
+            INSTANCE = Room.databaseBuilder(context, AppDataBase.class, Constants.DATABASE_NAME)
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return INSTANCE;
     }

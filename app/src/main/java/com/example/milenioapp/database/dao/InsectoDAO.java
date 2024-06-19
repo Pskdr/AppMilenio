@@ -21,7 +21,7 @@ public interface InsectoDAO {
     @Query("select * from insectos where idTipoInsecto = :idTipoInsecto")
     List<Insecto> getByTipo(long idTipoInsecto);
 
-    @Query("select id,descripcion,idTipoInsecto from insectos where idTipoInsecto = :idTipoInsecto")
+    @Query("select id,descripcion,idTipoInsecto as idTipo from insectos where idTipoInsecto = :idTipoInsecto")
     List<AgregarObjeto> getByTipoMostrar(long idTipoInsecto);
     @Insert
     void insert(Insecto insecto);

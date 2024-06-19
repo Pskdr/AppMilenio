@@ -18,7 +18,7 @@ public interface CebaderoDAO {
     List<Cebadero> getAll();
 
 
-    @Query("select id,descripcion,-1 from cebaderos")
+    @Query("select id,descripcion,-1 as idTipo from cebaderos")
     List<AgregarObjeto> getAllMostrar();
 
     @Insert

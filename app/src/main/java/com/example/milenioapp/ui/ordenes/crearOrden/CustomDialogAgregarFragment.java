@@ -221,7 +221,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
                         instancia.agregarZona(new Zona(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),"N",itemArrayList.get(position).getIdTipo()));
                         break;
                     case "C":
-                        instancia.agregarCebadero(new Cebadero(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo()));
+                        instancia.agregarCebadero(new Cebadero(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo() + ""));
                         break;
                     default:
                         break;

@@ -31,6 +31,6 @@ public interface ZonaDAO {
     @Query("select * from zonas where idTipo = :idTipo and defalt = 'S'")
     List<Zona> getByTypeDefault(long idTipo);
 
-    @Query("select id, descripcion, -1 from zonas")
+    @Query("select id, descripcion, -1 as idTipo from zonas")
     List<AgregarObjeto> getAll();
 }
