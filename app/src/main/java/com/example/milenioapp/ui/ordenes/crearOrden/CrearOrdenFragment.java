@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.home.AdapterHigiene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,25 +34,27 @@ public class CrearOrdenFragment extends Fragment {
         // Required empty public constructor
     }
     long idOrden,id;
-    RecyclerView rvZonas;
+    private RecyclerView rvHigiene, rvZonas;
 
-    private Button btnAgregarEspecie, btnAgregarZonas, btnAgregarCebaderos;
+    private Button btnSobreElServicio, btnGuardar;
+    private  ArrayList<HygieneItem> items;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_crear_orden, container, false);
 
-        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
-        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
-        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
+        btnSobreElServicio = view.findViewById(R.id.btnSobreElServicio);
+        btnGuardar = view.findViewById(R.id.btnGuardar);
 
+        rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
-        rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
 
         Bundle bundle = getArguments();
-         id = bundle.getLong("id",-1);
-         idOrden = bundle.getLong("idOrden",-1);
+        id = bundle.getLong("id",-1);
+        idOrden = bundle.getLong("idOrden",-1);
 
 
         if(idOrden != -1){
@@ -58,8 +63,43 @@ public class CrearOrdenFragment extends Fragment {
             obtenerEmpresa(id);
         }
 
+        rvHigiene.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
+        traerDatosHigiene();
         return view;
     }
+    private AdapterHigiene adapter;
+    private void traerDatosHigiene() {
+        items = new ArrayList<>();
+        new Thread(() -> {
+
+          ArrayList<Higiene> higienes = (ArrayList<Higiene>) AppDataBase.getInstance(getContext()).getHigieneDAO().getAll();
+
+            getActivity().runOnUiThread(() -> {
+                items.clear();
+                for (int i = 0; i < higienes.size(); i++) {
+                    items.add(new HygieneItem(higienes.get(i).getId(),higienes.get(i).getNombre(), higienes.get(i).getS().equals("S") ? true:false ));
+                }
+                llenarAdapterHigiene();
+
+            });
+
+        }).start();
+
+    }
+
+    private void llenarAdapterHigiene() {
+        adapter = new AdapterHigiene( new AdapterHigiene.onItemListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.d("pesk", "onItemClick: click");
+            }
+        }, items);
+
+        rvHigiene.setAdapter(adapter);
+        rvZonas.setAdapter(adapter);
+    }
+
     AdapterZonas adapterZonas;
     private void traerZonasDefault() {
         new Thread(() -> {
@@ -82,7 +122,7 @@ public class CrearOrdenFragment extends Fragment {
                     }
                 },this,false);
 
-                rvZonas.setAdapter(adapterZonas);
+                //rvHigiene.setAdapter(adapterZonas);
 
             });
 
