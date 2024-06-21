@@ -80,6 +80,6 @@
     <fragment
         android:id="@+id/crearOrdenFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment"
-        android:label="fragment_crear_orden"
+        android:label="Crear orden inspección"
         tools:layout="@layout/fragment_crear_orden" />
 </navigation>
