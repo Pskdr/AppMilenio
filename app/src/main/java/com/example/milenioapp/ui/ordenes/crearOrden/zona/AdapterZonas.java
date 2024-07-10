@@ -1,9 +1,8 @@
-package com.example.milenioapp.ui.ordenes.crearOrden;
+package com.example.milenioapp.ui.ordenes.crearOrden.zona;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,19 +10,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
-import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment;
 
 import java.util.ArrayList;
 
 public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCliente> {
 
-    private final ArrayList<GrupoZona> grupoZonas;
+    private final ArrayList<GrupoZonaMostrar> grupoZonas;
 
     private final AdapterZonas.onItemListener onItemListener;
     private final CrearOrdenFragment instancia;
     private final boolean bloquear;
 
-    public AdapterZonas(ArrayList<GrupoZona> grupoZonas,
+    public AdapterZonas(ArrayList<GrupoZonaMostrar> grupoZonas,
                                 AdapterZonas.onItemListener onItemListener,
                                 CrearOrdenFragment itemsFragment, boolean bloquear) {
         this.onItemListener = onItemListener;
@@ -45,6 +44,23 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
+        int finalPosition = position;
+        holder.tvZona.setText(grupoZonas.get(position).getNombre());
+        holder.tvProducto.setText(grupoZonas.get(position).getProducto());
+        holder.tvDocificacion.setText(grupoZonas.get(position).getDocificacion());
+        holder.tvBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                instancia.borrarZona(finalPosition);
+            }
+        });
+
+        holder.cvCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                instancia.abrirCustomDialog(grupoZonas.get(finalPosition), finalPosition);
+            }
+        });
 
     }
 
@@ -59,9 +75,8 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
     }
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvIngrediente,tvZona,tvBorrar;
+        private final TextView tvIngrediente,tvZona,tvDocificacion,tvBorrar,tvProducto;
         private final AdapterZonas.onItemListener onItemListener;
-        private final Spinner spinnerTecnica;
         private final CardView cvCliente;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterZonas.onItemListener onItemListener) {
@@ -70,8 +85,8 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
             tvIngrediente = itemView.findViewById(R.id.tvIngrediente);
             tvZona = itemView.findViewById(R.id.tvZona);
             tvBorrar = itemView.findViewById(R.id.tvBorrar);
-
-            spinnerTecnica = itemView.findViewById(R.id.spinnerTecnica);
+            tvDocificacion = itemView.findViewById(R.id.tvDocificacion);
+            tvProducto = itemView.findViewById(R.id.tvProducto);
 
             cvCliente = itemView.findViewById(R.id.cvCliente);
 

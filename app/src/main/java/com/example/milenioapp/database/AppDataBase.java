@@ -12,11 +12,13 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.milenioapp.database.dao.CebaderoDAO;
+import com.example.milenioapp.database.dao.CebaderoGroupDAO;
 import com.example.milenioapp.database.dao.ClienteDAO;
 import com.example.milenioapp.database.dao.EmpleadoDAO;
 import com.example.milenioapp.database.dao.EstadoCebaderoDAO;
 import com.example.milenioapp.database.dao.FacturaDAO;
 import com.example.milenioapp.database.dao.HigieneDAO;
+import com.example.milenioapp.database.dao.HigieneGroupDAO;
 import com.example.milenioapp.database.dao.InsectoDAO;
 import com.example.milenioapp.database.dao.OrdenDAO;
 import com.example.milenioapp.database.dao.TecnicaAplicacionDAO;
@@ -24,11 +26,13 @@ import com.example.milenioapp.database.dao.TipoInsectoDAO;
 import com.example.milenioapp.database.dao.UsuarioDAO;
 import com.example.milenioapp.database.dao.ZonaDAO;
 import com.example.milenioapp.database.entity.Cebadero;
+import com.example.milenioapp.database.entity.CebaderoGroup;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.Empleado;
 import com.example.milenioapp.database.entity.EstadoCebadero;
 import com.example.milenioapp.database.entity.Factura;
 import com.example.milenioapp.database.entity.Higiene;
+import com.example.milenioapp.database.entity.HigieneGroup;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
@@ -38,8 +42,8 @@ import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class,
-        Higiene.class},
-        version = 3, exportSchema = false)
+        Higiene.class, CebaderoGroup.class, HigieneGroup.class},
+        version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
 
@@ -58,6 +62,8 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract TecnicaAplicacionDAO getTecnicaAplicacionDAO();
     public abstract CebaderoDAO getCebaderoDAO();
     public abstract HigieneDAO getHigieneDAO();
+    public abstract CebaderoGroupDAO getCebaderoGroupDAO();
+    public abstract HigieneGroupDAO getHigieneGroupDAO();
 
 
     public static AppDataBase getInstance(Context context) {

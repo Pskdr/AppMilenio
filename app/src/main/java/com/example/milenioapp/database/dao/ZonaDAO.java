@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
 
 import java.util.List;
 
@@ -28,9 +29,11 @@ public interface ZonaDAO {
     @Update
     void update(Zona zona);
 
-    @Query("select * from zonas where idTipo = :idTipo and defalt = 'S'")
-    List<Zona> getByTypeDefault(long idTipo);
+    @Query("select id, -1 as idOrden, descripcion as nombre, '' as producto, '' as ingredienteActivo, '' as docificacion from zonas where idTipo = :idTipo and defalt = 'S'")
+    List<GrupoZonaMostrar> getByTypeDefault(long idTipo);
 
-    @Query("select id, descripcion, -1 as idTipo from zonas")
-    List<AgregarObjeto> getAll();
+    @Query("select * from zonas where idTipo = :idTipo")
+    List<Zona> getAll(long idTipo);
+
+
 }

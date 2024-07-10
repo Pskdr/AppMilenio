@@ -16,12 +16,14 @@ import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.database.entity.GrupoZona;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.home.AdapterHigiene;
+import com.example.milenioapp.ui.ordenes.crearOrden.zona.AdapterZonas;
+import com.example.milenioapp.ui.ordenes.crearOrden.zona.CustomDialogZonas;
+import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class CrearOrdenFragment extends Fragment {
 
     private Button btnSobreElServicio, btnGuardar;
     private  ArrayList<HygieneItem> items;
+    private List<Zona> zonasTratadas;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class CrearOrdenFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
                 items.clear();
                 for (int i = 0; i < higienes.size(); i++) {
-                    items.add(new HygieneItem(higienes.get(i).getId(),higienes.get(i).getNombre(), higienes.get(i).getS().equals("S") ? true:false ));
+                    items.add(new HygieneItem(higienes.get(i).getId(),higienes.get(i).getNombre(), higienes.get(i).getS() ));
                 }
                 llenarAdapterHigiene();
 
@@ -99,34 +102,31 @@ public class CrearOrdenFragment extends Fragment {
         rvHigiene.setAdapter(adapter);
         rvZonas.setAdapter(adapter);
     }
-
     AdapterZonas adapterZonas;
+    private ArrayList<GrupoZonaMostrar> grupoZonas;
     private void traerZonasDefault() {
         new Thread(() -> {
 
-            List<Zona> zonaList = AppDataBase.getInstance(getContext()).getZonaDAO().getByTypeDefault(cliente.getIdTipo());
+            grupoZonas = (ArrayList<GrupoZonaMostrar>) AppDataBase.getInstance(getContext()).getZonaDAO().getByTypeDefault(cliente.getIdTipo());
 
             getActivity().runOnUiThread(() ->{
-
-                ArrayList<GrupoZona> grupoZonas = new ArrayList<>();
-
-                for(int i = 0; i<zonaList.size(); i++){
-
-                    grupoZonas.add(new GrupoZona(zonaList.get(i).getId(),idOrden,-1));
-
-                }
-                adapterZonas = new AdapterZonas(grupoZonas, new AdapterZonas.onItemListener() {
-                    @Override
-                    public void onItemClick(int position) {
-
-                    }
-                },this,false);
-
-                //rvHigiene.setAdapter(adapterZonas);
-
+                
+                cargarAdapterZonas();
+               
             });
 
         }).start();
+    }
+
+    private void cargarAdapterZonas() {
+        adapterZonas = new AdapterZonas(grupoZonas, new AdapterZonas.onItemListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        },this,false);
+
+        rvZonas.setAdapter(adapterZonas);
     }
 
     private void obtenerEmpresa(long id) {
@@ -137,6 +137,7 @@ public class CrearOrdenFragment extends Fragment {
 
             getActivity().runOnUiThread(() -> {
                 traerZonasDefault();
+                zonasTratadas = new ArrayList<>();
             });
 
         }).start();
@@ -165,5 +166,21 @@ public class CrearOrdenFragment extends Fragment {
     }
 
     public void agregarCebadero(Cebadero cebadero) {
+    }
+
+    public void borrarZona(int finalPosition) {
+        grupoZonas.remove(finalPosition);
+        cargarAdapterZonas();
+    }
+
+    public void abrirCustomDialog(GrupoZonaMostrar grupoZonaMostrar, int position) {
+
+        final CustomDialogZonas dialog = new CustomDialogZonas(this, grupoZonaMostrar,cliente.getIdTipo(), position);
+        dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+    }
+
+    public void actualizarZona(GrupoZonaMostrar zonaAgregada, int position) {
+        grupoZonas.set(position,zonaAgregada);
+        cargarAdapterZonas();
     }
 }

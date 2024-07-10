@@ -182,7 +182,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
                         itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getInsectoDAO().getByTipoMostrar(tipoInsectoSeleccionado.getId());
                         break;
                     case "Z":
-                        itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getZonaDAO().getAll();
+                        //itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getZonaDAO().getAll();
                         break;
                     case "C":
 

@@ -10,12 +10,22 @@ public class Higiene {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String nombre;
-    private String s;
+    private String s; //S - N - NA
+    private long idTipoOrden;
 
-    public Higiene(long id, String nombre, String s) {
+    public Higiene(long id, String nombre, String s, long idTipoOrden) {
         this.id = id;
         this.nombre = nombre;
         this.s = s;
+        this.idTipoOrden = idTipoOrden;
+    }
+
+    public long getIdTipoOrden() {
+        return idTipoOrden;
+    }
+
+    public void setIdTipoOrden(long idTipoOrden) {
+        this.idTipoOrden = idTipoOrden;
     }
 
     public long getId() {

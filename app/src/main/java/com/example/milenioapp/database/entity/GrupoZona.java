@@ -9,12 +9,40 @@ public class GrupoZona {
     private long id;
     private long idZona;
     private long idOrden;
-    private long idTecnica;
+    private String producto;
+    private String ingredienteActivo;
+    private String docificacion;
 
-    public GrupoZona(long idZona, long idOrden, long idTecnica) {
+    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String docificacion) {
         this.idZona = idZona;
         this.idOrden = idOrden;
-        this.idTecnica = idTecnica;
+        this.producto = producto;
+        this.ingredienteActivo = ingredienteActivo;
+        this.docificacion = docificacion;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    public String getIngredienteActivo() {
+        return ingredienteActivo;
+    }
+
+    public void setIngredienteActivo(String ingredienteActivo) {
+        this.ingredienteActivo = ingredienteActivo;
+    }
+
+    public String getDocificacion() {
+        return docificacion;
+    }
+
+    public void setDocificacion(String docificacion) {
+        this.docificacion = docificacion;
     }
 
     public long getId() {
@@ -39,13 +67,5 @@ public class GrupoZona {
 
     public void setIdOrden(long idOrden) {
         this.idOrden = idOrden;
-    }
-
-    public long getIdTecnica() {
-        return idTecnica;
-    }
-
-    public void setIdTecnica(long idTecnica) {
-        this.idTecnica = idTecnica;
     }
 }

@@ -367,7 +367,9 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Plaga encontrada ▼"
+                    android:padding="5dp"
+                    android:id="@+id/tvPlagaEncontrada"
+                    android:text="Zonas ▼"
                     android:layout_width="0dp"
                     android:background="@color/greylight"
                     android:textColor="@color/black"
@@ -377,28 +379,24 @@
                     android:layout_weight=".5"/>
 
 
-                <TextView
-                    android:text="Nivel de infestación ▼ "
-                    android:background="@color/greylight"
-                    android:layout_width="0dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"/>
 
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvZonas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="80"
+                    android:layout_weight="70"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
-                    android:text="Higiene"/>
+                    android:text="AREAS LOCATIVAS E HIGIENE DE LAS INSTALACIONES"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -419,6 +417,16 @@
                     android:gravity="center"
                     android:layout_height="wrap_content"
                     android:text="NO"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:layout_weight="10"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="N/A"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -434,9 +442,8 @@
                     android:layout_weight="80"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
-                    android:text="Higiene"/>
+                    android:text="ESPECIE ENCONTRADA"/>
 
                 <TextView
                     android:layout_width="0dp"

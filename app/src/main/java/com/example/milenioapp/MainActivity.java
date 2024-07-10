@@ -17,10 +17,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Usuario;
+import com.example.milenioapp.database.entity.Zona;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,6 +73,31 @@ public class MainActivity extends AppCompatActivity {
         permissionsList.addAll(Arrays.asList(permissionsStr));
         askForPermissions(permissionsList);
     }
+
+    private void insertarDatosIniciales() {
+        List<Zona> zonaList = new ArrayList<>();
+        zonaList.add(new Zona(0, "Ejemplo1", "E1",0));
+        zonaList.add(new Zona(1, "Ejemplo2", "E2",0));
+        zonaList.add(new Zona(2, "Ejemplo3", "E3",0));
+        zonaList.add(new Zona(3, "Ejemplo4", "E4",0));
+
+        List<Higiene> higieneList = new ArrayList<>();
+        higieneList.add(new Higiene(0, "Area libre de residuos", "S",-1));
+        higieneList.add(new Higiene(1, "Area sin acumulación de basura", "N",-1));
+        higieneList.add(new Higiene(2, "Orden y aseo", "S",-1));
+        new Thread(() -> {
+
+            AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
+            AppDataBase.getInstance(getApplicationContext()).getZonaDAO().insertAll(zonaList);
+            AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
+
+            runOnUiThread(() -> {
+                obtenerUsuario();
+            });
+
+        }).start();
+    }
+
     private void askForPermissions(ArrayList<String> permissionsList) {
         String[] newPermissionStr = new String[permissionsList.size()];
         for (int i = 0; i < newPermissionStr.length; i++) {
@@ -112,9 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     });
 
     private void obtenerUsuario() {
-
         new Thread(() -> {
-
             Usuario usuario = AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().getUser();
 
             runOnUiThread(() -> {
@@ -127,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(miBundle);
                     startActivity(intent);
                     finish();
+                }else{
+                    insertarDatosIniciales();
                 }
 
             });

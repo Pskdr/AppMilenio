@@ -43,22 +43,30 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
         holder.tvNombre.setText(higieneArrayList.get(position).getItemName());
-        holder.rbSi.setChecked(higieneArrayList.get(position).isChecked());
-        holder.rbNo.setChecked(!higieneArrayList.get(position).isChecked());
+        holder.rbSi.setChecked(higieneArrayList.get(position).isChecked().equals("S"));
+        holder.rbNo.setChecked(!higieneArrayList.get(position).isChecked().equals("N"));
+        holder.rbNA.setChecked(!higieneArrayList.get(position).isChecked().equals("NA"));
 
         holder.rbSi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                higieneArrayList.get(position).setChecked(true);
+                higieneArrayList.get(position).setChecked("S");
                 notifyItemChanged(position);
             }
         });
 
         holder.rbNo.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                higieneArrayList.get(position).setChecked(false);
+                higieneArrayList.get(position).setChecked("N");
                 notifyItemChanged(position);
             }
         });
+        holder.rbNA.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                higieneArrayList.get(position).setChecked("NA");
+                notifyItemChanged(position);
+            }
+        });
+
 
         Log.d("pesk", "onBindViewHolder: entró "+higieneArrayList.get(position).getItemName());
     }
@@ -115,7 +123,7 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView tvNombre;
-        private final RadioButton rbSi, rbNo;
+        private final RadioButton rbSi, rbNo, rbNA;
         private final AdapterHigiene.onItemListener onItemListener;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterHigiene.onItemListener onItemListener) {
@@ -124,6 +132,7 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
             tvNombre = itemView.findViewById(R.id.itemName);
             rbSi = itemView.findViewById(R.id.radioYes);
             rbNo = itemView.findViewById(R.id.radioNo);
+            rbNA = itemView.findViewById(R.id.radioNa);
 
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);

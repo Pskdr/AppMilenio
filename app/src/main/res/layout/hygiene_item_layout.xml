@@ -13,14 +13,14 @@
                 android:id="@+id/itemName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="80"
+                android:layout_weight="60"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:text="" />
 
             <RadioGroup
                 android:layout_width="0dp"
-                android:layout_weight="20"
+                android:layout_weight="30"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
@@ -36,6 +36,14 @@
 
                 <RadioButton
                     android:id="@+id/radioNo"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <RadioButton
+                    android:id="@+id/radioNa"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_width="wrap_content"

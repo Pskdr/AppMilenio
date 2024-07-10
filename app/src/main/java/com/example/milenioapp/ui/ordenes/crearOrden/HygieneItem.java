@@ -3,9 +3,9 @@ package com.example.milenioapp.ui.ordenes.crearOrden;
 public class HygieneItem {
     private long id;
     private String itemName;
-    private boolean isChecked;
+    private String isChecked; //S - N - NA
 
-    public HygieneItem(long id,String itemName, boolean isChecked) {
+    public HygieneItem(long id,String itemName, String isChecked) {
         this.id = id;
         this.itemName = itemName;
         this.isChecked = isChecked;
@@ -27,11 +27,11 @@ public class HygieneItem {
         return itemName;
     }
 
-    public boolean isChecked() {
+    public String isChecked() {
         return isChecked;
     }
 
-    public void setChecked(boolean checked) {
+    public void setChecked(String checked) {
         isChecked = checked;
     }
 }
