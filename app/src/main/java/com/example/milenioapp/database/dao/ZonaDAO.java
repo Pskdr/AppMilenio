@@ -29,7 +29,7 @@ public interface ZonaDAO {
     @Update
     void update(Zona zona);
 
-    @Query("select id, -1 as idOrden, descripcion as nombre, '' as producto, '' as ingredienteActivo, '' as docificacion from zonas where idTipo = :idTipo and defalt = 'S'")
+    @Query("select id, -1 as idOrden, descripcion as nombre, '' as producto, '' as ingredienteActivo, '' as docificacion from zonas where idTipo = :idTipo")
     List<GrupoZonaMostrar> getByTypeDefault(long idTipo);
 
     @Query("select * from zonas where idTipo = :idTipo")

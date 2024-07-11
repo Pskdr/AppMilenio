@@ -1,5 +1,6 @@
 package com.example.milenioapp.ui.ordenes.crearOrden;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +21,10 @@ import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
-import com.example.milenioapp.ui.home.AdapterHigiene;
+import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.AdapterHigiene;
+import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
+import com.example.milenioapp.ui.ordenes.crearOrden.insecto.AdapterInsectos;
+import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.AdapterZonas;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.CustomDialogZonas;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
@@ -36,11 +40,12 @@ public class CrearOrdenFragment extends Fragment {
         // Required empty public constructor
     }
     long idOrden,id;
-    private RecyclerView rvHigiene, rvZonas;
+    private RecyclerView rvHigiene, rvZonas,rvInsectos;
 
     private Button btnSobreElServicio, btnGuardar;
     private  ArrayList<HygieneItem> items;
     private List<Zona> zonasTratadas;
+    private Orden orden;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class CrearOrdenFragment extends Fragment {
 
         rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
+        rvInsectos = view.findViewById(R.id.rvInsectos);
 
 
 
@@ -68,9 +74,41 @@ public class CrearOrdenFragment extends Fragment {
 
         rvHigiene.setLayoutManager(new LinearLayoutManager(getContext()));
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
-        traerDatosHigiene();
         return view;
     }
+    private ArrayList<Insecto> insectoArrayList;
+    private ArrayList<InsectoGroupMostrar> insectoGroupArrayList;
+    private void traerDatosEspecies() {
+        insectoArrayList = new ArrayList<>();
+        insectoGroupArrayList = new ArrayList<>();
+        new Thread(() -> {
+
+            insectoArrayList = (ArrayList<Insecto>) AppDataBase.getInstance(getContext()).getInsectoDAO().getAll();
+
+            getActivity().runOnUiThread(() -> {
+
+                for (int i = 0; i < insectoArrayList.size(); i++) {
+                    insectoGroupArrayList.add(new InsectoGroupMostrar(i,insectoArrayList.get(i).getDescripcion(), insectoArrayList.get(i).getId(),"" ));
+                }
+                llenarAdapterInsecto();
+
+            });
+
+        }).start();
+
+    }
+    private AdapterInsectos adapterInsectos;
+    private void llenarAdapterInsecto() {
+        adapterInsectos = new AdapterInsectos(new AdapterInsectos.onItemListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        },insectoGroupArrayList);
+        rvInsectos.setAdapter(adapterInsectos);
+
+    }
+
     private AdapterHigiene adapter;
     private void traerDatosHigiene() {
         items = new ArrayList<>();
@@ -100,7 +138,6 @@ public class CrearOrdenFragment extends Fragment {
         }, items);
 
         rvHigiene.setAdapter(adapter);
-        rvZonas.setAdapter(adapter);
     }
     AdapterZonas adapterZonas;
     private ArrayList<GrupoZonaMostrar> grupoZonas;
@@ -138,6 +175,9 @@ public class CrearOrdenFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
                 traerZonasDefault();
                 zonasTratadas = new ArrayList<>();
+
+                traerDatosHigiene();
+                traerDatosEspecies();
             });
 
         }).start();
@@ -147,7 +187,7 @@ public class CrearOrdenFragment extends Fragment {
         new Thread(() -> {
 
             cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
-            Orden orden = AppDataBase.getInstance(getContext()).getOrdenDAO().getByid(idOrden);
+            orden = AppDataBase.getInstance(getContext()).getOrdenDAO().getByid(idOrden);
 
 
             getActivity().runOnUiThread(() -> {
@@ -182,5 +222,13 @@ public class CrearOrdenFragment extends Fragment {
     public void actualizarZona(GrupoZonaMostrar zonaAgregada, int position) {
         grupoZonas.set(position,zonaAgregada);
         cargarAdapterZonas();
+    }
+    private Bitmap firmaAcompa, firmaOperario;
+    public void guardarFirmaAcompa(Bitmap bitmap) {
+        this.firmaAcompa = bitmap;
+    }
+
+    public void guardarFirmaOperario(Bitmap bitmap) {
+        this.firmaOperario = bitmap;
     }
 }

@@ -76,15 +76,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertarDatosIniciales() {
         List<Zona> zonaList = new ArrayList<>();
-        zonaList.add(new Zona(0, "Ejemplo1", "E1",0));
-        zonaList.add(new Zona(1, "Ejemplo2", "E2",0));
-        zonaList.add(new Zona(2, "Ejemplo3", "E3",0));
-        zonaList.add(new Zona(3, "Ejemplo4", "E4",0));
+        zonaList.add(new Zona(0, "Sala vísceras blancas Sifón", "E1",0));
+        zonaList.add(new Zona(1, "Lockers", "E2",0));
+        zonaList.add(new Zona(2, "Oficinas", "E3",0));
+        zonaList.add(new Zona(3, "Baños", "E4",0));
 
         List<Higiene> higieneList = new ArrayList<>();
-        higieneList.add(new Higiene(0, "Area libre de residuos", "S",-1));
-        higieneList.add(new Higiene(1, "Area sin acumulación de basura", "N",-1));
-        higieneList.add(new Higiene(2, "Orden y aseo", "S",-1));
+        higieneList.add(new Higiene(0, "Area libre de residuos", "S",0));
+        higieneList.add(new Higiene(1, "Area sin acumulación de basura", "S",0));
+        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
+        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
+        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
         new Thread(() -> {
 
             AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();

@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.ordenes.crearOrden;
+package com.example.milenioapp.ui.ordenes.crearOrden.hallazgos;
 
 public class HygieneItem {
     private long id;

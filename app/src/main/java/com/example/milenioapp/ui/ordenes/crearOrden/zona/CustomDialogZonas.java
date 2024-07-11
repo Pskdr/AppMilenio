@@ -1,5 +1,6 @@
 package com.example.milenioapp.ui.ordenes.crearOrden.zona;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,17 @@ public class CustomDialogZonas extends DialogFragment {
         this.idTipo = idTipo;
         this.position = position;
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null)
+        {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+            dialog.getWindow().setLayout(width, height);
+        }
+    }
     private Button btnGuardar, btnCerrar;
 
     private TextView errorText;
@@ -82,7 +93,7 @@ public class CustomDialogZonas extends DialogFragment {
                 this.zonaAgregada.setIngredienteActivo(tvIngrediente.getText().toString());
 
                 crearOrdenFragment.actualizarZona(zonaAgregada, position);
-
+                this.dismiss();
             }else{
                 errorText.setVisibility(View.VISIBLE);
             }
@@ -219,22 +230,38 @@ public class CustomDialogZonas extends DialogFragment {
                 spinnerIngredientes.setAdapter(arrayAdapterIngredientes);
                 spinnerdocificacion.setAdapter(arrayAdapterDocis);
 
-                spinnerProducto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         tvProducto.setText(productosList.get(position));
                     }
-                });
-                spinnerIngredientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        tvIngrediente.setText(ingredienteList.get(position));
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
-                spinnerdocificacion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                spinnerIngredientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        tvIngrediente.setText(ingredienteList.get(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                spinnerdocificacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         tvDocificacion.setText(docis.get(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
             });

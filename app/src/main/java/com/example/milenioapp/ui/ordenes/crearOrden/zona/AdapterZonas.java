@@ -48,6 +48,7 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
         holder.tvZona.setText(grupoZonas.get(position).getNombre());
         holder.tvProducto.setText(grupoZonas.get(position).getProducto());
         holder.tvDocificacion.setText(grupoZonas.get(position).getDocificacion());
+        holder.tvIngrediente.setText(grupoZonas.get(position).getIngredienteActivo());
         holder.tvBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

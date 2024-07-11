@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.home;
+package com.example.milenioapp.ui.ordenes.crearOrden.hallazgos;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.ui.ordenes.crearOrden.HygieneItem;
 
 import java.util.ArrayList;
 
@@ -44,8 +43,8 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
         holder.tvNombre.setText(higieneArrayList.get(position).getItemName());
         holder.rbSi.setChecked(higieneArrayList.get(position).isChecked().equals("S"));
-        holder.rbNo.setChecked(!higieneArrayList.get(position).isChecked().equals("N"));
-        holder.rbNA.setChecked(!higieneArrayList.get(position).isChecked().equals("NA"));
+        holder.rbNo.setChecked(higieneArrayList.get(position).isChecked().equals("N"));
+        holder.rbNA.setChecked(higieneArrayList.get(position).isChecked().equals("NA"));
 
         holder.rbSi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
