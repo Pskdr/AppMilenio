@@ -20,10 +20,12 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
 
     private final AdapterInsectos.onItemListener onItemListener;
     ArrayList<InsectoGroupMostrar> higieneArrayList;
+    private boolean bloquear;
 
-    public AdapterInsectos(AdapterInsectos.onItemListener onItemListener, ArrayList<InsectoGroupMostrar> arrayList) {
+    public AdapterInsectos(AdapterInsectos.onItemListener onItemListener, ArrayList<InsectoGroupMostrar> arrayList, boolean bloquear) {
         this.onItemListener = onItemListener;
         this.higieneArrayList = arrayList;
+        this.bloquear = bloquear;
     }
 
     @NonNull
@@ -38,6 +40,12 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
+
+        if(bloquear){
+            holder.rbSi.setEnabled(false);
+            holder.rbNo.setEnabled(false);
+            holder.rbNA.setEnabled(false);
+        }
         holder.tvNombre.setText(higieneArrayList.get(position).getNombre());
         holder.rbSi.setChecked(higieneArrayList.get(position).getS().equals("S"));
         holder.rbNo.setChecked(higieneArrayList.get(position).getS().equals("N"));

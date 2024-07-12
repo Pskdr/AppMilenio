@@ -23,10 +23,12 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
     private final AdapterHigiene.onItemListener onItemListener;
     ArrayList<HygieneItem> higieneArrayList;
     ArrayList<Cliente> copiaListaDatos;
+    private boolean bloquear;
 
-    public AdapterHigiene(AdapterHigiene.onItemListener onItemListener, ArrayList<HygieneItem> arrayList) {
+    public AdapterHigiene(AdapterHigiene.onItemListener onItemListener, ArrayList<HygieneItem> arrayList, boolean bloquear) {
         this.onItemListener = onItemListener;
         this.higieneArrayList = arrayList;
+        this.bloquear = bloquear;
     }
 
     @NonNull
@@ -41,6 +43,13 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
+
+        if(bloquear){
+            holder.rbSi.setEnabled(false);
+            holder.rbNo.setEnabled(false);
+            holder.rbNA.setEnabled(false);
+        }
+
         holder.tvNombre.setText(higieneArrayList.get(position).getItemName());
         holder.rbSi.setChecked(higieneArrayList.get(position).isChecked().equals("S"));
         holder.rbNo.setChecked(higieneArrayList.get(position).isChecked().equals("N"));

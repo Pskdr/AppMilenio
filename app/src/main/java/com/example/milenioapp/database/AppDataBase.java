@@ -17,6 +17,7 @@ import com.example.milenioapp.database.dao.ClienteDAO;
 import com.example.milenioapp.database.dao.EmpleadoDAO;
 import com.example.milenioapp.database.dao.EstadoCebaderoDAO;
 import com.example.milenioapp.database.dao.FacturaDAO;
+import com.example.milenioapp.database.dao.GrupoZonaDAO;
 import com.example.milenioapp.database.dao.HigieneDAO;
 import com.example.milenioapp.database.dao.HigieneGroupDAO;
 import com.example.milenioapp.database.dao.InsectoDAO;
@@ -31,9 +32,11 @@ import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.Empleado;
 import com.example.milenioapp.database.entity.EstadoCebadero;
 import com.example.milenioapp.database.entity.Factura;
+import com.example.milenioapp.database.entity.GrupoZona;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.HigieneGroup;
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
 import com.example.milenioapp.database.entity.TipoInsecto;
@@ -42,7 +45,7 @@ import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class,
-        Higiene.class, CebaderoGroup.class, HigieneGroup.class},
+        Higiene.class, CebaderoGroup.class, HigieneGroup.class, GrupoZona.class, InsectoGroup.class},
         version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
@@ -64,6 +67,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract HigieneDAO getHigieneDAO();
     public abstract CebaderoGroupDAO getCebaderoGroupDAO();
     public abstract HigieneGroupDAO getHigieneGroupDAO();
+    public abstract GrupoZonaDAO getGrupoZonaDAO();
 
 
     public static AppDataBase getInstance(Context context) {

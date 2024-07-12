@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
         zonaList.add(new Zona(3, "Baños", "E4",0));
 
         List<Higiene> higieneList = new ArrayList<>();
-        higieneList.add(new Higiene(0, "Area libre de residuos", "S",0));
-        higieneList.add(new Higiene(1, "Area sin acumulación de basura", "S",0));
-        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
-        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
-        higieneList.add(new Higiene(2, "Orden y aseo", "S",0));
+        higieneList.add(new Higiene(0, "Area libre de residuos" ,0));
+        higieneList.add(new Higiene(1, "Area sin acumulación de basura" ,0));
+        higieneList.add(new Higiene(2, "Orden y aseo", 0));
+        higieneList.add(new Higiene(2, "Orden y aseo", 0));
+        higieneList.add(new Higiene(2, "Orden y aseo", 0));
         new Thread(() -> {
 
             AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();

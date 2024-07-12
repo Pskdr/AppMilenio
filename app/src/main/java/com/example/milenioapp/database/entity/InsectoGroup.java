@@ -17,6 +17,10 @@ public class InsectoGroup {
         this.hallado = hallado;
     }
 
+    public String getHallado() {
+        return hallado;
+    }
+
     public long getId() {
         return id;
     }

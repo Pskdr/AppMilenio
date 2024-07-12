@@ -35,12 +35,14 @@ public class CustomDialogZonas extends DialogFragment {
 
     private TextView tvZona, tvProducto, tvIngrediente,tvDocificacion;
     private int position;
+    private boolean bloquear;
 
-    public CustomDialogZonas(CrearOrdenFragment crearOrdenFragment, GrupoZonaMostrar zonaAgregada, long idTipo, int position) {
+    public CustomDialogZonas(CrearOrdenFragment crearOrdenFragment, GrupoZonaMostrar zonaAgregada, long idTipo, int position, boolean bloquear) {
         this.crearOrdenFragment = crearOrdenFragment;
         this.zonaAgregada = zonaAgregada;
         this.idTipo = idTipo;
         this.position = position;
+        this.bloquear = bloquear;
     }
     @Override
     public void onStart() {
@@ -101,7 +103,12 @@ public class CustomDialogZonas extends DialogFragment {
 
         llenarSpinners();
 
-
+        if (bloquear){
+            spinnerProducto.setEnabled(false);
+            spinnerIngredientes.setEnabled(false);
+            spinnerdocificacion.setEnabled(false);
+            btnGuardar.setVisibility(View.GONE);
+        }
         return view;
     }
 

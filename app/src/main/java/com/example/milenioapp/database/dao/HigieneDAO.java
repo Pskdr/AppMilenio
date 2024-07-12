@@ -10,6 +10,7 @@ import androidx.room.Update;
 import com.example.milenioapp.database.entity.Factura;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
 
 import java.util.List;
 
@@ -18,6 +19,11 @@ public interface HigieneDAO {
 
     @Query("select * from higiene")
     List<Higiene> getAll();
+
+    @Query("select higienesgroup.id as id,higiene.nombre as itemName,higienesgroup.s as isChecked " +
+            "from higienesgroup inner join higiene on higiene.id = higienesgroup.idHigiene " +
+            "where idOrden = :idOrden")
+    List<HygieneItem> getAgregados(long idOrden);
     @Insert
     long insert(Higiene higiene);
     @Update

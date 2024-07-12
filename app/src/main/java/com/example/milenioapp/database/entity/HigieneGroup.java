@@ -12,11 +12,21 @@ public class HigieneGroup {
 
     private long idOrden;
     private long idHigiene;
+    private String s; //S - N - NA
 
-    public HigieneGroup(long id, long idOrden, long idHigiene) {
+    public HigieneGroup(long id, long idOrden, long idHigiene, String s) {
         this.id = id;
         this.idOrden = idOrden;
         this.idHigiene = idHigiene;
+        this.s = s;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
     }
 
     public long getId() {

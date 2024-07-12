@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public interface InsectoDAO {
     @Query("select * from insectos")
     List<Insecto> getAll();
 
+    @Query("select insectosgroup.id as id,insectos.descripcion as nombre,insectos.id as idInsecto, insectosgroup.hallado as s " +
+            "from insectosgroup inner join insectos on insectos.id = insectosgroup.idInsecto " +
+            "where insectosgroup.idOrden = :idOrden")
+    List<InsectoGroupMostrar> getInsectosGuardados(long idOrden);
     @Query("select * from insectos where idTipoInsecto = :idTipoInsecto")
     List<Insecto> getByTipo(long idTipoInsecto);
 

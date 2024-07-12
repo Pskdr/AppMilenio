@@ -130,6 +130,7 @@
                     android:layout_weight="70"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
+                    android:enabled="false"
                     android:background="@color/white"
                     android:hint="Empresa">
 
@@ -137,6 +138,7 @@
                         android:id="@+id/tiEmpresa"
                         android:layout_width="match_parent"
                         style="@style/CustomTextStyle"
+                        android:enabled="false"
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:textColor="@color/black" />
@@ -149,6 +151,7 @@
                     android:layout_width="0dp"
                     android:background="@color/white"
                     android:layout_height="55dp"
+                    android:enabled="false"
                     android:hint="Fecha">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -156,6 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/CustomTextStyle"
+                        android:enabled="false"
                         android:inputType="date"
                         android:textColor="@color/black" />
 
@@ -171,6 +175,7 @@
                     android:layout_weight="60"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
+                    android:enabled="false"
                     android:background="@color/white"
                     android:hint="Cliente">
 
@@ -178,6 +183,7 @@
                         android:id="@+id/tiCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:inputType="text"
                         style="@style/CustomTextStyle"
                         android:textColor="@color/black" />
@@ -190,11 +196,13 @@
                     android:layout_width="0dp"
                     android:background="@color/white"
                     android:layout_height="55dp"
+                    android:enabled="false"
                     android:hint="Nit">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiNit"
                         android:layout_width="match_parent"
+                        android:enabled="false"
                         android:layout_height="wrap_content"
                         style="@style/CustomTextStyle"
                         android:inputType="text"
@@ -207,12 +215,15 @@
                     android:layout_width="0dp"
                     android:background="@color/white"
 
+                    android:enabled="false"
                     android:layout_height="55dp"
                     android:hint="DD/MM/AA">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiFechaActual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         style="@style/CustomTextStyle"
                         android:inputType="date"
                         android:textColor="@color/black" />
@@ -230,6 +241,7 @@
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:background="@color/white"
+                    android:enabled="false"
                     android:hint="Contacto">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -237,6 +249,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:enabled="false"
                         style="@style/CustomTextStyle"
                         android:textColor="@color/black" />
 
@@ -247,6 +260,7 @@
                     android:layout_weight="40"
                     android:layout_width="0dp"
                     android:background="@color/white"
+                    android:enabled="false"
                     android:layout_height="55dp"
                     android:hint="Telefono">
 
@@ -254,6 +268,7 @@
                         android:id="@+id/tiTelefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         style="@style/CustomTextStyle"
                         android:inputType="text"
                         android:textColor="@color/black" />
@@ -271,12 +286,14 @@
                     android:layout_weight="60"
                     android:layout_width="0dp"
                     android:background="@color/white"
+                    android:enabled="false"
                     android:layout_height="55dp"
                     android:hint="Direccion">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiDireccion"
                         android:layout_width="match_parent"
+                        android:enabled="false"
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         style="@style/CustomTextStyle"
@@ -289,6 +306,7 @@
                     android:layout_weight="40"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
+                    android:enabled="false"
                     android:background="@color/white"
                     android:hint="Sede">
 
@@ -296,6 +314,7 @@
                         android:id="@+id/tiSede"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:inputType="text"
                         style="@style/CustomTextStyle"
                         android:textColor="@color/black" />
@@ -326,42 +345,37 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputOutlinedStyle"
-                    android:layout_weight="30"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:background="@color/white"
-                    android:hint="Hora ingreso">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"
-                        style="@style/CustomTextStyle"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputOutlinedStyle"
-                    android:layout_weight="30"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:background="@color/white"
-                    android:hint="Hora salida">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/CustomTextStyle"
-                        android:inputType="datetime"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
 
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvTimeIngreso"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:hint="Hora ingreso"
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvTimeSalida"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:hint="Hora salida"
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content">
@@ -439,12 +453,11 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="80"
+                    android:layout_weight="70"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="ESPECIE ENCONTRADA"/>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="10"
@@ -464,6 +477,16 @@
                     android:gravity="center"
                     android:layout_height="wrap_content"
                     android:text="NO"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:layout_weight="10"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="N/A"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -481,6 +504,29 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+
+                        android:id="@+id/btnFIrmaAcompañante"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firmacompañante"/>
+                    <Button
+                        android:id="@+id/btnFirmaTecnico"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="50"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firmaoperario"/>
+
+                </LinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
@@ -515,40 +561,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <Button
-
-                        android:id="@+id/btnFIrmaAcompañante"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="50"
-                        android:layout_height="wrap_content"
-                        android:text="@string/firmacompañante"/>
-                    <Button
-                        android:id="@+id/btnFirmaTecnico"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="50"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/firmaoperario"/>
-
-                </LinearLayout>
-                <TextView
-                    android:text="@string/firmacompañante"
-                    android:layout_width="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text="@string/firmaoperario"
-                    android:layout_width="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/btnGuardar"

@@ -98,6 +98,12 @@ public class FirmaFragment extends Fragment {
             btnBorrar.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(firmaAcompa){
+                        crearOrdenFragment.guardarFirmaAcompa(null);
+                    }else{
+                        crearOrdenFragment.guardarFirmaOperario(null);
+                    }
                     if(path != null) {
                         path.reset();
                         paths.clear();
