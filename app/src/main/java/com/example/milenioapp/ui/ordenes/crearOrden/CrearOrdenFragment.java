@@ -15,13 +15,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
+import com.example.milenioapp.database.entity.GrupoZona;
 import com.example.milenioapp.database.entity.Higiene;
+import com.example.milenioapp.database.entity.HigieneGroup;
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.AdapterHigiene;
@@ -58,11 +63,11 @@ public class CrearOrdenFragment extends Fragment {
 
     private TextInputEditText tiEmpresa, tiFecha, tiCliente,
             tiNit,tiContacto,tiTelefono,tiDireccion, tiSede,
-            tiFechaActual, tiOperario,tiHoraIngreso,tiHoraSalida;
+            tiFechaActual, tiOperario;
 
     private TextInputEditText tiObservaciones, tiCorrectivos;
 
-
+    private TextView tvHoraIngreso, tvHoraSalida;
     int thour, tminute;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,8 +85,8 @@ public class CrearOrdenFragment extends Fragment {
         tiSede = view.findViewById(R.id.tiSede);
         tiFechaActual = view.findViewById(R.id.tiFechaActual);
         tiOperario = view.findViewById(R.id.tiOperario);
-        tiHoraIngreso = view.findViewById(R.id.tvTimeIngreso);
-        tiHoraSalida = view.findViewById(R.id.tvTimeSalida);
+        tvHoraIngreso = view.findViewById(R.id.tvTimeIngreso);
+        tvHoraSalida = view.findViewById(R.id.tvTimeSalida);
 
         tiObservaciones = view.findViewById(R.id.tiObservaciones);
         tiCorrectivos = view.findViewById(R.id.tiCorrectivos);
@@ -169,7 +174,7 @@ public class CrearOrdenFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
                 hygieneItems.clear();
                 for (int i = 0; i < higienes.size(); i++) {
-                    hygieneItems.add(new HygieneItem(higienes.get(i).getId(),higienes.get(i).getNombre(), "NA" ));
+                    hygieneItems.add(new HygieneItem(0,higienes.get(i).getId(),higienes.get(i).getNombre(), "NA" ));
                 }
                 llenarAdapterHigiene();
 
@@ -246,8 +251,17 @@ public class CrearOrdenFragment extends Fragment {
 
                 //insert
                 btnGuardar.setOnClickListener(v -> {
-
-                    //orden = new Orden(0,);
+                    if(validarDatos()){
+                        Utilities utilities = new Utilities();
+                        if (orden == null){
+                            Calendar calendar = Calendar.getInstance();
+                            orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
+                                    0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
+                                    horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
+                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAcompa),"N");
+                            insertarOrdenNueva(orden);
+                        }
+                    }
 
                 });
 
@@ -255,7 +269,7 @@ public class CrearOrdenFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 final int hora=c.get(Calendar.HOUR_OF_DAY);
                 final int minuto=c.get(Calendar.MINUTE);
-                tiHoraIngreso.setOnClickListener(v -> {
+                tvHoraIngreso.setOnClickListener(v -> {
                     TimePickerDialog timePickerDialog = new TimePickerDialog(
                             getActivity(),
                             android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -268,7 +282,7 @@ public class CrearOrdenFragment extends Fragment {
                                     Date date = f24Hours.parse(time);
                                     SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
 
-                                    tiHoraIngreso.setText(f12Hours.format(date).toLowerCase());
+                                    tvHoraIngreso.setText(f12Hours.format(date).toLowerCase());
                                     horaEntrada.setTimeInMillis(date.getTime());
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -280,7 +294,7 @@ public class CrearOrdenFragment extends Fragment {
                     timePickerDialog.show();
 
                 });
-                tiHoraSalida.setOnClickListener(v -> {
+                tvHoraSalida.setOnClickListener(v -> {
                     TimePickerDialog timePickerDialog = new TimePickerDialog(
                             getActivity(),
                             android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -293,7 +307,7 @@ public class CrearOrdenFragment extends Fragment {
                                     Date date = f24Hours.parse(time);
                                     SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
 
-                                    tiHoraSalida.setText(f12Hours.format(date).toLowerCase());
+                                    tvHoraSalida.setText(f12Hours.format(date).toLowerCase());
                                     horaSalida.setTimeInMillis(date.getTime());
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -310,6 +324,86 @@ public class CrearOrdenFragment extends Fragment {
 
         }).start();
     }
+
+    private void insertarOrdenNueva(Orden orden) {
+        new Thread(() -> {
+
+            long idOrden = AppDataBase.getInstance(getContext()).getOrdenDAO().insert(orden);
+
+            getActivity().runOnUiThread(() -> {
+
+                ArrayList<GrupoZona> grupoZonaInsert = new ArrayList<>();
+                for (int i = 0; i < grupoZonas.size(); i++) {
+                    grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
+                            idOrden,grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
+                            grupoZonas.get(i).getDocificacion()));
+                }
+
+                ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
+                for (int i = 0; i < hygieneItems.size(); i++) {
+                    higieneGroupsInsert.add(new HigieneGroup(idOrden,hygieneItems.get(i).getIdHigiene(),
+                            hygieneItems.get(i).getIsChecked()));
+                }
+
+                ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
+                for (int i = 0; i < insectoGroupArrayList.size(); i++) {
+                    insectoGroupsInsert.add(new InsectoGroup(idOrden,insectoGroupArrayList.get(i).getIdInsecto(),
+                            insectoGroupArrayList.get(i).getS()));
+                }
+
+                new Thread(() -> {
+                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
+                    AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
+
+                    getActivity().runOnUiThread(() -> {
+
+                        Toast.makeText(getContext(),"Inserto exitoso",Toast.LENGTH_LONG).show();
+                        getActivity().onBackPressed();
+                    });
+                }).start();
+            });
+
+        }).start();
+    }
+
+    private boolean validarDatos() {
+
+        if(tiOperario.getText().toString().equals("") || tvHoraIngreso.getText().toString().equals("")
+                || tvHoraSalida.getText().toString().equals("") ){
+            return false;
+        }
+
+        for (int i = 0; i < insectoGroupArrayList.size(); i++) {
+            if(insectoGroupArrayList.get(i).getS().equals("")){
+                Toast.makeText(getContext(),"Tiene que seleccionar todas las especies",Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+        }
+        for (int i = 0; i < hygieneItems.size(); i++) {
+            if(hygieneItems.get(i).isChecked().equals("")){
+                Toast.makeText(getContext(),"Tiene que seleccionar todas las areas locativas ",Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+        }
+        for (int i = 0; i < grupoZonas.size(); i++) {
+            if(grupoZonas.get(i).getIngredienteActivo().equals("") || grupoZonas.get(i).getProducto().equals("") || grupoZonas.get(i).getDocificacion().equals("")){
+                Toast.makeText(getContext(),"Tiene que seleccionar todos los datos de las zonas ",Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+        }
+
+        if(firmaOperario == null || firmaAcompa == null){
+            Toast.makeText(getContext(),"Las firmas son obligatorias",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
     private Calendar horaEntrada, horaSalida;
     private void obtenerEmpresa(long id, long idOrden) {
 
@@ -347,10 +441,10 @@ public class CrearOrdenFragment extends Fragment {
             tiOperario.setText(orden.getOperario());
 
             horaIngreso.setTimeInMillis(orden.getHoraIngreso());
-            tiHoraIngreso.setText(utilities.getFechaString(horaIngreso));
+            tvHoraIngreso.setText(utilities.getFechaString(horaIngreso));
 
             horaSalida.setTimeInMillis(orden.getHoraSalida());
-            tiHoraSalida.setText(utilities.getFechaString(horaSalida));
+            tvHoraSalida.setText(utilities.getFechaString(horaSalida));
 
             guardarFirmaOperario(utilities.stringToBitMap(orden.getFirmaOperario()));
             guardarFirmaAcompa(utilities.stringToBitMap(orden.getFirmaAyudante()));
@@ -366,15 +460,82 @@ public class CrearOrdenFragment extends Fragment {
                 tiObservaciones.setEnabled(false);
                 tiCorrectivos.setEnabled(false);
                 tiOperario.setEnabled(false);
-                tiHoraIngreso.setEnabled(false);
-                tiHoraSalida.setEnabled(false);
+                tvHoraIngreso.setEnabled(false);
+                tvHoraSalida.setEnabled(false);
             }
 
             //update
             btnGuardar.setOnClickListener(v -> {
+                if(validarDatos()){
+                    if (orden == null){
+                       Calendar calendar2 = Calendar.getInstance();
+                        orden = new Orden(0,calendar2.getTimeInMillis(),calendar2.getTimeInMillis(),
+                                0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
+                                horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
+                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAcompa),"N");
+                        insertarOrdenNueva(orden);
+                    }else{
+                        orden.setOperario(tiOperario.getText().toString());
+                        orden.setHoraIngreso(horaEntrada.getTimeInMillis());
+                        orden.setHoraSalida(horaSalida.getTimeInMillis());
+                        orden.setObservacionesTecnicas(tiObservaciones.getText().toString());
+                        orden.setCorrectivos(tiCorrectivos.getText().toString());
+                        orden.setFirmaOperario(utilities.bitMapToString(firmaOperario));
+                        orden.setFirmaAyudante(utilities.bitMapToString(firmaAcompa));
+
+                        updateOrden(orden);
+
+                    }
+                }
 
             });
         }
+    }
+
+    private void updateOrden(Orden orden) {
+        new Thread(() -> {
+
+            AppDataBase.getInstance(getContext()).getOrdenDAO().update(orden);
+
+            getActivity().runOnUiThread(() -> {
+
+
+                ArrayList<GrupoZona> grupoZonaInsert = new ArrayList<>();
+                for (int i = 0; i < grupoZonas.size(); i++) {
+                    grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
+                            orden.getId(),grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
+                            grupoZonas.get(i).getDocificacion()));
+                    grupoZonaInsert.get(i).setId(grupoZonas.get(i).getId());
+                }
+
+                ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
+                for (int i = 0; i < hygieneItems.size(); i++) {
+                    higieneGroupsInsert.add(new HigieneGroup(orden.getId(),hygieneItems.get(i).getIdHigiene(),
+                            hygieneItems.get(i).getIsChecked()));
+                    higieneGroupsInsert.get(i).setId(hygieneItems.get(i).getId());
+                }
+
+                ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
+                for (int i = 0; i < insectoGroupArrayList.size(); i++) {
+                    insectoGroupsInsert.add(new InsectoGroup(orden.getId(),insectoGroupArrayList.get(i).getIdInsecto(),
+                            insectoGroupArrayList.get(i).getS()));
+                    insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getId());
+                }
+
+                new Thread(() -> {
+                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
+                    AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
+
+                    getActivity().runOnUiThread(() -> {
+
+                        Toast.makeText(getContext(),"Inserto exitoso",Toast.LENGTH_LONG).show();
+                        getActivity().onBackPressed();
+                    });
+                }).start();
+            });
+
+        }).start();
     }
 
     private void traerZonasAgregadas(Orden orden) {

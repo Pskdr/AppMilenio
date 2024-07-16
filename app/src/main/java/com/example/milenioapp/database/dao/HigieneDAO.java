@@ -20,7 +20,7 @@ public interface HigieneDAO {
     @Query("select * from higiene")
     List<Higiene> getAll();
 
-    @Query("select higienesgroup.id as id,higiene.nombre as itemName,higienesgroup.s as isChecked " +
+    @Query("select higienesgroup.id as id,higiene.id as idHigiene,higiene.nombre as itemName,higienesgroup.s as isChecked " +
             "from higienesgroup inner join higiene on higiene.id = higienesgroup.idHigiene " +
             "where idOrden = :idOrden")
     List<HygieneItem> getAgregados(long idOrden);

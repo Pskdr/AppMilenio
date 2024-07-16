@@ -11,7 +11,7 @@ import com.example.milenioapp.database.entity.Orden;
 public interface OrdenDAO {
 
     @Insert
-    void insert(Orden orden);
+    long insert(Orden orden);
     @Update
     void update(Orden orden);
     @Delete

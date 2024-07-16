@@ -2,19 +2,30 @@ package com.example.milenioapp.ui.ordenes.crearOrden.zona;
 
 public class GrupoZonaMostrar {
     private long id;
+    private long idZona;
     private long idOrden;
     private String nombre;
     private String producto;
     private String ingredienteActivo;
     private String docificacion;
 
-    public GrupoZonaMostrar(long id, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion) {
+
+    public GrupoZonaMostrar(long id, long idZona, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion) {
         this.id = id;
+        this.idZona = idZona;
         this.idOrden = idOrden;
         this.nombre = nombre;
         this.producto = producto;
         this.ingredienteActivo = ingredienteActivo;
         this.docificacion = docificacion;
+    }
+
+    public long getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(long idZona) {
+        this.idZona = idZona;
     }
 
     public long getId() {

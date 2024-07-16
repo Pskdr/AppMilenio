@@ -21,6 +21,7 @@ import com.example.milenioapp.database.dao.GrupoZonaDAO;
 import com.example.milenioapp.database.dao.HigieneDAO;
 import com.example.milenioapp.database.dao.HigieneGroupDAO;
 import com.example.milenioapp.database.dao.InsectoDAO;
+import com.example.milenioapp.database.dao.InsectoGroupDAO;
 import com.example.milenioapp.database.dao.OrdenDAO;
 import com.example.milenioapp.database.dao.TecnicaAplicacionDAO;
 import com.example.milenioapp.database.dao.TipoInsectoDAO;
@@ -68,6 +69,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract CebaderoGroupDAO getCebaderoGroupDAO();
     public abstract HigieneGroupDAO getHigieneGroupDAO();
     public abstract GrupoZonaDAO getGrupoZonaDAO();
+    public abstract InsectoGroupDAO getInsectoGroupDAO();
 
 
     public static AppDataBase getInstance(Context context) {

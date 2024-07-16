@@ -14,8 +14,7 @@ public class HigieneGroup {
     private long idHigiene;
     private String s; //S - N - NA
 
-    public HigieneGroup(long id, long idOrden, long idHigiene, String s) {
-        this.id = id;
+    public HigieneGroup( long idOrden, long idHigiene, String s) {
         this.idOrden = idOrden;
         this.idHigiene = idHigiene;
         this.s = s;
