@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.milenioapp.R;
@@ -30,19 +31,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FirmaFragment extends Fragment {
+public class FirmaFragment extends DialogFragment {
 
     private boolean firmaAcompa;
     private Bitmap firma;
-    public FirmaFragment(CrearOrdenFragment crearOrdenFragment, boolean firmaAcompa, Bitmap firma) {
+    private boolean bloquear;
+    public FirmaFragment(CrearOrdenFragment crearOrdenFragment, boolean firmaAcompa, Bitmap firma, boolean bloquear) {
         // Required empty public constructor
         this.crearOrdenFragment = crearOrdenFragment;
         this.firmaAcompa = firmaAcompa;
         this.firma = firma;
+        this.bloquear = bloquear;
 
     }
 
-    private Button btnGuardar, btnBorrar;
+    private Button btnGuardar, btnBorrar,btnCerrar;
     File sign;
 
     private Path path = new Path();
@@ -63,14 +66,23 @@ public class FirmaFragment extends Fragment {
 
         btnBorrar = view.findViewById(R.id.btnBorrar);
         btnGuardar = view.findViewById(R.id.btnGuardar);
+        btnCerrar = view.findViewById(R.id.btnCerrar);
         imageView = view.findViewById(R.id.canvasImageView);
 
         if(firma != null){
             imageView.setImageBitmap(firma);
             btnGuardar.setVisibility(View.GONE);
         }else{
-            rlPrueba.addView(new CanvasFirma(getContext()));
+            if(!bloquear) {
+                rlPrueba.addView(new CanvasFirma(getContext()));
+            }else{
+                btnGuardar.setVisibility(View.GONE);
+            }
         }
+
+        btnCerrar.setOnClickListener(v -> {
+            dismiss();
+        });
         return view;
     }
 
@@ -109,6 +121,8 @@ public class FirmaFragment extends Fragment {
                         paths.clear();
                         invalidate();
                     }
+
+                    dismiss();
                 }
             });
 
@@ -131,6 +145,8 @@ public class FirmaFragment extends Fragment {
                 }else{
                     crearOrdenFragment.guardarFirmaOperario(bitmap);
                 }
+
+                dismiss();
 
             });
 

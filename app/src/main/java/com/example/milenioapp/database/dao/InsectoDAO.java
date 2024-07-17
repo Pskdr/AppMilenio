@@ -3,9 +3,11 @@ package com.example.milenioapp.database.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
 import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
@@ -34,4 +36,7 @@ public interface InsectoDAO {
     void update(Insecto insecto);
     @Delete
     void delete(Insecto insecto);
+
+    @Insert( onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Insecto> insectoList);
 }

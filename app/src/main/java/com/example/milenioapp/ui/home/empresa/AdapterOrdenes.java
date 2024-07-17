@@ -3,8 +3,6 @@ package com.example.milenioapp.ui.home.empresa;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,98 +10,74 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
-import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.ui.home.Empresa;
+import com.example.milenioapp.ui.utilidades.Utilities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-
-public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHolderCliente> implements Filterable {
+public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHolderCliente> {
 
     private final AdapterOrdenes.onItemListener onItemListener;
-    ArrayList<Empresa> empresaArrayList;
-    ArrayList<Empresa> copiaListaDatos;
+    private final ArrayList<OrdenMostrar> ordenArrayList;
 
-    public AdapterOrdenes(AdapterOrdenes.onItemListener onItemListener, ArrayList<Empresa> arrayList) {
+    public AdapterOrdenes(AdapterOrdenes.onItemListener onItemListener, ArrayList<OrdenMostrar> ordenArrayList) {
         this.onItemListener = onItemListener;
-        this.empresaArrayList = arrayList;
-        this.copiaListaDatos = new ArrayList<>(arrayList);
+        this.ordenArrayList = ordenArrayList;
     }
 
     @NonNull
     @Override
-    public ViewHolderCliente onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlist_empresa, null, false);
+    public AdapterOrdenes.ViewHolderCliente onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlist_orden_agregada,null,false);
 
         view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
 
-        return new ViewHolderCliente(view, onItemListener);
+        return new AdapterOrdenes.ViewHolderCliente(view,onItemListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
-        holder.tvEmpresa.setText(empresaArrayList.get(position).getNombre());
+    public void onBindViewHolder(@NonNull AdapterOrdenes.ViewHolderCliente holder, int position) {
+        Utilities utilities = new Utilities();
+        Calendar horaIngreso = Calendar.getInstance();
+        Calendar horaSalida = Calendar.getInstance();
+        Calendar fechaEnvio = Calendar.getInstance();
+
+        horaIngreso.setTimeInMillis(ordenArrayList.get(position).getHoraEntrada());
+        horaSalida.setTimeInMillis(ordenArrayList.get(position).getHoraSalida());
+        fechaEnvio.setTimeInMillis(ordenArrayList.get(position).getFechaInicio());
+
+        holder.tvOperario.setText(ordenArrayList.get(position).getNombre());
+        holder.tvHoraIngreso.setText(utilities.split(utilities.getFechaString(horaIngreso),1));
+        holder.tvHoraSalida.setText(utilities.split(utilities.getFechaString(horaSalida),1));
+        holder.tvFecha.setText(utilities.split(utilities.getFechaString(fechaEnvio),0));
+        holder.tvEstadoEnvio.setText(ordenArrayList.get(position).getEstadoEnvio().equals("E")  ? "ENVIADO" : "PENDIENTE");
+
     }
 
     @Override
     public int getItemCount() {
-        return empresaArrayList.size();
+        return ordenArrayList.size();
     }
-
-    @Override
-    public Filter getFilter() {
-        return empresaFilter;
-    }
-
-    private final Filter empresaFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Empresa> listaFiltrada = new ArrayList<>();
-
-            if(charSequence == null || charSequence.length() == 0){
-                listaFiltrada.addAll(copiaListaDatos);
-
-
-            }else{
-                String filterpattern = charSequence.toString().toLowerCase().trim();
-
-                for(Empresa empresa : copiaListaDatos){
-                    if(empresa.getNombre().toLowerCase().contains(filterpattern)) {
-                        listaFiltrada.add(empresa);
-                    }
-                }
-
-            }
-            FilterResults resultado = new FilterResults();
-            resultado.values = listaFiltrada;
-
-            return resultado;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            empresaArrayList.clear();
-            empresaArrayList.addAll((ArrayList<Empresa>)filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
-
 
     public interface onItemListener
     {
         void onItemClick(int position);
     }
-
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvEmpresa;
-        private final CardView cvCliente;
+        private final TextView tvOperario,tvHoraIngreso,tvHoraSalida,tvFecha,tvEstadoEnvio;
         private final AdapterOrdenes.onItemListener onItemListener;
+        private final CardView cvCliente;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterOrdenes.onItemListener onItemListener) {
             super(itemView);
 
-            tvEmpresa = itemView.findViewById(R.id.tvEmpresa);
+            tvOperario = itemView.findViewById(R.id.tvOperario);
+            tvHoraIngreso = itemView.findViewById(R.id.tvHoraIngreso);
+            tvHoraSalida = itemView.findViewById(R.id.tvHoraSalida);
+            tvFecha = itemView.findViewById(R.id.tvFecha);
+            tvEstadoEnvio = itemView.findViewById(R.id.tvEstadoEnvio);
+
             cvCliente = itemView.findViewById(R.id.cvCliente);
 
             this.onItemListener = onItemListener;

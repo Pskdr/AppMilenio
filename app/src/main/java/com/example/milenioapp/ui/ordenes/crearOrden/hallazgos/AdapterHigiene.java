@@ -51,27 +51,24 @@ public class AdapterHigiene extends RecyclerView.Adapter<AdapterHigiene.ViewHold
         }
 
         holder.tvNombre.setText(higieneArrayList.get(position).getItemName());
-        holder.rbSi.setChecked(higieneArrayList.get(position).isChecked().equals("S"));
-        holder.rbNo.setChecked(higieneArrayList.get(position).isChecked().equals("N"));
-        holder.rbNA.setChecked(higieneArrayList.get(position).isChecked().equals("NA"));
+        holder.rbSi.setChecked(higieneArrayList.get(position).getS().equals("S"));
+        holder.rbNo.setChecked(higieneArrayList.get(position).getS().equals("N"));
+        holder.rbNA.setChecked(higieneArrayList.get(position).getS().equals("NA"));
 
         holder.rbSi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                higieneArrayList.get(position).setChecked("S");
-                notifyItemChanged(position);
+                higieneArrayList.get(position).setS("S");
             }
         });
 
         holder.rbNo.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                higieneArrayList.get(position).setChecked("N");
-                notifyItemChanged(position);
+                higieneArrayList.get(position).setS("N");
             }
         });
         holder.rbNA.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                higieneArrayList.get(position).setChecked("NA");
-                notifyItemChanged(position);
+                higieneArrayList.get(position).setS("NA");
             }
         });
 

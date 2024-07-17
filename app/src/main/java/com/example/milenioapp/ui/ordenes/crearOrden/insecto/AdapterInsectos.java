@@ -54,20 +54,17 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
         holder.rbSi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 higieneArrayList.get(position).setS("S");
-                notifyItemChanged(position);
             }
         });
 
         holder.rbNo.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 higieneArrayList.get(position).setS("N");
-                notifyItemChanged(position);
             }
         });
         holder.rbNA.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 higieneArrayList.get(position).setS("NA");
-                notifyItemChanged(position);
             }
         });
 

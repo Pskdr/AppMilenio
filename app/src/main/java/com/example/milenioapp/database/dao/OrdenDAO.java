@@ -7,6 +7,10 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Orden;
+import com.example.milenioapp.ui.home.empresa.OrdenMostrar;
+
+import java.util.List;
+
 @Dao
 public interface OrdenDAO {
 
@@ -19,4 +23,6 @@ public interface OrdenDAO {
 
     @Query("select * from ordenes where id = :idOrden")
     Orden getByid(long idOrden);
+    @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio,fechaInicio from ordenes")
+    List<OrdenMostrar> getAllMostrar();
 }

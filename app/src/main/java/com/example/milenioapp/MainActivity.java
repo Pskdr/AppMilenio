@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Higiene;
+import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.Usuario;
 import com.example.milenioapp.database.entity.Zona;
 
@@ -84,14 +85,25 @@ public class MainActivity extends AppCompatActivity {
         List<Higiene> higieneList = new ArrayList<>();
         higieneList.add(new Higiene(0, "Area libre de residuos" ,0));
         higieneList.add(new Higiene(1, "Area sin acumulación de basura" ,0));
-        higieneList.add(new Higiene(2, "Orden y aseo", 0));
-        higieneList.add(new Higiene(2, "Orden y aseo", 0));
-        higieneList.add(new Higiene(2, "Orden y aseo", 0));
+        higieneList.add(new Higiene(2, "Zona sucia sifón", 0));
+        higieneList.add(new Higiene(3, "Baños", 0));
+        higieneList.add(new Higiene(4, "Areas comunes", 0));
+
+        List<Insecto> insectoList = new ArrayList<>();
+        insectoList.add(new Insecto(0,"CUCARACHA AMERICANA",0));
+        insectoList.add(new Insecto(1,"CUCARACHA ALEMANA",0));
+        insectoList.add(new Insecto(2,"HORMIGAS",0));
+        insectoList.add(new Insecto(3,"ROEDORES",0));
+        insectoList.add(new Insecto(4,"PULGAS",0));
+        insectoList.add(new Insecto(5,"CHINCHE",0));
+        insectoList.add(new Insecto(6,"VOLADORES",0));
+
         new Thread(() -> {
 
             AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
             AppDataBase.getInstance(getApplicationContext()).getZonaDAO().insertAll(zonaList);
             AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
+            AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);
 
             runOnUiThread(() -> {
                 obtenerUsuario();

@@ -16,7 +16,7 @@ import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.ui.home.AdapterEmpresa;
+import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.ui.home.Empresa;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class EmpresaDetalleFragment extends Fragment {
 
     private Button btnCrear;
     private ArrayList<Empresa> empresaArrayList = new ArrayList<>();
-    private RecyclerView rvOpciones;
+    private RecyclerView rvOpciones, rvOrdenes;
     boolean abierto = false;
     public EmpresaDetalleFragment() {
         // Required empty public constructor
@@ -40,6 +40,8 @@ public class EmpresaDetalleFragment extends Fragment {
         btnCrear = view.findViewById(R.id.btnCrear);
         rvOpciones = view.findViewById(R.id.rvOpciones);
         rvOpciones.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvOrdenes = view.findViewById(R.id.rvOrdenes);
+        rvOrdenes.setLayoutManager(new LinearLayoutManager(getContext()));
 
         btnCrear.setOnClickListener(view1 -> {
 
@@ -76,12 +78,39 @@ public class EmpresaDetalleFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
 
                 ((MainMenu)getActivity()).setActionBarTitle("Cliente: "+cliente.getNombre());
+
+                traerOrdenes();
             });
 
         }).start();
     }
+    ArrayList<OrdenMostrar> ordenArrayList;
+    private AdapterOrdenes adapterOrdenes;
+    private void traerOrdenes() {
+        new Thread(() -> {
 
-    AdapterOrdenes adapterEmpresa;
+            ordenArrayList = (ArrayList<OrdenMostrar>) AppDataBase.getInstance(getContext()).getOrdenDAO().getAllMostrar();
+
+            getActivity().runOnUiThread(() -> {
+
+                adapterOrdenes = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
+                    @Override
+                    public void onItemClick(int position) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("id", cliente.getId());
+                        bundle.putLong("idOrden", ordenArrayList.get(position).getId());
+                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
+                    }
+                },ordenArrayList);
+
+                rvOrdenes.setAdapter(adapterOrdenes);
+
+            });
+        }).start();
+    }
+
+    AdapterOpciones adapterEmpresa;
     private void desplegarAdapter() {
         empresaArrayList.clear();
         empresaArrayList.add(new Empresa(0, "Fomato de orden"));
@@ -91,7 +120,7 @@ public class EmpresaDetalleFragment extends Fragment {
         empresaArrayList.add(new Empresa(4, "Fomato de desinfección"));
         abierto = true;
 
-        adapterEmpresa = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
+        adapterEmpresa = new AdapterOpciones(new AdapterOpciones.onItemListener() {
             @Override
             public void onItemClick(int position) {
                 abierto = false;

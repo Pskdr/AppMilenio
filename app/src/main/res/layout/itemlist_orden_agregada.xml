@@ -21,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
             android:layout_margin="6dp"
-            android:paddingTop="6dp"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="match_parent">
@@ -42,13 +41,13 @@
                         android:layout_width="0dp"
                         android:layout_weight="30"
                         android:layout_height="wrap_content"
-                        android:text="Zona: "/>
+                        android:text="Operario: "/>
                     <TextView
-                        android:id="@+id/tvZona"
+                        android:id="@+id/tvOperario"
                         android:layout_width="0dp"
                         android:layout_weight="70"
                         android:layout_height="wrap_content"
-                        android:text="ZONA DE PRUEBA"/>
+                        android:text=""/>
 
                 </LinearLayout>
 
@@ -57,70 +56,79 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="Hora ingreso "/>
+                    <TextView
+                        android:id="@+id/tvHoraIngreso"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="40"
-                            android:layout_height="wrap_content"
-                            android:text="Producto "/>
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="30"
-                            android:layout_height="wrap_content"
-                            android:text="Ingrediente activo"/>
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="30"
-                            android:layout_height="wrap_content"
-                            android:text="Dosificación"/>
-                    </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvProducto"
-                        android:layout_width="0dp"
-                        android:layout_weight="40"
-                        android:text="Producto prueba"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/tvIngrediente"
+                        android:textStyle="bold"
                         android:layout_width="0dp"
                         android:layout_weight="30"
                         android:layout_height="wrap_content"
-                        android:text="Ingrediente activo prueba"/>
+                        android:text="Hora salida "/>
+                    <TextView
+                        android:id="@+id/tvHoraSalida"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvDocificacion"
+                        android:textStyle="bold"
                         android:layout_width="0dp"
                         android:layout_weight="30"
                         android:layout_height="wrap_content"
-                        android:text="Dosis prueba"/>
+                        android:text="Fecha Servicio "/>
+                    <TextView
+                        android:id="@+id/tvFecha"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="Estado envío "/>
+                    <TextView
+                        android:id="@+id/tvEstadoEnvio"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                </LinearLayout>
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvBorrar"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:textColor="@color/white"
-                android:background="@drawable/et_style_button"
-                android:layout_width="30dp"
-                android:gravity="center"
-                android:layout_height="40dp"
-                android:text="X"/>
 
 
         </LinearLayout>

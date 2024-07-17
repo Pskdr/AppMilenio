@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrden.firma.FirmaFragment;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.AdapterHigiene;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
 import com.example.milenioapp.ui.ordenes.crearOrden.insecto.AdapterInsectos;
@@ -56,7 +58,7 @@ public class CrearOrdenFragment extends Fragment {
     long idOrden,id;
     private RecyclerView rvHigiene, rvZonas,rvInsectos;
 
-    private Button btnSobreElServicio, btnGuardar;
+    private Button btnSobreElServicio, btnGuardar, btnFirmaAyudante, btnFirmaOperario;
     private  ArrayList<HygieneItem> hygieneItems;
     private List<Zona> zonasTratadas;
     private Orden orden;
@@ -93,6 +95,8 @@ public class CrearOrdenFragment extends Fragment {
 
         btnSobreElServicio = view.findViewById(R.id.btnSobreElServicio);
         btnGuardar = view.findViewById(R.id.btnGuardar);
+        btnFirmaAyudante = view.findViewById(R.id.btnFirmaAyudante);
+        btnFirmaOperario = view.findViewById(R.id.btnFirmaTecnico);
 
         rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
@@ -112,8 +116,7 @@ public class CrearOrdenFragment extends Fragment {
         }
 
 
-
-
+        rvInsectos.setLayoutManager(new LinearLayoutManager(getContext()));
         rvHigiene.setLayoutManager(new LinearLayoutManager(getContext()));
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
@@ -243,6 +246,31 @@ public class CrearOrdenFragment extends Fragment {
             cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
 
             getActivity().runOnUiThread(() -> {
+
+
+                Utilities utilities = new Utilities();
+                Calendar calendarActual = Calendar.getInstance();
+                tiEmpresa.setText(cliente.getNombre());
+                tiFecha.setText(utilities.getFechaString(calendarActual));
+                tiFechaActual.setText(utilities.getFechaActual());
+                tiCliente.setText(cliente.getNombreContacto());
+                tiNit.setText(cliente.getNIT());
+                tiContacto.setText(cliente.getNombreContacto());
+                tiTelefono.setText(cliente.getTelefono());
+                tiDireccion.setText(cliente.getDireccion());
+                tiSede.setText(cliente.getSede());
+                btnFirmaAyudante.setOnClickListener(v -> {
+
+                    final DialogFragment dialog = new FirmaFragment(this, true, firmaAyudante, false);
+                    dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+
+                });
+
+                btnFirmaOperario.setOnClickListener(v -> {
+
+                    final DialogFragment dialog = new FirmaFragment(this, false,firmaOperario, false);
+                    dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+                });
                 traerZonasDefault();
                 zonasTratadas = new ArrayList<>();
 
@@ -252,13 +280,12 @@ public class CrearOrdenFragment extends Fragment {
                 //insert
                 btnGuardar.setOnClickListener(v -> {
                     if(validarDatos()){
-                        Utilities utilities = new Utilities();
                         if (orden == null){
                             Calendar calendar = Calendar.getInstance();
                             orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
                                     0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                     horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAcompa),"N");
+                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
                             insertarOrdenNueva(orden);
                         }
                     }
@@ -342,7 +369,7 @@ public class CrearOrdenFragment extends Fragment {
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < hygieneItems.size(); i++) {
                     higieneGroupsInsert.add(new HigieneGroup(idOrden,hygieneItems.get(i).getIdHigiene(),
-                            hygieneItems.get(i).getIsChecked()));
+                            hygieneItems.get(i).getS()));
                 }
 
                 ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
@@ -371,6 +398,8 @@ public class CrearOrdenFragment extends Fragment {
 
         if(tiOperario.getText().toString().equals("") || tvHoraIngreso.getText().toString().equals("")
                 || tvHoraSalida.getText().toString().equals("") ){
+
+            Toast.makeText(getContext(),"Tiene que seleccionar el operario, la hora de ingreso y la hora de salida",Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -382,7 +411,7 @@ public class CrearOrdenFragment extends Fragment {
 
         }
         for (int i = 0; i < hygieneItems.size(); i++) {
-            if(hygieneItems.get(i).isChecked().equals("")){
+            if(hygieneItems.get(i).getS().equals("")){
                 Toast.makeText(getContext(),"Tiene que seleccionar todas las areas locativas ",Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -396,7 +425,7 @@ public class CrearOrdenFragment extends Fragment {
 
         }
 
-        if(firmaOperario == null || firmaAcompa == null){
+        if(firmaOperario == null || firmaAyudante == null){
             Toast.makeText(getContext(),"Las firmas son obligatorias",Toast.LENGTH_LONG).show();
             return false;
         }
@@ -404,7 +433,7 @@ public class CrearOrdenFragment extends Fragment {
         return true;
     }
 
-    private Calendar horaEntrada, horaSalida;
+    private Calendar horaEntrada= Calendar.getInstance(), horaSalida = Calendar.getInstance();
     private void obtenerEmpresa(long id, long idOrden) {
 
         new Thread(() -> {
@@ -427,7 +456,7 @@ public class CrearOrdenFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         Calendar horaIngreso = Calendar.getInstance();
         Calendar horaSalida = Calendar.getInstance();
-        if(orden!= null){
+        if(orden!= null && cliente != null){
             calendar.setTimeInMillis(orden.getFechaUsuario());
             tiEmpresa.setText(cliente.getNombre());
             tiFecha.setText(utilities.getFechaString(calendar));
@@ -472,7 +501,7 @@ public class CrearOrdenFragment extends Fragment {
                         orden = new Orden(0,calendar2.getTimeInMillis(),calendar2.getTimeInMillis(),
                                 0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                 horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAcompa),"N");
+                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
                         insertarOrdenNueva(orden);
                     }else{
                         orden.setOperario(tiOperario.getText().toString());
@@ -481,13 +510,26 @@ public class CrearOrdenFragment extends Fragment {
                         orden.setObservacionesTecnicas(tiObservaciones.getText().toString());
                         orden.setCorrectivos(tiCorrectivos.getText().toString());
                         orden.setFirmaOperario(utilities.bitMapToString(firmaOperario));
-                        orden.setFirmaAyudante(utilities.bitMapToString(firmaAcompa));
+                        orden.setFirmaAyudante(utilities.bitMapToString(firmaAyudante));
 
                         updateOrden(orden);
 
                     }
                 }
 
+            });
+
+            btnFirmaAyudante.setOnClickListener(v -> {
+
+                final DialogFragment dialog = new FirmaFragment(this, true,utilities.stringToBitMap(orden.getFirmaAyudante()), false);
+                dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+
+            });
+
+            btnFirmaOperario.setOnClickListener(v -> {
+
+                final DialogFragment dialog = new FirmaFragment(this, false,utilities.stringToBitMap(orden.getFirmaOperario()), false);
+                dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
             });
         }
     }
@@ -511,7 +553,7 @@ public class CrearOrdenFragment extends Fragment {
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < hygieneItems.size(); i++) {
                     higieneGroupsInsert.add(new HigieneGroup(orden.getId(),hygieneItems.get(i).getIdHigiene(),
-                            hygieneItems.get(i).getIsChecked()));
+                            hygieneItems.get(i).getS()));
                     higieneGroupsInsert.get(i).setId(hygieneItems.get(i).getId());
                 }
 
@@ -575,9 +617,9 @@ public class CrearOrdenFragment extends Fragment {
         grupoZonas.set(position,zonaAgregada);
         cargarAdapterZonas();
     }
-    private Bitmap firmaAcompa, firmaOperario;
+    private Bitmap firmaAyudante, firmaOperario;
     public void guardarFirmaAcompa(Bitmap bitmap) {
-        this.firmaAcompa = bitmap;
+        this.firmaAyudante = bitmap;
     }
 
     public void guardarFirmaOperario(Bitmap bitmap) {

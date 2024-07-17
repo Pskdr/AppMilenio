@@ -57,7 +57,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_custom_dialog_materiales, container, false);
+        View view = inflater.inflate(R.layout.custom_dialog_agregar_insecto, container, false);
         ((MainMenu)getActivity()).noGirarPantalla();
         rvMaterialesAll = view.findViewById(R.id.rvItemsAll);
         btnCerrar = view.findViewById(R.id.btnCerrar);
@@ -186,7 +186,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
                         break;
                     case "C":
 
-                        itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getCebaderoDAO().getAllMostrar();
+                        //itemArrayList = (ArrayList<AgregarObjeto>) AppDataBase.getInstance(getContext()).getCebaderoDAO().getAllMostrar();
                         break;
                     default:
                         break;
@@ -213,7 +213,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
             {
                 switch (tipo){
                     case "E":
-                        Insecto insecto = new Insecto(itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo());
+                        Insecto insecto = new Insecto(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo());
                         insecto.setId(itemArrayList.get(position).getId());
                             instancia.agregarInsecto(insecto);
                         break;

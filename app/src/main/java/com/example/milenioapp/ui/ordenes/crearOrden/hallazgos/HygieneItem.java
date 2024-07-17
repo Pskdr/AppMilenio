@@ -4,14 +4,15 @@ public class HygieneItem {
     private long id;
     private long idHigiene;
     private String itemName;
-    private String isChecked; //S - N - NA
+    private String s; //S - N - NA
 
-    public HygieneItem(long id,long idHigiene,String itemName, String isChecked) {
+    public HygieneItem(long id,long idHigiene,String itemName, String s) {
         this.id = id;
         this.idHigiene = idHigiene;
         this.itemName = itemName;
-        this.isChecked = isChecked;
+        this.s = s;
     }
+
 
     public long getIdHigiene() {
         return idHigiene;
@@ -21,12 +22,12 @@ public class HygieneItem {
         this.idHigiene = idHigiene;
     }
 
-    public String getIsChecked() {
-        return isChecked;
+    public String getS() {
+        return s;
     }
 
-    public void setIsChecked(String isChecked) {
-        this.isChecked = isChecked;
+    public void setS(String s) {
+        this.s = s;
     }
 
     public long getId() {
@@ -45,11 +46,4 @@ public class HygieneItem {
         return itemName;
     }
 
-    public String isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(String checked) {
-        isChecked = checked;
-    }
 }

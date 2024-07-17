@@ -398,6 +398,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvZonas"
                 android:layout_width="match_parent"
+                android:minHeight="400dp"
                 android:layout_height="wrap_content"/>
 
             <LinearLayout
@@ -446,6 +447,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHigiene"
                 android:layout_width="match_parent"
+                android:minHeight="400dp"
                 android:layout_height="wrap_content"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -491,6 +493,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvInsectos"
+                android:minHeight="400dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -511,7 +514,7 @@
 
                     <Button
 
-                        android:id="@+id/btnFIrmaAcompañante"
+                        android:id="@+id/btnFirmaAyudante"
                         android:layout_marginTop="5dp"
                         android:layout_width="0dp"
                         android:layout_weight="50"
