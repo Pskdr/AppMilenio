@@ -92,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
         List<Insecto> insectoList = new ArrayList<>();
         insectoList.add(new Insecto(0,"CUCARACHA AMERICANA",0));
         insectoList.add(new Insecto(1,"CUCARACHA ALEMANA",0));
-        insectoList.add(new Insecto(2,"HORMIGAS",0));
-        insectoList.add(new Insecto(3,"ROEDORES",0));
-        insectoList.add(new Insecto(4,"PULGAS",0));
+        insectoList.add(new Insecto(2,"HORMIGAS",1));
+        insectoList.add(new Insecto(3,"ROEDORES",1));
+        insectoList.add(new Insecto(4,"PULGAS",1));
         insectoList.add(new Insecto(5,"CHINCHE",0));
-        insectoList.add(new Insecto(6,"VOLADORES",0));
+        insectoList.add(new Insecto(6,"MOSCAS",0));
 
         new Thread(() -> {
 

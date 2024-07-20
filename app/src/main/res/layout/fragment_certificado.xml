@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ordenes.crearOrden.certificado.CertificadoFragment">
+
+    <LinearLayout
+        android:layout_margin="20px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                android:background="@color/bluedark">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Milenio S.A.S."
+                    android:textColor="@color/white"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="CERTIFICADO DE CONTROL Y PREVENCION DE PLAGAS "
+                    android:textColor="@color/black"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="33"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="30"
+                    android:background="@drawable/et_style_header_pdf"
+                    android:gravity="center"
+                    android:text="Codigo:  FO-GS-04"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="40"
+                    android:background="@drawable/et_style_header_pdf"
+                    android:gravity="center"
+                    android:text="Versión:  03"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+
+                <TextView
+                    android:id="@+id/tvFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="40"
+                    android:background="@drawable/et_style_header_pdf"
+                    android:gravity="center"
+                    android:text="Fecha:  22-04-2020"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="40"
+                    android:background="@drawable/et_style_header_pdf"
+                    android:gravity="center"
+                    android:text="Página 1 - 1"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/subHeader1"
+            android:layout_width="match_parent"
+            android:layout_height="50px"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Dando cumplimiento al decreto 1843 de 1991, certificamos que hemos realizado Manejo Integrado de plagas en el siguiente establecimiento, siguiendo todos las normas que dicta Secretaría de Salud. "
+                    android:textColor="@color/black"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="DATOS DEL CLIENTE:"
+                    android:textColor="@color/black"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:paddingLeft="5px"
+                    android:text="Cliente:"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="5px"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:text="Nombre cliente"
+                    android:textSize="15px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="NIT: "
+                    android:paddingLeft="5px"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvNit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:text="NIT"
+                    android:textStyle="bold"
+                    android:paddingLeft="5px"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="Dirección"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvDireccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="26/03/2023"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="Fecha Servicio:"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvFechaServicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="26/03/2023"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="Plaga encontrada"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvPlagaEncontrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="26/03/2023"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="Tecnico asignado"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvTecnicoAsignado"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:paddingLeft="5px"
+                    android:text="NOMBRE TECNICO"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:paddingLeft="5px"
+                    android:text="Sede"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@drawable/et_style_header_pdf">
+
+                <TextView
+                    android:id="@+id/tvSede"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="5px"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="left"
+                    android:text="sede"
+                    android:textSize="15px"/>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/et_style_header_pdf"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15px"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Zona tratada"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="15px" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Tecnica aplicación"
+                    android:textColor="@color/black"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="33"
+                android:background="@drawable/et_style_header_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Ingrediente activo"
+                    android:textColor="@color/black"
+                    android:textSize="15px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutPadre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvZonas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/et_style_header_grey"
+            android:gravity="center"
+            android:text="OBSERVACIONES"
+            android:textColor="@color/black"
+            android:textSize="15px"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvObservaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70px"
+            android:paddingLeft="10px"
+            android:layout_gravity="center"
+            android:background="@drawable/et_style_header_pdf"
+            android:gravity="left"
+            android:text="Todos nuestros productos cuentan con fichas técnicas y hojas de seguridad disponibles, y están avalados para uso en salud pública.
+\nEste documento es exclusivo de la empresa FUMIGACIONES Y PRODUCTOS DE ASEO MILENIO SAS.  El uso indebido o falsificación del mismo, incurre en delito penal y sancionatorio, de acuerdo al artículo 292 del Código Penal Colombiano.
+\nSe expide como constancia del programa de control de plagas de la empresa CÁRNICOS MONTANA .
+\nCordialmente,"
+            android:textColor="@color/black"
+            android:textSize="15px"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/et_style_header_grey"
+            android:gravity="center"
+            android:text="FIRMAS"
+            android:textColor="@color/black"
+            android:textSize="15px"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="50"
+                android:background="@drawable/et_style_header_pdf">
+
+                <ImageView
+                    android:id="@+id/ivFirmaOperario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:rotation="90" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="50"
+                android:background="@drawable/et_style_header_pdf">
+
+                <ImageView
+                    android:id="@+id/ivFirmaAyudante"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:rotation="90" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70px"
+            android:paddingLeft="10px"
+            android:layout_gravity="center"
+            android:background="@drawable/et_style_header_pdf"
+            android:gravity="center"
+            android:text="Dirección: Calle 19 N. 52-61 Barrio San Pablo - Teléfono: 5952180- 3122541748- Medellín"
+            android:textColor="@color/black"
+            android:textSize="15px"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

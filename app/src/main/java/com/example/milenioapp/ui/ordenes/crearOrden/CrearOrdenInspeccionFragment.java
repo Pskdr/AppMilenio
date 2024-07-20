@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ViewKt;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,17 +49,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CrearOrdenFragment extends Fragment {
+public class CrearOrdenInspeccionFragment extends Fragment {
 
     private Cliente cliente;
 
-    public CrearOrdenFragment() {
+    public CrearOrdenInspeccionFragment() {
         // Required empty public constructor
     }
     long idOrden,id;
     private RecyclerView rvHigiene, rvZonas,rvInsectos;
 
-    private Button btnSobreElServicio, btnGuardar, btnFirmaAyudante, btnFirmaOperario;
+    private Button btnGuardar, btnFirmaAyudante, btnFirmaOperario,btnCertificado;
     private  ArrayList<HygieneItem> hygieneItems;
     private List<Zona> zonasTratadas;
     private Orden orden;
@@ -71,6 +72,8 @@ public class CrearOrdenFragment extends Fragment {
 
     private TextView tvHoraIngreso, tvHoraSalida;
     int thour, tminute;
+
+    private Button btnAgregarZona, btnAgregarAreaLocativa, btnAgregarEspecie;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,7 +96,6 @@ public class CrearOrdenFragment extends Fragment {
         tiObservaciones = view.findViewById(R.id.tiObservaciones);
         tiCorrectivos = view.findViewById(R.id.tiCorrectivos);
 
-        btnSobreElServicio = view.findViewById(R.id.btnSobreElServicio);
         btnGuardar = view.findViewById(R.id.btnGuardar);
         btnFirmaAyudante = view.findViewById(R.id.btnFirmaAyudante);
         btnFirmaOperario = view.findViewById(R.id.btnFirmaTecnico);
@@ -101,6 +103,10 @@ public class CrearOrdenFragment extends Fragment {
         rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
         rvInsectos = view.findViewById(R.id.rvInsectos);
+
+        btnAgregarZona = view.findViewById(R.id.btnAgregarZona);
+        btnAgregarAreaLocativa = view.findViewById(R.id.btnAgregarAreaLocativa);
+        btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
 
 
 
@@ -119,6 +125,33 @@ public class CrearOrdenFragment extends Fragment {
         rvInsectos.setLayoutManager(new LinearLayoutManager(getContext()));
         rvHigiene.setLayoutManager(new LinearLayoutManager(getContext()));
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        btnCertificado.setOnClickListener(v -> {
+            if(validarDatos()){
+                if(orden != null){
+                    Bundle enviar = new Bundle();
+                    enviar.putLong("id", cliente.getId());
+                    enviar.putLong("idOrden", orden.getId());
+                    ViewKt.findNavController(getView()).navigate(R.id.action_ordenInspeccionFragment_to_certificadoFragment, enviar);
+                }else{
+                    Utilities utilities = new Utilities();
+                    Calendar calendar = Calendar.getInstance();
+                    orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
+                            0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
+                            horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
+                            tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
+                    insertarOrdenNueva(orden);
+
+                }
+            }
+        });
+
+        btnAgregarZona.setOnClickListener(v -> {
+
+
+
+        });
+
         return view;
     }
     private ArrayList<Insecto> insectoArrayList;
@@ -363,7 +396,7 @@ public class CrearOrdenFragment extends Fragment {
                 for (int i = 0; i < grupoZonas.size(); i++) {
                     grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
                             idOrden,grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
-                            grupoZonas.get(i).getDocificacion()));
+                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion()));
                 }
 
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
@@ -546,7 +579,7 @@ public class CrearOrdenFragment extends Fragment {
                 for (int i = 0; i < grupoZonas.size(); i++) {
                     grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
                             orden.getId(),grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
-                            grupoZonas.get(i).getDocificacion()));
+                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion()));
                     grupoZonaInsert.get(i).setId(grupoZonas.get(i).getId());
                 }
 
@@ -592,10 +625,33 @@ public class CrearOrdenFragment extends Fragment {
         }).start();
     }
 
-    public void agregarInsecto(Insecto insecto) {
+    public void agregarInsecto(long idInsecto) {
+        new Thread(() -> {
+
+            Insecto insecto = AppDataBase.getInstance(getContext()).getInsectoDAO().getById(idInsecto);
+
+            getActivity().runOnUiThread(() -> {
+
+                insectoGroupArrayList.add(new InsectoGroupMostrar(0,insecto.getDescripcion(),insecto.getId(),""));
+                llenarAdapterInsecto();
+
+            });
+
+        }).start();
     }
 
-    public void agregarZona(Zona n) {
+    public void agregarZona(long idZona) {
+        new Thread(() -> {
+
+            Zona zona = AppDataBase.getInstance(getContext()).getZonaDAO().getById(idZona);
+
+            getActivity().runOnUiThread(() -> {
+                grupoZonas.add(new GrupoZonaMostrar(0,zona.getId(),orden != null ? orden.getId() : 0,zona.getDescripcion(),"","","",""));
+                cargarAdapterZonas();
+
+            });
+
+        }).start();
     }
 
     public void agregarCebadero(Cebadero cebadero) {
@@ -624,5 +680,20 @@ public class CrearOrdenFragment extends Fragment {
 
     public void guardarFirmaOperario(Bitmap bitmap) {
         this.firmaOperario = bitmap;
+    }
+
+    public void agregarHigiene(long idHigiene) {
+        new Thread(() -> {
+
+            Higiene higiene = AppDataBase.getInstance(getContext()).getHigieneDAO().getId(idHigiene);
+
+            getActivity().runOnUiThread(() -> {
+
+                hygieneItems.add(new HygieneItem(0,higiene.getId(),higiene.getNombre(),""));
+                llenarAdapterHigiene();
+
+            });
+
+        }).start();
     }
 }

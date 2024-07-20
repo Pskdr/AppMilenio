@@ -23,14 +23,13 @@
 
     <TextView
         android:id="@+id/tvAgregarNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
-        android:textStyle="bold"
+        android:text="AGREGAR INSECTO"
         android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:id="@+id/lyTipo"
         android:layout_width="wrap_content"

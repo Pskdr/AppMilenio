@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
-import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment;
+import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
 
 import java.util.ArrayList;
 
@@ -19,12 +19,12 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
     private final ArrayList<GrupoZonaMostrar> grupoZonas;
 
     private final AdapterZonas.onItemListener onItemListener;
-    private final CrearOrdenFragment instancia;
+    private final CrearOrdenInspeccionFragment instancia;
     private final boolean bloquear;
 
     public AdapterZonas(ArrayList<GrupoZonaMostrar> grupoZonas,
-                                AdapterZonas.onItemListener onItemListener,
-                                CrearOrdenFragment itemsFragment, boolean bloquear) {
+                        AdapterZonas.onItemListener onItemListener,
+                        CrearOrdenInspeccionFragment itemsFragment, boolean bloquear) {
         this.onItemListener = onItemListener;
         this.grupoZonas = grupoZonas;
         this.instancia = itemsFragment;

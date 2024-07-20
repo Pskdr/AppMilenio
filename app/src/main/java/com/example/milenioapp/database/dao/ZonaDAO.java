@@ -9,8 +9,10 @@ import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -29,11 +31,16 @@ public interface ZonaDAO {
     @Update
     void update(Zona zona);
 
-    @Query("select 0 as id,id as idZona, -1 as idOrden, descripcion as nombre, '' as producto, '' as ingredienteActivo, '' as docificacion from zonas where idTipo = :idTipo")
+    @Query("select 0 as id,id as idZona, -1 as idOrden, descripcion as nombre, '' as producto, '' as ingredienteActivo, '' as docificacion, '' as tecnicaAplicacion from zonas where idTipo = :idTipo")
     List<GrupoZonaMostrar> getByTypeDefault(long idTipo);
 
     @Query("select * from zonas where idTipo = :idTipo")
     List<Zona> getAll(long idTipo);
 
 
+    @Query("select id, descripcion as nombre from zonas where idTipo = :idTipo")
+    List<ItemMostrar> getByTypeDefaultAgregar(long idTipo);
+
+    @Query("select * from zonas where id = :idZona")
+    Zona getById(long idZona);
 }

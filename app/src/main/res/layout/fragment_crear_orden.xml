@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.ordenes.crearOrden.CrearOrdenFragment">
+    tools:context=".ui.ordenes.crearOrden.CrearOrdenInspeccionFragment">
 
     <LinearLayout
         android:orientation="vertical"
@@ -57,20 +57,24 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="match_parent">
-
                 <TextView
                     android:background="@drawable/et_style_header"
                     android:textColor="@color/white"
                     android:text="Código FO-GS-03"
                     android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="25"
                     android:layout_height="0dp"/>
 
+
                 <TextView
                     android:textColor="@color/white"
                     android:text="Código FO-GS-03"
                     android:background="@drawable/et_style_header"
                     android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="25"
                     android:layout_height="0dp"/>
 
@@ -80,6 +84,8 @@
                     android:background="@drawable/et_style_header"
                     android:layout_width="match_parent"
                     android:layout_weight="25"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_height="0dp"/>
 
                 <TextView
@@ -88,6 +94,8 @@
                     android:background="@drawable/et_style_header"
                     android:layout_width="match_parent"
                     android:layout_weight="25"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_height="0dp"/>
 
 
@@ -376,6 +384,14 @@
                     android:textStyle="bold"/>
 
             </LinearLayout>
+            <Button
+                android:id="@+id/btnAgregarZona"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar Zona"/>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content">
@@ -400,6 +416,15 @@
                 android:layout_width="match_parent"
                 android:minHeight="400dp"
                 android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnAgregarAreaLocativa"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar area locativa e higiene"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -449,6 +474,15 @@
                 android:layout_width="match_parent"
                 android:minHeight="400dp"
                 android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnAgregarEspecie"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar especie"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginRight="10dp"
@@ -564,6 +598,12 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <Button
+                    android:id="@+id/btnCertificado"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Generar certificado"/>
 
                 <Button
                     android:id="@+id/btnGuardar"

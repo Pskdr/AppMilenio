@@ -17,28 +17,24 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
-import com.example.milenioapp.database.AppDataBase;
-import com.example.milenioapp.database.entity.Zona;
-import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment;
-import com.example.milenioapp.ui.ordenes.crearOrden.zona.AdapterZonas;
-import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomDialogZonas extends DialogFragment {
 
-    private final CrearOrdenFragment crearOrdenFragment;
+    private final CrearOrdenInspeccionFragment crearOrdenInspeccionFragment;
     private GrupoZonaMostrar zonaAgregada;
     private final long idTipo;
-    private Spinner spinnerProducto,spinnerIngredientes,spinnerdocificacion;
+    private Spinner spinnerProducto,spinnerdocificacion;
 
     private TextView tvZona, tvProducto, tvIngrediente,tvDocificacion;
     private int position;
     private boolean bloquear;
+    private TextView tvIngredienteActivo;
 
-    public CustomDialogZonas(CrearOrdenFragment crearOrdenFragment, GrupoZonaMostrar zonaAgregada, long idTipo, int position, boolean bloquear) {
-        this.crearOrdenFragment = crearOrdenFragment;
+    public CustomDialogZonas(CrearOrdenInspeccionFragment crearOrdenInspeccionFragment, GrupoZonaMostrar zonaAgregada, long idTipo, int position, boolean bloquear) {
+        this.crearOrdenInspeccionFragment = crearOrdenInspeccionFragment;
         this.zonaAgregada = zonaAgregada;
         this.idTipo = idTipo;
         this.position = position;
@@ -69,9 +65,9 @@ public class CustomDialogZonas extends DialogFragment {
         tvProducto = view.findViewById(R.id.tvProducto);
         tvIngrediente = view.findViewById(R.id.tvIngrediente);
         tvDocificacion = view.findViewById(R.id.tvDocificacion);
+        tvIngredienteActivo = view.findViewById(R.id.tvIngredienteActivo);
 
         spinnerProducto = view.findViewById(R.id.spinnerProducto);
-        spinnerIngredientes = view.findViewById(R.id.spinnerIngredientes);
         spinnerdocificacion = view.findViewById(R.id.spinnerDocis);
 
         errorText = view.findViewById(R.id.errorText);
@@ -94,7 +90,7 @@ public class CustomDialogZonas extends DialogFragment {
                 this.zonaAgregada.setDocificacion(tvDocificacion.getText().toString());
                 this.zonaAgregada.setIngredienteActivo(tvIngrediente.getText().toString());
 
-                crearOrdenFragment.actualizarZona(zonaAgregada, position);
+                crearOrdenInspeccionFragment.actualizarZona(zonaAgregada, position);
                 this.dismiss();
             }else{
                 errorText.setVisibility(View.VISIBLE);
@@ -105,7 +101,6 @@ public class CustomDialogZonas extends DialogFragment {
 
         if (bloquear){
             spinnerProducto.setEnabled(false);
-            spinnerIngredientes.setEnabled(false);
             spinnerdocificacion.setEnabled(false);
             btnGuardar.setVisibility(View.GONE);
         }
@@ -125,25 +120,18 @@ public class CustomDialogZonas extends DialogFragment {
     private void llenarSpinners() {
         new Thread(() -> {
 
-           ArrayList<String> productosList = new ArrayList<>();
+           ArrayList<ProductoMostrar> productosList = new ArrayList<>();
 
-           productosList.add("MURDER 10%");
-           productosList.add("HAWKER PLUS");
-           productosList.add("TEMPRID SC");
-           productosList.add("STUKA GRANOS");
-           productosList.add("STUKA GRANOS");
-           productosList.add("SAMBAMETRINA");
-           productosList.add("BECIBUX 10%");
-           productosList.add("FENDONA SC");
-           productosList.add("PYBUTHRIN 33");
+           productosList.add(new ProductoMostrar("MURDER 10%", "ALFACIPERMETRINA"));
+           productosList.add(new ProductoMostrar("HAWKER PLUS","TETRAMETRINA+CIPERMETRINA"));
+           productosList.add(new ProductoMostrar("TEMPRID SC","BETACYFLUTHRIN+IMIDACLOPRID"));
+           productosList.add(new ProductoMostrar("STUKA GRANOS","Deltametrina+ Pirimifox metil"));
+           productosList.add(new ProductoMostrar("SAMBAMETRINA","ALFACIPERMETRINA"));
+           productosList.add(new ProductoMostrar("BECIBUX 10%","Betacipermetrina+Butóxido de piperonilo"));
+           productosList.add(new ProductoMostrar("FENDONA SC","ALFACIPERMETRINA"));
+           productosList.add(new ProductoMostrar("PYBUTHRIN 33","Piretrina natural"));
 
             ArrayList<String> ingredienteList = new ArrayList<>();
-            ingredienteList.add("ALFACIPERMETRINA");
-            ingredienteList.add("TETRAMETRINA+CIPERMETRINA");
-            ingredienteList.add("BETACYFLUTHRIN+IMIDACLOPRID");
-            ingredienteList.add("Deltametrina+ Pirimifox metil");
-            ingredienteList.add("Betacipermetrina+Butóxido de piperonilo");
-            ingredienteList.add("Piretrina natural");
 
             ArrayList<String> docis = new ArrayList<>();
 
@@ -151,27 +139,33 @@ public class CustomDialogZonas extends DialogFragment {
             docis.add("4 cm/ lt agua");
             docis.add("10 cm/ lt agua");
             docis.add("puro");
+
+            ArrayList<String> tecnicaAplicacion = new ArrayList<>();
+            tecnicaAplicacion.add("ASPERSIÓN E INSPECCIÓN");
+            tecnicaAplicacion.add("");
+            tecnicaAplicacion.add("");
+            tecnicaAplicacion.add("");
             getActivity().runOnUiThread(() -> {
 
-                if(!zonaAgregada.getProducto().equals("") && !zonaAgregada.getIngredienteActivo().equals("") && !zonaAgregada.getDocificacion().equals("")) {
-                    productosList.add(0, "-Seleccione-");
+                if(zonaAgregada.getProducto().equals("") && zonaAgregada.getIngredienteActivo().equals("") && zonaAgregada.getDocificacion().equals("") && zonaAgregada.getTecnicaAplicacion().equals("")) {
+                    productosList.add(0, new ProductoMostrar("-Seleccione-", "-Seleccione-"));
                     ingredienteList.add(0, "-Seleccione-");
                     docis.add(0, "-Seleccione-");
                 }else{
-                    productosList.add(0, zonaAgregada.getProducto());
+                    productosList.add(0, new ProductoMostrar(zonaAgregada.getProducto(),zonaAgregada.getIngredienteActivo()));
                     ingredienteList.add(0, zonaAgregada.getIngredienteActivo());
                     docis.add(0, zonaAgregada.getDocificacion());
                 }
-                ArrayAdapter<String> arrayAdapterProducto = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,productosList){
+                ArrayAdapter<ProductoMostrar> arrayAdapterProducto = new ArrayAdapter<ProductoMostrar>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,productosList){
 
                     @NonNull
                     @Override
                     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                         TextView label = (TextView) super.getView(position, convertView, parent);
 
-                        String producto = getItem(position);
-                        label.setHint(producto);
-                        label.setText(producto);
+                        ProductoMostrar producto = getItem(position);
+                        label.setHint(producto.getProducto());
+                        label.setText(producto.getProducto());
 
                         return label;
                     }
@@ -180,36 +174,13 @@ public class CustomDialogZonas extends DialogFragment {
                     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                         TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
-                        String producto = getItem(position);
-                        label.setText(producto);
+                        ProductoMostrar producto = getItem(position);
+                        label.setText(producto.getProducto());
                         return label;
                     }
                 };
 
 
-                ArrayAdapter<String> arrayAdapterIngredientes = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,ingredienteList){
-
-                    @NonNull
-                    @Override
-                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                        TextView label = (TextView) super.getView(position, convertView, parent);
-
-                        String producto = getItem(position);
-                        label.setHint(producto);
-                        label.setText(producto);
-
-                        return label;
-                    }
-
-                    @Override
-                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
-
-                        String producto = getItem(position);
-                        label.setText(producto);
-                        return label;
-                    }
-                };
                 ArrayAdapter<String> arrayAdapterDocis = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,docis){
 
                     @NonNull
@@ -234,13 +205,14 @@ public class CustomDialogZonas extends DialogFragment {
                     }
                 };
                 spinnerProducto.setAdapter(arrayAdapterProducto);
-                spinnerIngredientes.setAdapter(arrayAdapterIngredientes);
                 spinnerdocificacion.setAdapter(arrayAdapterDocis);
 
                 spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        tvProducto.setText(productosList.get(position));
+                        tvProducto.setText(productosList.get(position).getProducto());
+                        tvIngrediente.setText(productosList.get(position).getIngredienteActivo());
+                        tvIngredienteActivo.setText(productosList.get(position).getIngredienteActivo());
                     }
 
                     @Override
@@ -249,17 +221,6 @@ public class CustomDialogZonas extends DialogFragment {
                     }
                 });
 
-                spinnerIngredientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        tvIngrediente.setText(ingredienteList.get(position));
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
                 spinnerdocificacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

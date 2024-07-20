@@ -12,13 +12,23 @@ public class GrupoZona {
     private String producto;
     private String ingredienteActivo;
     private String docificacion;
+    private String tecnicaAplicacion;
 
-    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String docificacion) {
+    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String docificacion,String tecnicaAplicacion) {
         this.idZona = idZona;
         this.idOrden = idOrden;
         this.producto = producto;
         this.ingredienteActivo = ingredienteActivo;
         this.docificacion = docificacion;
+        this.tecnicaAplicacion=tecnicaAplicacion;
+    }
+
+    public String getTecnicaAplicacion() {
+        return tecnicaAplicacion;
+    }
+
+    public void setTecnicaAplicacion(String tecnicaAplicacion) {
+        this.tecnicaAplicacion = tecnicaAplicacion;
     }
 
     public String getProducto() {

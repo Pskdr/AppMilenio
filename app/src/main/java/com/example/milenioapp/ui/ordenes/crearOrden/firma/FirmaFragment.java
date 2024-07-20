@@ -19,10 +19,9 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.example.milenioapp.R;
-import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenFragment;
+import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,9 +35,9 @@ public class FirmaFragment extends DialogFragment {
     private boolean firmaAcompa;
     private Bitmap firma;
     private boolean bloquear;
-    public FirmaFragment(CrearOrdenFragment crearOrdenFragment, boolean firmaAcompa, Bitmap firma, boolean bloquear) {
+    public FirmaFragment(CrearOrdenInspeccionFragment crearOrdenInspeccionFragment, boolean firmaAcompa, Bitmap firma, boolean bloquear) {
         // Required empty public constructor
-        this.crearOrdenFragment = crearOrdenFragment;
+        this.crearOrdenInspeccionFragment = crearOrdenInspeccionFragment;
         this.firmaAcompa = firmaAcompa;
         this.firma = firma;
         this.bloquear = bloquear;
@@ -52,7 +51,7 @@ public class FirmaFragment extends DialogFragment {
     private List<Path> paths = new ArrayList<>();
 
     private RelativeLayout rlPrueba;
-    private CrearOrdenFragment crearOrdenFragment;
+    private CrearOrdenInspeccionFragment crearOrdenInspeccionFragment;
     private ImageView imageView;
 
     @Nullable
@@ -112,9 +111,9 @@ public class FirmaFragment extends DialogFragment {
                 public void onClick(View view) {
 
                     if(firmaAcompa){
-                        crearOrdenFragment.guardarFirmaAcompa(null);
+                        crearOrdenInspeccionFragment.guardarFirmaAcompa(null);
                     }else{
-                        crearOrdenFragment.guardarFirmaOperario(null);
+                        crearOrdenInspeccionFragment.guardarFirmaOperario(null);
                     }
                     if(path != null) {
                         path.reset();
@@ -141,9 +140,9 @@ public class FirmaFragment extends DialogFragment {
                 createWordDocumentWithImage(imageFile.getPath());
 
                 if(firmaAcompa){
-                    crearOrdenFragment.guardarFirmaAcompa(bitmap);
+                    crearOrdenInspeccionFragment.guardarFirmaAcompa(bitmap);
                 }else{
-                    crearOrdenFragment.guardarFirmaOperario(bitmap);
+                    crearOrdenInspeccionFragment.guardarFirmaOperario(bitmap);
                 }
 
                 dismiss();

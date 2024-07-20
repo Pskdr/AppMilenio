@@ -10,6 +10,7 @@ import androidx.room.Update;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
 
 import java.util.List;
@@ -30,6 +31,10 @@ public interface InsectoDAO {
 
     @Query("select id,descripcion,idTipoInsecto as idTipo from insectos where idTipoInsecto = :idTipoInsecto")
     List<AgregarObjeto> getByTipoMostrar(long idTipoInsecto);
+
+
+    @Query("select id, insectos.descripcion as nombre from insectos where idTipoInsecto = :idTipoInsecto")
+    List<ItemMostrar> gettAllAgregar(long idTipoInsecto);
     @Insert
     void insert(Insecto insecto);
     @Update
@@ -39,4 +44,7 @@ public interface InsectoDAO {
 
     @Insert( onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Insecto> insectoList);
+
+    @Query("select * from insectos where id = :idInsecto")
+    Insecto getById(long idInsecto);
 }

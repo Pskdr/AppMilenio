@@ -169,10 +169,12 @@
                 android:text="Ingredientes"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
-            <Spinner
-                android:id="@+id/spinnerIngredientes"
+            <TextView
+                android:id="@+id/tvIngredienteActivo"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_height="wrap_content"/>
 
             <TextView
@@ -184,6 +186,20 @@
                 android:textColor="@color/black"/>
             <Spinner
                 android:id="@+id/spinnerDocis"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tecnica aplicación"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <Spinner
+                android:id="@+id/spinnerTecnica"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"/>

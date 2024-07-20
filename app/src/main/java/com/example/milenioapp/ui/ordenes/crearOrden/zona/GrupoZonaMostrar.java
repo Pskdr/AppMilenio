@@ -8,9 +8,10 @@ public class GrupoZonaMostrar {
     private String producto;
     private String ingredienteActivo;
     private String docificacion;
+    private String tecnicaAplicacion;
 
 
-    public GrupoZonaMostrar(long id, long idZona, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion) {
+    public GrupoZonaMostrar(long id, long idZona, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion, String tecnicaAplicacion) {
         this.id = id;
         this.idZona = idZona;
         this.idOrden = idOrden;
@@ -18,6 +19,15 @@ public class GrupoZonaMostrar {
         this.producto = producto;
         this.ingredienteActivo = ingredienteActivo;
         this.docificacion = docificacion;
+        this.tecnicaAplicacion = tecnicaAplicacion;
+    }
+
+    public String getTecnicaAplicacion() {
+        return tecnicaAplicacion;
+    }
+
+    public void setTecnicaAplicacion(String tecnicaAplicacion) {
+        this.tecnicaAplicacion = tecnicaAplicacion;
     }
 
     public long getIdZona() {

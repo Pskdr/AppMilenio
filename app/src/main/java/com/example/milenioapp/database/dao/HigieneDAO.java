@@ -10,8 +10,10 @@ import androidx.room.Update;
 import com.example.milenioapp.database.entity.Factura;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -33,4 +35,9 @@ public interface HigieneDAO {
 
     @Insert( onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Higiene> Higienes);
+    @Query("select id, higiene.nombre as nombre from higiene")
+    List<ItemMostrar> getAllAgregar();
+
+    @Query("select * from higiene where id = :idHigiene")
+    Higiene getId(long idHigiene);
 }

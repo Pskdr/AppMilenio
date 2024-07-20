@@ -37,7 +37,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     ArrayList<AgregarObjeto> itemArrayList = new ArrayList<>();
     ArrayList<AgregarObjeto> materialArray;
     MaterialAdapterDialog materialAdapterDialog;
-    CrearOrdenFragment instancia;
+    CrearOrdenInspeccionFragment instancia;
     SearchView svCodigo;
     private Spinner spinner;
     private LinearLayout lyTipo;
@@ -46,7 +46,7 @@ public class CustomDialogAgregarFragment extends DialogFragment {
     private TextView tvTipode;
 
     public CustomDialogAgregarFragment(ArrayList<AgregarObjeto> itemArray,
-                                        CrearOrdenFragment materialesFragment, String tipo) {
+                                       CrearOrdenInspeccionFragment materialesFragment, String tipo) {
         this.materialArray = itemArray;
         this.instancia = materialesFragment;
         this.tipo = tipo;
@@ -215,10 +215,10 @@ public class CustomDialogAgregarFragment extends DialogFragment {
                     case "E":
                         Insecto insecto = new Insecto(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo());
                         insecto.setId(itemArrayList.get(position).getId());
-                            instancia.agregarInsecto(insecto);
+                            //instancia.agregarInsecto(insecto);
                         break;
                     case "Z":
-                        instancia.agregarZona(new Zona(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),"N",itemArrayList.get(position).getIdTipo()));
+                        //instancia.agregarZona(new Zona(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),"N",itemArrayList.get(position).getIdTipo()));
                         break;
                     case "C":
                         instancia.agregarCebadero(new Cebadero(itemArrayList.get(position).getId(),itemArrayList.get(position).getDescription(),itemArrayList.get(position).getIdTipo() + ""));
