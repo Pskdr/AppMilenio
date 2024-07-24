@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.database.entity.TecnicaAplicacion;
 import com.example.milenioapp.database.entity.Usuario;
 import com.example.milenioapp.database.entity.Zona;
 
@@ -98,12 +99,17 @@ public class MainActivity extends AppCompatActivity {
         insectoList.add(new Insecto(5,"CHINCHE",0));
         insectoList.add(new Insecto(6,"MOSCAS",0));
 
+        List<TecnicaAplicacion> tecnicaAplicacionList = new ArrayList<>();
+        tecnicaAplicacionList.add(new TecnicaAplicacion(0,"ASPERSION","",0));
+        tecnicaAplicacionList.add(new TecnicaAplicacion(1,"DISOLUCIÓN","",0));
+
         new Thread(() -> {
 
             AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
             AppDataBase.getInstance(getApplicationContext()).getZonaDAO().insertAll(zonaList);
             AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
             AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);
+            AppDataBase.getInstance(getApplicationContext()).getTecnicaAplicacionDAO().insertAll(tecnicaAplicacionList);
 
             runOnUiThread(() -> {
                 obtenerUsuario();

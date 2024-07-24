@@ -78,25 +78,7 @@
                     android:layout_weight="25"
                     android:layout_height="0dp"/>
 
-                <TextView
-                    android:textColor="@color/white"
-                    android:text="Fecha 20/04/2020"
-                    android:background="@drawable/et_style_header"
-                    android:layout_width="match_parent"
-                    android:layout_weight="25"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_height="0dp"/>
 
-                <TextView
-                    android:textColor="@color/white"
-                    android:text="Página 1-1"
-                    android:background="@drawable/et_style_header"
-                    android:layout_width="match_parent"
-                    android:layout_weight="25"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_height="0dp"/>
 
 
 
@@ -137,7 +119,7 @@
                     style="?attr/textInputOutlinedStyle"
                     android:layout_weight="70"
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:enabled="false"
                     android:background="@color/white"
                     android:hint="Empresa">
@@ -158,7 +140,7 @@
                     android:layout_weight="30"
                     android:layout_width="0dp"
                     android:background="@color/white"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="Fecha">
 
@@ -182,7 +164,7 @@
                     style="?attr/textInputOutlinedStyle"
                     android:layout_weight="60"
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:enabled="false"
                     android:background="@color/white"
                     android:hint="Cliente">
@@ -203,7 +185,7 @@
                     android:layout_weight="20"
                     android:layout_width="0dp"
                     android:background="@color/white"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="Nit">
 
@@ -224,7 +206,7 @@
                     android:background="@color/white"
 
                     android:enabled="false"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:hint="DD/MM/AA">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -247,7 +229,7 @@
                     style="?attr/textInputOutlinedStyle"
                     android:layout_weight="60"
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:enabled="false"
                     android:hint="Contacto">
@@ -269,7 +251,7 @@
                     android:layout_width="0dp"
                     android:background="@color/white"
                     android:enabled="false"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:hint="Telefono">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -295,7 +277,7 @@
                     android:layout_width="0dp"
                     android:background="@color/white"
                     android:enabled="false"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:hint="Direccion">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -313,7 +295,7 @@
                     style="?attr/textInputOutlinedStyle"
                     android:layout_weight="40"
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:enabled="false"
                     android:background="@color/white"
                     android:hint="Sede">
@@ -340,7 +322,7 @@
                     android:layout_weight="40"
                     android:layout_width="0dp"
                     android:background="@color/white"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:hint="Operario">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -472,7 +454,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHigiene"
                 android:layout_width="match_parent"
-                android:minHeight="400dp"
+                android:minHeight="200dp"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btnAgregarEspecie"
@@ -527,7 +509,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvInsectos"
-                android:minHeight="400dp"
+                android:minHeight="300dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -567,7 +549,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="Observacioens técnicas">
 
@@ -584,7 +566,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="Correctivos">
 

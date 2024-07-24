@@ -26,7 +26,7 @@ public class CustomDialogZonas extends DialogFragment {
     private final CrearOrdenInspeccionFragment crearOrdenInspeccionFragment;
     private GrupoZonaMostrar zonaAgregada;
     private final long idTipo;
-    private Spinner spinnerProducto,spinnerdocificacion;
+    private Spinner spinnerProducto,spinnerdocificacion,spinnerTecnica;
 
     private TextView tvZona, tvProducto, tvIngrediente,tvDocificacion;
     private int position;
@@ -69,6 +69,7 @@ public class CustomDialogZonas extends DialogFragment {
 
         spinnerProducto = view.findViewById(R.id.spinnerProducto);
         spinnerdocificacion = view.findViewById(R.id.spinnerDocis);
+        spinnerTecnica = view.findViewById(R.id.spinnerTecnica);
 
         errorText = view.findViewById(R.id.errorText);
 
@@ -102,13 +103,14 @@ public class CustomDialogZonas extends DialogFragment {
         if (bloquear){
             spinnerProducto.setEnabled(false);
             spinnerdocificacion.setEnabled(false);
+            spinnerTecnica.setEnabled(false);
             btnGuardar.setVisibility(View.GONE);
         }
         return view;
     }
 
     private boolean validarDatos() {
-        if(tvProducto.getText().toString().equals("-Seleccione-") || tvZona.getText().toString().equals("-Seleccione-") || tvDocificacion.getText().toString().equals("-Seleccione-")){
+        if(tvProducto.getText().toString().equals("-Seleccione-") || tvZona.getText().toString().equals("-Seleccione-") || tvDocificacion.getText().toString().equals("-Seleccione-") || zonaAgregada.getTecnicaAplicacion().equals("-Seleccione-")){
             return false;
         }
         return true;
@@ -141,20 +143,20 @@ public class CustomDialogZonas extends DialogFragment {
             docis.add("puro");
 
             ArrayList<String> tecnicaAplicacion = new ArrayList<>();
-            tecnicaAplicacion.add("ASPERSIÓN E INSPECCIÓN");
-            tecnicaAplicacion.add("");
-            tecnicaAplicacion.add("");
-            tecnicaAplicacion.add("");
+            tecnicaAplicacion.add("ASPERSIÓN");
+            tecnicaAplicacion.add("DISOLUCIÓN");
             getActivity().runOnUiThread(() -> {
 
                 if(zonaAgregada.getProducto().equals("") && zonaAgregada.getIngredienteActivo().equals("") && zonaAgregada.getDocificacion().equals("") && zonaAgregada.getTecnicaAplicacion().equals("")) {
                     productosList.add(0, new ProductoMostrar("-Seleccione-", "-Seleccione-"));
                     ingredienteList.add(0, "-Seleccione-");
                     docis.add(0, "-Seleccione-");
+                    tecnicaAplicacion.add(0, "-Seleccione-");
                 }else{
                     productosList.add(0, new ProductoMostrar(zonaAgregada.getProducto(),zonaAgregada.getIngredienteActivo()));
                     ingredienteList.add(0, zonaAgregada.getIngredienteActivo());
                     docis.add(0, zonaAgregada.getDocificacion());
+                    tecnicaAplicacion.add(0, zonaAgregada.getTecnicaAplicacion());
                 }
                 ArrayAdapter<ProductoMostrar> arrayAdapterProducto = new ArrayAdapter<ProductoMostrar>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,productosList){
 
@@ -204,8 +206,34 @@ public class CustomDialogZonas extends DialogFragment {
                         return label;
                     }
                 };
+
+                ArrayAdapter<String> arrayAdapterTecnica = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tecnicaAplicacion){
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setHint(producto);
+                        label.setText(producto);
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setText(producto);
+                        return label;
+                    }
+                };
+
                 spinnerProducto.setAdapter(arrayAdapterProducto);
                 spinnerdocificacion.setAdapter(arrayAdapterDocis);
+                spinnerTecnica.setAdapter(arrayAdapterTecnica);
 
                 spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -225,6 +253,18 @@ public class CustomDialogZonas extends DialogFragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         tvDocificacion.setText(docis.get(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                spinnerTecnica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        zonaAgregada.setTecnicaAplicacion(tecnicaAplicacion.get(position).toString());
                     }
 
                     @Override

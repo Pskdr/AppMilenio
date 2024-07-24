@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.ui.ordenes.crearOrden.certificado.ItemZonasMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
 
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ public interface GrupoZonaDAO {
             "from GrupoZonas inner join zonas on GrupoZonas.idZona = zonas.id " +
             "where GrupoZonas.idOrden = :idOrden")
     List<GrupoZonaMostrar> getZonasAgregadas(long idOrden);
+
+    @Query("select  GrupoZonas.id, zonas.descripcion as nombre,GrupoZonas.tecnicaAplicacion as tecnica,GrupoZonas.ingredienteActivo as ingredienteActivo " +
+            "from GrupoZonas inner join zonas on GrupoZonas.idZona = zonas.id " +
+            "where GrupoZonas.idOrden = :idOrden")
+    List<ItemZonasMostrar> getZonasAgregadasPdf(long idOrden);
     @Insert
     void insert(GrupoZona grupoZona);
     @Update

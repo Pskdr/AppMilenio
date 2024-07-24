@@ -31,6 +31,7 @@ import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.CustomDialogAgregar;
 import com.example.milenioapp.ui.ordenes.crearOrden.firma.FirmaFragment;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.AdapterHigiene;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
@@ -99,6 +100,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         btnGuardar = view.findViewById(R.id.btnGuardar);
         btnFirmaAyudante = view.findViewById(R.id.btnFirmaAyudante);
         btnFirmaOperario = view.findViewById(R.id.btnFirmaTecnico);
+        btnCertificado = view.findViewById(R.id.btnCertificado);
 
         rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
@@ -130,9 +132,9 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             if(validarDatos()){
                 if(orden != null){
                     Bundle enviar = new Bundle();
-                    enviar.putLong("id", cliente.getId());
+                    enviar.putLong("idCliente", cliente.getId());
                     enviar.putLong("idOrden", orden.getId());
-                    ViewKt.findNavController(getView()).navigate(R.id.action_ordenInspeccionFragment_to_certificadoFragment, enviar);
+                    ViewKt.findNavController(getView()).navigate(R.id.action_crearOrdenInspeccionFragment_to_certificadoFragment, enviar);
                 }else{
                     Utilities utilities = new Utilities();
                     Calendar calendar = Calendar.getInstance();
@@ -148,10 +150,21 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
         btnAgregarZona.setOnClickListener(v -> {
 
-
-
+            CustomDialogAgregar customDialogAgregar = new CustomDialogAgregar(this,cliente,0);
+            customDialogAgregar.show(getChildFragmentManager(),"");
         });
 
+        btnAgregarAreaLocativa.setOnClickListener(v -> {
+
+            CustomDialogAgregar customDialogAgregar = new CustomDialogAgregar(this,cliente,1);
+            customDialogAgregar.show(getChildFragmentManager(),"");
+        });
+
+        btnAgregarEspecie.setOnClickListener(v -> {
+
+            CustomDialogAgregar customDialogAgregar = new CustomDialogAgregar(this,cliente,2);
+            customDialogAgregar.show(getChildFragmentManager(),"");
+        });
         return view;
     }
     private ArrayList<Insecto> insectoArrayList;
@@ -503,10 +516,10 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             tiOperario.setText(orden.getOperario());
 
             horaIngreso.setTimeInMillis(orden.getHoraIngreso());
-            tvHoraIngreso.setText(utilities.getFechaString(horaIngreso));
+            tvHoraIngreso.setText(utilities.refactorFecha(utilities.split(utilities.getFechaString(horaIngreso),1)));
 
             horaSalida.setTimeInMillis(orden.getHoraSalida());
-            tvHoraSalida.setText(utilities.getFechaString(horaSalida));
+            tvHoraSalida.setText(utilities.refactorFecha(utilities.split(utilities.getFechaString(horaSalida),1)));
 
             guardarFirmaOperario(utilities.stringToBitMap(orden.getFirmaOperario()));
             guardarFirmaAcompa(utilities.stringToBitMap(orden.getFirmaAyudante()));
@@ -563,6 +576,60 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
                 final DialogFragment dialog = new FirmaFragment(this, false,utilities.stringToBitMap(orden.getFirmaOperario()), false);
                 dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+            });
+
+            Calendar c = Calendar.getInstance();
+            final int hora=c.get(Calendar.HOUR_OF_DAY);
+            final int minuto=c.get(Calendar.MINUTE);
+            tvHoraIngreso.setOnClickListener(v -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        (view1, hourOfDay, minute) -> {
+                            thour = hourOfDay;
+                            tminute = minute;
+                            String time = thour + ":" + tminute;
+                            SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
+                            try {
+                                Date date = f24Hours.parse(time);
+                                SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
+
+                                tvHoraIngreso.setText(f12Hours.format(date).toLowerCase());
+                                horaEntrada.setTimeInMillis(date.getTime());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }, hora, minuto, false
+                );
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //timePickerDialog.updateTime(thour,tminute);
+                timePickerDialog.show();
+
+            });
+            tvHoraSalida.setOnClickListener(v -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        (view1, hourOfDay, minute) -> {
+                            thour = hourOfDay;
+                            tminute = minute;
+                            String time = thour + ":" + tminute;
+                            SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
+                            try {
+                                Date date = f24Hours.parse(time);
+                                SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
+
+                                tvHoraSalida.setText(f12Hours.format(date).toLowerCase());
+                                horaSalida.setTimeInMillis(date.getTime());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }, hora, minuto, false
+                );
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //timePickerDialog.updateTime(thour,tminute);
+                timePickerDialog.show();
+
             });
         }
     }

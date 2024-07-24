@@ -208,6 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textStyle="bold"
                     android:paddingLeft="5px"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -383,7 +384,7 @@
                     android:layout_marginRight="10dp"
                     android:gravity="left"
                     android:paddingLeft="5px"
-                    android:text="26/03/2023"
+                    android:text=""
                     android:textSize="15px"
                     android:textStyle="bold" />
             </LinearLayout>

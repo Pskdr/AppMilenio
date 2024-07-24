@@ -22,12 +22,8 @@ import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.database.entity.Higiene;
-import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
-import com.example.milenioapp.ui.ordenes.crearOrden.zona.ProductoMostrar;
-
 import java.util.ArrayList;
 
 public class CustomDialogAgregar extends DialogFragment {
@@ -197,4 +193,6 @@ public class CustomDialogAgregar extends DialogFragment {
             dialog.getWindow().setLayout(width, height);
         }
     }
+
+
 }

@@ -25,7 +25,7 @@ public class AdapterAgregar extends RecyclerView.Adapter<AdapterAgregar.ViewHold
     @NonNull
     @Override
     public ViewHolderCliente onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hygiene_item_layout, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlist_items_agregar, null, false);
 
         view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
 

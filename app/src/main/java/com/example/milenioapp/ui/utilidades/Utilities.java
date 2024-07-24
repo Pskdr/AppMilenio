@@ -408,4 +408,14 @@ public class Utilities {
         }
         return finalS;
     }
+    public String refactorFecha(String fecha){
+        String primerosNumeros = spliWith(fecha,0);
+        String segundosNumeros = spliWith(fecha,1);
+        int primerNumero = Integer.parseInt(primerosNumeros);
+        if(primerNumero > 12){
+            return (primerNumero - 12)+":"+ segundosNumeros +" PM";
+        }else{
+            return primerNumero+":"+segundosNumeros+" AM";
+        }
+    }
 }
