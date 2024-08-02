@@ -139,15 +139,18 @@ public class CustomDialogAgregar extends DialogFragment {
 
     private void TraerDatos() {
         new Thread(() -> {
+            if(itemMostrars != null){
+                itemMostrars.clear();
+            }
 
             switch ((int) opcion){
                 case 0:
                     itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getZonaDAO().getByTypeDefaultAgregar(cliente.getIdTipo());
                     break;
-                case 2:
+                case 1:
                     itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getHigieneDAO().getAllAgregar();
                     break;
-                case 3:
+                case 2:
                     itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getInsectoDAO().gettAllAgregar(tipoInsecto);
                     break;
                 default:
