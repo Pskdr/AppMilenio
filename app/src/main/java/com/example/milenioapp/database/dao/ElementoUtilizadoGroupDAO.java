@@ -13,13 +13,16 @@ import java.util.List;
 
 @Dao
 public interface ElementoUtilizadoGroupDAO {
-    @Query("select * from elementosutilizadosgroup")
-    List<ElementoUtilizadoGroupDAO> getAll();
+
+    @Query("SELECT * FROM elementosutilizadosgroup")
+    List<ElementoUtilizadoGroup> getAll();
 
     @Insert
     void insert(ElementoUtilizadoGroup elementoUtilizadoGroup);
+
     @Update
     void update(ElementoUtilizadoGroup elementoUtilizadoGroup);
+
     @Delete
     void delete(ElementoUtilizadoGroup elementoUtilizadoGroup);
 

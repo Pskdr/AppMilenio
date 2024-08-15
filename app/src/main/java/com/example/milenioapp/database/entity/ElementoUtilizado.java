@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ElementosUtilizados")
 public class ElementoUtilizado {
-    @PrimaryKey()
+    @PrimaryKey
     private long id;
     @NonNull
     private String descripcion;
@@ -24,11 +24,12 @@ public class ElementoUtilizado {
         this.id = id;
     }
 
+    @NonNull
     public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    public void setDescripcion(@NonNull String descripcion) {
         this.descripcion = descripcion;
     }
 }

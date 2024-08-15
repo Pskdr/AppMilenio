@@ -6,11 +6,12 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "EstadosCebadero")
 public class EstadoCebadero {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private long id;
     private String descripcion;
 
-    public EstadoCebadero( String descripcion) {
+    public EstadoCebadero(long id, String descripcion) {
+        this.id = id;
         this.descripcion = descripcion;
     }
 

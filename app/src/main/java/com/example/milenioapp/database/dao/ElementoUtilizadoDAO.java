@@ -19,7 +19,6 @@ public interface ElementoUtilizadoDAO {
     @Query("select * from elementosutilizados")
     List<ElementoUtilizado> getAll();
 
-
     @Insert
     void insert(ElementoUtilizado elementoUtilizado);
     @Update

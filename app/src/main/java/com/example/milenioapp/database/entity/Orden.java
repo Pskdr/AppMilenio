@@ -48,6 +48,7 @@ public class Orden {
         this.estadoEnvio = estadoEnvio;
     }
 
+
     public String getObjetivoDelServicio() {
         return objetivoDelServicio;
     }
