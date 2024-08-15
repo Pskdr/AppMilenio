@@ -79,7 +79,7 @@ public class CustomDialogAgregar extends DialogFragment {
             case 3:
 
                 tvAgregarNombre.setText("AGREGAR ELEMENTOS Y/O EQUIPO");
-
+                lyTipo.setVisibility(View.GONE);
                 traerDatos();
                 break;
             default:
@@ -208,6 +208,7 @@ public class CustomDialogAgregar extends DialogFragment {
                     break;
                 case 3:
                     itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().gettAllAgregar();
+                    break;
                 default:
                     itemMostrars = new ArrayList<>();
             }
@@ -230,6 +231,7 @@ public class CustomDialogAgregar extends DialogFragment {
                                 }else{
                                     return;
                                 }
+                                break;
                             case 3:
                                 instancia.agregarElemento(itemMostrars.get(position).getId());
                                 break;

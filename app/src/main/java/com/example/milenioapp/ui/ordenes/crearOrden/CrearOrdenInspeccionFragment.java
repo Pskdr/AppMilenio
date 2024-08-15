@@ -77,7 +77,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             tiNit,tiContacto,tiTelefono,tiDireccion, tiSede,
             tiFechaActual, tiOperario;
 
-    private TextInputEditText tiObservaciones, tiCorrectivos;
+    private TextInputEditText tiObservaciones, tiCorrectivos,tiObjetivoDelServicio;
 
     private TextView tvHoraIngreso, tvHoraSalida;
     int thour, tminute;
@@ -107,6 +107,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
         tiObservaciones = view.findViewById(R.id.tiObservaciones);
         tiCorrectivos = view.findViewById(R.id.tiCorrectivos);
+        tiObjetivoDelServicio = view.findViewById(R.id.tiObjetivoDelServicio);
 
         btnGuardar = view.findViewById(R.id.btnGuardar);
         btnFirmaAyudante = view.findViewById(R.id.btnFirmaAyudante);
@@ -350,7 +351,8 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                             orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
                                     0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                     horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),tipoDeServicio,"N");
+                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),
+                                    utilities.bitMapToString(firmaAyudante),tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"N");
                             insertarOrdenNueva(orden);
                         }
                     }
@@ -581,6 +583,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             tiDireccion.setText(cliente.getDireccion());
             tiSede.setText(cliente.getSede());
             tiOperario.setText(orden.getOperario());
+            tiObjetivoDelServicio.setText(orden.getObjetivoDelServicio());
 
             horaIngreso.setTimeInMillis(orden.getHoraIngreso());
             tvHoraIngreso.setText(utilities.refactorFecha(utilities.split(utilities.getFechaString(horaIngreso),1)));
@@ -615,7 +618,8 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                         orden = new Orden(0,calendar2.getTimeInMillis(),calendar2.getTimeInMillis(),
                                 0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                 horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),tipoDeServicio,"N");
+                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante)
+                                ,tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"N");
                         insertarOrdenNueva(orden);
                     }else{
                         orden.setOperario(tiOperario.getText().toString());
@@ -901,14 +905,23 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         }).start();
     }
 
-    public void eliminarInsecto(int position) {
-        insectoArrayList.remove(position);
+    public void eliminarInsecto(long id) {
+        for (int i = 0; i<insectoGroupArrayList.size(); i++){
+            if(id == insectoGroupArrayList.get(i).getIdInsecto()){
+                insectoGroupArrayList.remove(i);
+                break;
+            }
+        }
         llenarAdapterInsecto();
     }
 
-    public void eliminarElementoUtilizado(int position) {
-
-        elementoUtilizadoArray.remove(position);
+    public void eliminarElementoUtilizado(long id) {
+        for (int i = 0; i<elementoUtilizadoArray.size(); i++){
+            if(id == elementoUtilizadoArray.get(i).getIdElemento()){
+                elementoUtilizadoArray.remove(i);
+                break;
+            }
+        }
         llenarAdapterElementos();
     }
 }

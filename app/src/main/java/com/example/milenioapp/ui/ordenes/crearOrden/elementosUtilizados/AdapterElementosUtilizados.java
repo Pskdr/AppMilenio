@@ -44,7 +44,7 @@ public class AdapterElementosUtilizados extends RecyclerView.Adapter<AdapterElem
         holder.tvNombre.setText(insectosArraylist.get(position).getDescripcion());
 
         holder.btnBorrar.setOnClickListener(v -> {
-            instancia.eliminarElementoUtilizado(position);
+            instancia.eliminarElementoUtilizado(insectosArraylist.get(position).getIdElemento());
         });
     }
 

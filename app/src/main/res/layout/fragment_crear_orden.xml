@@ -595,6 +595,22 @@
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Objetivo del servicio">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiObjetivoDelServicio"
+                        android:layout_width="match_parent"
+                        style="@style/CustomTextStyle"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/btnCertificado"

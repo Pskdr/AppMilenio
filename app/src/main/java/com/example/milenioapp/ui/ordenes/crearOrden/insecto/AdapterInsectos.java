@@ -45,7 +45,7 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
         holder.tvNivelDeInfestacion.setText(insectosArraylist.get(position).getNivelInfestacion());
 
         holder.btnBorrar.setOnClickListener(v -> {
-            instancia.eliminarInsecto(position);
+            instancia.eliminarInsecto(insectosArraylist.get(position).getIdInsecto());
         });
     }
 
