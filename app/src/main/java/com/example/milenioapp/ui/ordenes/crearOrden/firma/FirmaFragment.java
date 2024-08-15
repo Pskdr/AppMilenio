@@ -84,6 +84,7 @@ public class FirmaFragment extends DialogFragment {
             }else{
                 crearOrdenInspeccionFragment.guardarFirmaOperario(null);
             }
+            dismiss();
 
         });
         btnCerrar.setOnClickListener(v -> {
