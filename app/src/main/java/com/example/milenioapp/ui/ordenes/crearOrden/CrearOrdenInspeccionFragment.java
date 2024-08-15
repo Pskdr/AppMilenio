@@ -30,6 +30,7 @@ import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.ElementoUtilizado;
+import com.example.milenioapp.database.entity.ElementoUtilizadoGroup;
 import com.example.milenioapp.database.entity.GrupoZona;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.HigieneGroup;
@@ -492,11 +493,15 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                     insectoGroupsInsert.add(new InsectoGroup(idOrden,insectoGroupArrayList.get(i).getIdInsecto(),
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                 }
-
+                ArrayList<ElementoUtilizadoGroup> elementoUtilizadoInsert = new ArrayList<>();
+                for (int i = 0; i < elementoUtilizadoArray.size(); i++) {
+                    elementoUtilizadoInsert.add(new ElementoUtilizadoGroup(elementoUtilizadoArray.get(i).getIdElemento(),idOrden));
+                }
                 new Thread(() -> {
                     AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().insertAll(elementoUtilizadoInsert);
 
                     getActivity().runOnUiThread(() -> {
 
@@ -782,11 +787,16 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                     insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getId());
                 }
+                ArrayList<ElementoUtilizadoGroup> elementoUtilizadoInsert = new ArrayList<>();
+                for (int i = 0; i < elementoUtilizadoArray.size(); i++) {
+                    elementoUtilizadoInsert.add(new ElementoUtilizadoGroup(elementoUtilizadoArray.get(i).getIdElemento(),idOrden));
+                }
 
                 new Thread(() -> {
                     AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().insertAll(elementoUtilizadoInsert);
 
                     getActivity().runOnUiThread(() -> {
 
