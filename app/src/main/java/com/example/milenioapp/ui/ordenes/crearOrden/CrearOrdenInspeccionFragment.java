@@ -517,14 +517,6 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             Toast.makeText(getContext(),"Tiene que seleccionar el operario, la hora de ingreso y la hora de salida",Toast.LENGTH_LONG).show();
             return false;
         }
-
-        for (int i = 0; i < insectoGroupArrayList.size(); i++) {
-            if(insectoGroupArrayList.get(i).getS().equals("")){
-                Toast.makeText(getContext(),"Tiene que seleccionar todas las especies",Toast.LENGTH_LONG).show();
-                return false;
-            }
-
-        }
         for (int i = 0; i < hygieneItems.size(); i++) {
             if(hygieneItems.get(i).getS().equals("")){
                 Toast.makeText(getContext(),"Tiene que seleccionar todas las areas locativas ",Toast.LENGTH_LONG).show();
