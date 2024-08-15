@@ -22,10 +22,11 @@ public class Orden {
     private String correctivos;
     private String firmaOperario;
     private String firmaAyudante;
+    private String tipoServicio;
     private String estadoEnvio;
 
     public Orden(long idEmpleado, long fechaInicio, long fechaUsuario, long idCebadero, long idFactura, long idUsuario, String serial, String operario,
-                 long horaIngreso, long horaSalida, String observacionesTecnicas, String correctivos, String firmaOperario, String firmaAyudante, String estadoEnvio) {
+                 long horaIngreso, long horaSalida, String observacionesTecnicas, String correctivos, String firmaOperario, String firmaAyudante, String tipoServicio,String estadoEnvio) {
         this.idEmpleado = idEmpleado;
         this.fechaInicio = fechaInicio;
         this.fechaUsuario = fechaUsuario;
@@ -40,7 +41,16 @@ public class Orden {
         this.correctivos = correctivos;
         this.firmaOperario = firmaOperario;
         this.firmaAyudante = firmaAyudante;
+        this.tipoServicio = tipoServicio;
         this.estadoEnvio = estadoEnvio;
+    }
+
+    public String getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     public String getEstadoEnvio() {

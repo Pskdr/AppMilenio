@@ -10,11 +10,21 @@ public class InsectoGroup {
     private long idOrden;
     private long idInsecto;
     private String hallado;
+    private String nivelInfestacion;// A - M - B
 
-    public InsectoGroup(long idOrden, long idInsecto, String hallado) {
+    public InsectoGroup(long idOrden, long idInsecto, String hallado, String nivelInfestacion) {
         this.idOrden = idOrden;
         this.idInsecto = idInsecto;
         this.hallado = hallado;
+        this.nivelInfestacion = nivelInfestacion;
+    }
+
+    public String getNivelInfestacion() {
+        return nivelInfestacion;
+    }
+
+    public void setNivelInfestacion(String nivelInfestacion) {
+        this.nivelInfestacion = nivelInfestacion;
     }
 
     public String getHallado() {

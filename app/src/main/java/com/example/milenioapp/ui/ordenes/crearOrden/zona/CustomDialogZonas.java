@@ -18,6 +18,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
 import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,7 @@ public class CustomDialogZonas extends DialogFragment {
     private Button btnGuardar, btnCerrar;
 
     private TextView errorText;
+    private TextInputEditText tiFecha;
 
 
     @Override
@@ -63,6 +65,7 @@ public class CustomDialogZonas extends DialogFragment {
 
         tvZona = view.findViewById(R.id.tvZona);
         tvProducto = view.findViewById(R.id.tvProducto);
+        tiFecha = view.findViewById(R.id.tiFecha);
         tvIngrediente = view.findViewById(R.id.tvIngrediente);
         tvDocificacion = view.findViewById(R.id.tvDocificacion);
         tvIngredienteActivo = view.findViewById(R.id.tvIngredienteActivo);
@@ -90,6 +93,7 @@ public class CustomDialogZonas extends DialogFragment {
                 this.zonaAgregada.setProducto(tvProducto.getText().toString());
                 this.zonaAgregada.setDocificacion(tvDocificacion.getText().toString());
                 this.zonaAgregada.setIngredienteActivo(tvIngrediente.getText().toString());
+                this.zonaAgregada.setFechaVencimiento(tiFecha.getText().toString());
 
                 crearOrdenInspeccionFragment.actualizarZona(zonaAgregada, position);
                 this.dismiss();
@@ -97,7 +101,7 @@ public class CustomDialogZonas extends DialogFragment {
                 errorText.setVisibility(View.VISIBLE);
             }
         });
-
+        tiFecha.setText(zonaAgregada.getFechaVencimiento());
         llenarSpinners();
 
         if (bloquear){

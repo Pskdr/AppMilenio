@@ -22,7 +22,7 @@ public interface InsectoDAO {
     @Query("select * from insectos")
     List<Insecto> getAll();
 
-    @Query("select insectosgroup.id as id,insectos.descripcion as nombre,insectos.id as idInsecto, insectosgroup.hallado as s " +
+    @Query("select insectosgroup.id as id,insectos.descripcion as nombre,insectos.id as idInsecto, insectosgroup.hallado as s, insectosgroup.nivelInfestacion as nivelInfestacion " +
             "from insectosgroup inner join insectos on insectos.id = insectosgroup.idInsecto " +
             "where insectosgroup.idOrden = :idOrden")
     List<InsectoGroupMostrar> getInsectosGuardados(long idOrden);

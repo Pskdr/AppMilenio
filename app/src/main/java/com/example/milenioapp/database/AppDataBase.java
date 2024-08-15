@@ -14,6 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.example.milenioapp.database.dao.CebaderoDAO;
 import com.example.milenioapp.database.dao.CebaderoGroupDAO;
 import com.example.milenioapp.database.dao.ClienteDAO;
+import com.example.milenioapp.database.dao.ElementoUtilizadoDAO;
 import com.example.milenioapp.database.dao.EmpleadoDAO;
 import com.example.milenioapp.database.dao.EstadoCebaderoDAO;
 import com.example.milenioapp.database.dao.FacturaDAO;
@@ -30,6 +31,8 @@ import com.example.milenioapp.database.dao.ZonaDAO;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.CebaderoGroup;
 import com.example.milenioapp.database.entity.Cliente;
+import com.example.milenioapp.database.entity.ElementoUtilizado;
+import com.example.milenioapp.database.entity.ElementoUtilizadoGroup;
 import com.example.milenioapp.database.entity.Empleado;
 import com.example.milenioapp.database.entity.EstadoCebadero;
 import com.example.milenioapp.database.entity.Factura;
@@ -46,7 +49,8 @@ import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         EstadoCebadero.class, Factura.class, Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class,
-        Higiene.class, CebaderoGroup.class, HigieneGroup.class, GrupoZona.class, InsectoGroup.class},
+        Higiene.class, CebaderoGroup.class, HigieneGroup.class, GrupoZona.class, InsectoGroup.class,
+        ElementoUtilizado.class, ElementoUtilizadoGroup.class},
         version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
@@ -70,6 +74,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract HigieneGroupDAO getHigieneGroupDAO();
     public abstract GrupoZonaDAO getGrupoZonaDAO();
     public abstract InsectoGroupDAO getInsectoGroupDAO();
+    public abstract ElementoUtilizadoDAO getElementoUtilizadoDAO();
 
 
     public static AppDataBase getInstance(Context context) {

@@ -9,9 +9,11 @@ public class GrupoZonaMostrar {
     private String ingredienteActivo;
     private String docificacion;
     private String tecnicaAplicacion;
+    private String fechaVencimiento;
 
 
-    public GrupoZonaMostrar(long id, long idZona, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion, String tecnicaAplicacion) {
+    public GrupoZonaMostrar(long id, long idZona, long idOrden, String nombre, String producto, String ingredienteActivo, String docificacion,
+                            String tecnicaAplicacion, String fechaVencimiento) {
         this.id = id;
         this.idZona = idZona;
         this.idOrden = idOrden;
@@ -20,6 +22,15 @@ public class GrupoZonaMostrar {
         this.ingredienteActivo = ingredienteActivo;
         this.docificacion = docificacion;
         this.tecnicaAplicacion = tecnicaAplicacion;
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public String getTecnicaAplicacion() {

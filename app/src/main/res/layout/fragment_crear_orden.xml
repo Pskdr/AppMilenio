@@ -24,7 +24,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_margin="20dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Inspeccion General y Diagnostico"
+                    android:text="Orden de Servicio"
                     android:layout_width="match_parent"
                     android:textStyle="bold"
                     android:textColor="@color/white"
@@ -57,20 +57,11 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="match_parent">
-                <TextView
-                    android:background="@drawable/et_style_header"
-                    android:textColor="@color/white"
-                    android:text="Código FO-GS-03"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="25"
-                    android:layout_height="0dp"/>
 
 
                 <TextView
                     android:textColor="@color/white"
-                    android:text="Código FO-GS-03"
+                    android:text="COD FO-GS-03"
                     android:background="@drawable/et_style_header"
                     android:layout_width="match_parent"
                     android:layout_gravity="center"
@@ -316,6 +307,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Tipo de Servicio:"/>
+                <Spinner
+                    android:id="@+id/spinnerTipoDeServicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
@@ -370,18 +380,19 @@
                 android:id="@+id/btnAgregarZona"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Agregar Zona"/>
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:padding="5dp"
+                    android:paddingLeft="5dp"
                     android:id="@+id/tvPlagaEncontrada"
-                    android:text="Zonas ▼"
+                    android:text="Zonas "
                     android:layout_width="0dp"
                     android:background="@color/greylight"
                     android:textColor="@color/black"
@@ -406,11 +417,13 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Agregar area locativa e higiene"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginRight="10dp"
+                android:background="@color/greylight"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
@@ -454,20 +467,21 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHigiene"
                 android:layout_width="match_parent"
-                android:minHeight="200dp"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btnAgregarEspecie"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Agregar especie"/>
 
             <LinearLayout
+                android:paddingLeft="5dp"
+                android:background="@color/greylight"
                 android:layout_width="match_parent"
-                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
@@ -476,40 +490,42 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="ESPECIE ENCONTRADA"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="10"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:text="SI"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:textStyle="bold"
-                    android:layout_weight="10"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
-                    android:text="NO"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:textStyle="bold"
-                    android:layout_weight="10"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvInsectos"
-                android:minHeight="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnAgregarElementeos"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar elementos ultilizados"/>
+
+            <LinearLayout
+                android:paddingLeft="5dp"
+                android:background="@color/greylight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="70"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="ELEMENTOS UTILIZADOS"/>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvElementos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -584,6 +600,7 @@
                     android:id="@+id/btnCertificado"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
+                    android:enabled="false"
                     android:layout_height="wrap_content"
                     android:text="Generar certificado"/>
 

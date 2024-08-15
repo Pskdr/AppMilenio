@@ -96,14 +96,12 @@ public class AdapterOpciones extends RecyclerView.Adapter<AdapterOpciones.ViewHo
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView tvEmpresa;
-        private final CardView cvCliente;
         private final AdapterOpciones.onItemListener onItemListener;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterOpciones.onItemListener onItemListener) {
             super(itemView);
 
             tvEmpresa = itemView.findViewById(R.id.tvEmpresa);
-            cvCliente = itemView.findViewById(R.id.cvCliente);
 
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);

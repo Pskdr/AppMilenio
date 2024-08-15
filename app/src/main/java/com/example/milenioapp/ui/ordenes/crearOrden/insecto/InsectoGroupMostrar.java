@@ -5,12 +5,23 @@ public class InsectoGroupMostrar {
     private String nombre;
     private long idInsecto;
     private String s; //S - N - NA
+    private String nivelInfestacion; //ALTO - MEDIO - BAJO
 
-    public InsectoGroupMostrar(long id, String nombre, long idInsecto, String s) {
+    public InsectoGroupMostrar(long id, String nombre, long idInsecto, String s, String nivelInfestacion) {
         this.id = id;
         this.nombre = nombre;
         this.idInsecto = idInsecto;
         this.s = s;
+        this.nivelInfestacion = nivelInfestacion;
+
+    }
+
+    public String getNivelInfestacion() {
+        return nivelInfestacion;
+    }
+
+    public void setNivelInfestacion(String nivelInfestacion) {
+        this.nivelInfestacion = nivelInfestacion;
     }
 
     public String getS() {

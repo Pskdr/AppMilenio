@@ -1,9 +1,8 @@
-package com.example.milenioapp.ui.ordenes.crearOrden.insecto;
+package com.example.milenioapp.ui.ordenes.crearOrden.elementosUtilizados;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,17 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
+import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
 
 import java.util.ArrayList;
 
-public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHolderCliente> {
+public class AdapterElementosUtilizados extends RecyclerView.Adapter<AdapterElementosUtilizados.ViewHolderCliente> {
 
-    private final AdapterInsectos.onItemListener onItemListener;
+    private final AdapterElementosUtilizados.onItemListener onItemListener;
     private final CrearOrdenInspeccionFragment instancia;
-    ArrayList<InsectoGroupMostrar> insectosArraylist;
+    ArrayList<ElementoUtilizadoMostrar> insectosArraylist;
     private boolean bloquear;
 
-    public AdapterInsectos(AdapterInsectos.onItemListener onItemListener, ArrayList<InsectoGroupMostrar> arrayList, CrearOrdenInspeccionFragment instancia, boolean bloquear) {
+    public AdapterElementosUtilizados(AdapterElementosUtilizados.onItemListener onItemListener, ArrayList<ElementoUtilizadoMostrar> arrayList, CrearOrdenInspeccionFragment instancia, boolean bloquear) {
         this.onItemListener = onItemListener;
         this.insectosArraylist = arrayList;
         this.instancia = instancia;
@@ -41,11 +41,10 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
 
-        holder.tvNombre.setText(insectosArraylist.get(position).getNombre());
-        holder.tvNivelDeInfestacion.setText(insectosArraylist.get(position).getNivelInfestacion());
+        holder.tvNombre.setText(insectosArraylist.get(position).getDescripcion());
 
         holder.btnBorrar.setOnClickListener(v -> {
-            instancia.eliminarInsecto(position);
+            instancia.eliminarElementoUtilizado(position);
         });
     }
 
@@ -61,15 +60,14 @@ public class AdapterInsectos extends RecyclerView.Adapter<AdapterInsectos.ViewHo
 
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvNombre,tvNivelDeInfestacion;
+        private final TextView tvNombre;
         private final TextView btnBorrar;
-        private final AdapterInsectos.onItemListener onItemListener;
+        private final AdapterElementosUtilizados.onItemListener onItemListener;
 
-        public ViewHolderCliente(@NonNull View itemView, AdapterInsectos.onItemListener onItemListener) {
+        public ViewHolderCliente(@NonNull View itemView, AdapterElementosUtilizados.onItemListener onItemListener) {
             super(itemView);
 
             tvNombre = itemView.findViewById(R.id.itemName);
-            tvNivelDeInfestacion = itemView.findViewById(R.id.tvNivelDeInfestacion);
             btnBorrar = itemView.findViewById(R.id.btnBorrar);
 
             this.onItemListener = onItemListener;

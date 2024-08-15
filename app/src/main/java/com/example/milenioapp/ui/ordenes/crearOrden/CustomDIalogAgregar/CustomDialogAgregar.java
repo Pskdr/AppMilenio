@@ -25,6 +25,7 @@ import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment;
 import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomDialogAgregar extends DialogFragment {
 
@@ -42,7 +43,9 @@ public class CustomDialogAgregar extends DialogFragment {
         this.opcion = opcion;
     }
 
-    private Spinner spinnerTipo;
+    private Spinner spinnerTipo,spinnerInfestacion;
+
+    private String infestacionNivel;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -53,6 +56,7 @@ public class CustomDialogAgregar extends DialogFragment {
         rvItemsAll = view.findViewById(R.id.rvItemsAll);
         btnCerrar = view.findViewById(R.id.btnCerrar);
         spinnerTipo = view.findViewById(R.id.spinnerTipo);
+        spinnerInfestacion = view.findViewById(R.id.spinnerInfestacion);
 
 
         switch ((int) opcion){
@@ -60,17 +64,23 @@ public class CustomDialogAgregar extends DialogFragment {
                 tvAgregarNombre.setText("AGREGAR ZONA");
                 lyTipo.setVisibility(View.GONE);
 
-                TraerDatos();
+                traerDatos();
                 break;
             case 1:
                 tvAgregarNombre.setText("AGREGAR HIGIENE LOCATIVOS");
                 lyTipo.setVisibility(View.GONE);
 
-                TraerDatos();
+                traerDatos();
                 break;
             case 2:
                 tvAgregarNombre.setText("AGREGAR INSECTO");
                 llenarTipoInsectos();
+                break;
+            case 3:
+
+                tvAgregarNombre.setText("AGREGAR ELEMENTOS Y/O EQUIPO");
+
+                traerDatos();
                 break;
             default:
 
@@ -121,7 +131,50 @@ public class CustomDialogAgregar extends DialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tipoInsecto  = tipoInsectosAgregars.get(position).getId();
-                TraerDatos();
+                traerDatos();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        List<String> nivelInfestacion = new ArrayList<>();
+        nivelInfestacion.add("ALTO");
+        nivelInfestacion.add("MEDIO");
+        nivelInfestacion.add("BAJO");
+
+
+        ArrayAdapter<String> arrayAdapterDocis = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,nivelInfestacion){
+
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                TextView label = (TextView) super.getView(position, convertView, parent);
+
+                String producto = getItem(position);
+                label.setHint(producto);
+                label.setText(producto);
+
+                return label;
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                String producto = getItem(position);
+                label.setText(producto);
+                return label;
+            }
+        };
+
+        spinnerInfestacion.setAdapter(arrayAdapterDocis);
+        spinnerInfestacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                infestacionNivel = arrayAdapterDocis.getItem(position);
             }
 
             @Override
@@ -137,7 +190,7 @@ public class CustomDialogAgregar extends DialogFragment {
     private AdapterAgregar adapterAgregar;
     private ArrayList<ItemMostrar> itemMostrars;
 
-    private void TraerDatos() {
+    private void traerDatos() {
         new Thread(() -> {
             if(itemMostrars != null){
                 itemMostrars.clear();
@@ -153,6 +206,8 @@ public class CustomDialogAgregar extends DialogFragment {
                 case 2:
                     itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getInsectoDAO().gettAllAgregar(tipoInsecto);
                     break;
+                case 3:
+                    itemMostrars = (ArrayList<ItemMostrar>) AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().gettAllAgregar();
                 default:
                     itemMostrars = new ArrayList<>();
             }
@@ -166,11 +221,17 @@ public class CustomDialogAgregar extends DialogFragment {
                             case 0:
                                 instancia.agregarZona(itemMostrars.get(position).getId());
                                 break;
-                            case 2:
+                            case 1:
                                 instancia.agregarHigiene(itemMostrars.get(position).getId());
                                 break;
+                            case 2:
+                                if(!infestacionNivel.equals("")) {
+                                    instancia.agregarInsecto(itemMostrars.get(position).getId(), infestacionNivel);
+                                }else{
+                                    return;
+                                }
                             case 3:
-                                instancia.agregarInsecto(itemMostrars.get(position).getId());
+                                instancia.agregarElemento(itemMostrars.get(position).getId());
                                 break;
                             default:
                         }

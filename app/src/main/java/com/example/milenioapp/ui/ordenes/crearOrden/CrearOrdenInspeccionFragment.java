@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.ViewKt;
@@ -16,7 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +29,7 @@ import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
+import com.example.milenioapp.database.entity.ElementoUtilizado;
 import com.example.milenioapp.database.entity.GrupoZona;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.HigieneGroup;
@@ -32,6 +38,8 @@ import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.CustomDialogAgregar;
+import com.example.milenioapp.ui.ordenes.crearOrden.elementosUtilizados.AdapterElementosUtilizados;
+import com.example.milenioapp.ui.ordenes.crearOrden.elementosUtilizados.ElementoUtilizadoMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrden.firma.FirmaFragment;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.AdapterHigiene;
 import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
@@ -58,7 +66,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         // Required empty public constructor
     }
     long idOrden,id;
-    private RecyclerView rvHigiene, rvZonas,rvInsectos;
+    private RecyclerView rvHigiene, rvZonas,rvInsectos,rvElementosUtilizados;
 
     private Button btnGuardar, btnFirmaAyudante, btnFirmaOperario,btnCertificado;
     private  ArrayList<HygieneItem> hygieneItems;
@@ -74,7 +82,8 @@ public class CrearOrdenInspeccionFragment extends Fragment {
     private TextView tvHoraIngreso, tvHoraSalida;
     int thour, tminute;
 
-    private Button btnAgregarZona, btnAgregarAreaLocativa, btnAgregarEspecie;
+    private Button btnAgregarZona, btnAgregarAreaLocativa, btnAgregarEspecie,btnAgregarElementos;
+    private Spinner spinnerTipoDeServicio;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,6 +103,8 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         tvHoraIngreso = view.findViewById(R.id.tvTimeIngreso);
         tvHoraSalida = view.findViewById(R.id.tvTimeSalida);
 
+        spinnerTipoDeServicio = view.findViewById(R.id.spinnerTipoDeServicio);
+
         tiObservaciones = view.findViewById(R.id.tiObservaciones);
         tiCorrectivos = view.findViewById(R.id.tiCorrectivos);
 
@@ -105,10 +116,12 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         rvHigiene = view.findViewById(R.id.rvHigiene);
         rvZonas = view.findViewById(R.id.rvZonas);
         rvInsectos = view.findViewById(R.id.rvInsectos);
+        rvElementosUtilizados = view.findViewById(R.id.rvElementos);
 
         btnAgregarZona = view.findViewById(R.id.btnAgregarZona);
         btnAgregarAreaLocativa = view.findViewById(R.id.btnAgregarAreaLocativa);
         btnAgregarEspecie = view.findViewById(R.id.btnAgregarEspecie);
+        btnAgregarElementos = view.findViewById(R.id.btnAgregarElementeos);
 
 
 
@@ -124,29 +137,11 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         }
 
 
+        rvElementosUtilizados.setLayoutManager(new LinearLayoutManager(getContext()));
         rvInsectos.setLayoutManager(new LinearLayoutManager(getContext()));
         rvHigiene.setLayoutManager(new LinearLayoutManager(getContext()));
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        btnCertificado.setOnClickListener(v -> {
-            if(validarDatos()){
-                if(orden != null){
-                    Bundle enviar = new Bundle();
-                    enviar.putLong("idCliente", cliente.getId());
-                    enviar.putLong("idOrden", orden.getId());
-                    ViewKt.findNavController(getView()).navigate(R.id.action_crearOrdenInspeccionFragment_to_certificadoFragment, enviar);
-                }else{
-                    Utilities utilities = new Utilities();
-                    Calendar calendar = Calendar.getInstance();
-                    orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
-                            0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
-                            horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                            tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
-                    insertarOrdenNueva(orden);
-
-                }
-            }
-        });
 
         btnAgregarZona.setOnClickListener(v -> {
 
@@ -165,6 +160,11 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             CustomDialogAgregar customDialogAgregar = new CustomDialogAgregar(this,cliente,2);
             customDialogAgregar.show(getChildFragmentManager(),"");
         });
+        btnAgregarElementos.setOnClickListener(v -> {
+
+            CustomDialogAgregar customDialogAgregar = new CustomDialogAgregar(this,cliente,3);
+            customDialogAgregar.show(getChildFragmentManager(),"");
+        });
         return view;
     }
     private ArrayList<Insecto> insectoArrayList;
@@ -172,22 +172,27 @@ public class CrearOrdenInspeccionFragment extends Fragment {
     private void traerDatosEspecies() {
         insectoArrayList = new ArrayList<>();
         insectoGroupArrayList = new ArrayList<>();
-        new Thread(() -> {
-
-            insectoArrayList = (ArrayList<Insecto>) AppDataBase.getInstance(getContext()).getInsectoDAO().getAll();
-
-            getActivity().runOnUiThread(() -> {
-
-                for (int i = 0; i < insectoArrayList.size(); i++) {
-                    insectoGroupArrayList.add(new InsectoGroupMostrar(i,insectoArrayList.get(i).getDescripcion(), insectoArrayList.get(i).getId(),"" ));
-                }
-                llenarAdapterInsecto();
-
-            });
-
-        }).start();
+        llenarAdapterInsecto();
 
     }
+    private ArrayList<ElementoUtilizadoMostrar> elementoUtilizadoArray;
+    private void traerDatosElementos() {
+        elementoUtilizadoArray = new ArrayList<>();
+
+        llenarAdapterElementos();
+
+    }
+    private AdapterElementosUtilizados adapterElementosUtilizados;
+    private void llenarAdapterElementos() {
+        adapterElementosUtilizados = new AdapterElementosUtilizados(new AdapterElementosUtilizados.onItemListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        }, elementoUtilizadoArray,this, (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
+        rvElementosUtilizados.setAdapter(adapterElementosUtilizados);
+    }
+
     private void traerDatosEspecies(Orden orden) {
         insectoGroupArrayList = new ArrayList<>();
         new Thread(() -> {
@@ -201,6 +206,19 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         }).start();
 
     }
+    private void traerDatosElementos(Orden orden) {
+        elementoUtilizadoArray = new ArrayList<>();
+        new Thread(() -> {
+
+            elementoUtilizadoArray = (ArrayList<ElementoUtilizadoMostrar>) AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().getElementosGuardados(orden.getId());
+
+            getActivity().runOnUiThread(() -> {
+                llenarAdapterElementos();
+            });
+
+        }).start();
+
+    }
     private AdapterInsectos adapterInsectos;
     private void llenarAdapterInsecto() {
         adapterInsectos = new AdapterInsectos(new AdapterInsectos.onItemListener() {
@@ -208,7 +226,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             public void onItemClick(int position) {
 
             }
-        },insectoGroupArrayList, (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
+        },insectoGroupArrayList,this, (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
         rvInsectos.setAdapter(adapterInsectos);
 
     }
@@ -322,6 +340,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
                 traerDatosHigiene();
                 traerDatosEspecies();
+                traerDatosElementos();
 
                 //insert
                 btnGuardar.setOnClickListener(v -> {
@@ -331,7 +350,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                             orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
                                     0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                     horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
+                                    tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),tipoDeServicio,"N");
                             insertarOrdenNueva(orden);
                         }
                     }
@@ -392,11 +411,59 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                     timePickerDialog.show();
 
                 });
+                List<String> tipoDeServicioList = new ArrayList<>();
+                tipoDeServicioList.add("Aspersión");
+                tipoDeServicioList.add("Nebulización");
+                tipoDeServicioList.add("Termonebulización");
+                tipoDeServicioList.add("Polvo Seco");
+                tipoDeServicioList.add("Insepcción");
+                tipoDeServicioList.add("Desratización");
+                tipoDeServicioList.add("Aplicación de gel");
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoDeServicioList){
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setHint(producto);
+                        label.setText(producto);
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setText(producto);
+                        return label;
+                    }
+                };
+
+                spinnerTipoDeServicio.setAdapter(arrayAdapter);
+                spinnerTipoDeServicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        tipoDeServicio = arrayAdapter.getItem(position);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
             });
 
         }).start();
     }
+
+
+
+    private String tipoDeServicio;
 
     private void insertarOrdenNueva(Orden orden) {
         new Thread(() -> {
@@ -409,7 +476,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 for (int i = 0; i < grupoZonas.size(); i++) {
                     grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
                             idOrden,grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
-                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion()));
+                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion(),grupoZonas.get(i).getFechaVencimiento()));
                 }
 
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
@@ -421,7 +488,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < insectoGroupArrayList.size(); i++) {
                     insectoGroupsInsert.add(new InsectoGroup(idOrden,insectoGroupArrayList.get(i).getIdInsecto(),
-                            insectoGroupArrayList.get(i).getS()));
+                            insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                 }
 
                 new Thread(() -> {
@@ -530,6 +597,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             traerZonasAgregadas(orden);
             traerDatosHigiene(orden);
             traerDatosEspecies(orden);
+            traerDatosElementos(orden);
 
             if(orden.getEstadoEnvio().equals("E")){
                 tiObservaciones.setEnabled(false);
@@ -547,7 +615,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                         orden = new Orden(0,calendar2.getTimeInMillis(),calendar2.getTimeInMillis(),
                                 0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                 horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
-                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),"N");
+                                tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante),tipoDeServicio,"N");
                         insertarOrdenNueva(orden);
                     }else{
                         orden.setOperario(tiOperario.getText().toString());
@@ -631,6 +699,61 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 timePickerDialog.show();
 
             });
+            btnCertificado.setOnClickListener(v -> {
+                if(validarDatos()){
+                    Bundle enviar = new Bundle();
+                    enviar.putLong("idCliente", cliente.getId());
+                    enviar.putLong("idOrden", orden.getId());
+                    ViewKt.findNavController(getView()).navigate(R.id.action_crearOrdenInspeccionFragment_to_certificadoFragment, enviar);
+                }
+            });
+
+            List<String> tipoDeServicioList = new ArrayList<>();
+            tipoDeServicioList.add(0,orden.getTipoServicio());
+            tipoDeServicioList.add("Aspersión");
+            tipoDeServicioList.add("Nebulización");
+            tipoDeServicioList.add("Termonebulización");
+            tipoDeServicioList.add("Polvo Seco");
+            tipoDeServicioList.add("Insepcción");
+            tipoDeServicioList.add("Desratización");
+            tipoDeServicioList.add("Aplicación de gel");
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoDeServicioList){
+
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    TextView label = (TextView) super.getView(position, convertView, parent);
+
+                    String producto = getItem(position);
+                    label.setHint(producto);
+                    label.setText(producto);
+
+                    return label;
+                }
+
+                @Override
+                public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                    String producto = getItem(position);
+                    label.setText(producto);
+                    return label;
+                }
+            };
+
+            spinnerTipoDeServicio.setAdapter(arrayAdapter);
+            spinnerTipoDeServicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    tipoDeServicio = arrayAdapter.getItem(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
         }
     }
 
@@ -646,7 +769,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 for (int i = 0; i < grupoZonas.size(); i++) {
                     grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
                             orden.getId(),grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
-                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion()));
+                            grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion(),grupoZonas.get(i).getFechaVencimiento()));
                     grupoZonaInsert.get(i).setId(grupoZonas.get(i).getId());
                 }
 
@@ -660,7 +783,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < insectoGroupArrayList.size(); i++) {
                     insectoGroupsInsert.add(new InsectoGroup(orden.getId(),insectoGroupArrayList.get(i).getIdInsecto(),
-                            insectoGroupArrayList.get(i).getS()));
+                            insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                     insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getId());
                 }
 
@@ -692,15 +815,29 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         }).start();
     }
 
-    public void agregarInsecto(long idInsecto) {
+    public void agregarInsecto(long idInsecto, String infestacionNivel) {
         new Thread(() -> {
 
             Insecto insecto = AppDataBase.getInstance(getContext()).getInsectoDAO().getById(idInsecto);
 
             getActivity().runOnUiThread(() -> {
 
-                insectoGroupArrayList.add(new InsectoGroupMostrar(0,insecto.getDescripcion(),insecto.getId(),""));
+                insectoGroupArrayList.add(new InsectoGroupMostrar(0,insecto.getDescripcion(),insecto.getId(),"",infestacionNivel));
                 llenarAdapterInsecto();
+
+            });
+
+        }).start();
+    }
+    public void agregarElemento(long idElemento) {
+        new Thread(() -> {
+
+            ElementoUtilizado elementoUtilizado = AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().getById(idElemento);
+
+            getActivity().runOnUiThread(() -> {
+
+                elementoUtilizadoArray.add(new ElementoUtilizadoMostrar(0,elementoUtilizado.getId(),elementoUtilizado.getDescripcion()));
+                llenarAdapterElementos();
 
             });
 
@@ -713,7 +850,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             Zona zona = AppDataBase.getInstance(getContext()).getZonaDAO().getById(idZona);
 
             getActivity().runOnUiThread(() -> {
-                grupoZonas.add(new GrupoZonaMostrar(0,zona.getId(),orden != null ? orden.getId() : 0,zona.getDescripcion(),"","","",""));
+                grupoZonas.add(new GrupoZonaMostrar(0,zona.getId(),orden != null ? orden.getId() : 0,zona.getDescripcion(),"","","","",""));
                 cargarAdapterZonas();
 
             });
@@ -762,5 +899,16 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             });
 
         }).start();
+    }
+
+    public void eliminarInsecto(int position) {
+        insectoArrayList.remove(position);
+        llenarAdapterInsecto();
+    }
+
+    public void eliminarElementoUtilizado(int position) {
+
+        elementoUtilizadoArray.remove(position);
+        llenarAdapterElementos();
     }
 }

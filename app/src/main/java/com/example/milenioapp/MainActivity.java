@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.ElementoUtilizado;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
@@ -99,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
         insectoList.add(new Insecto(5,"CHINCHE",0));
         insectoList.add(new Insecto(6,"MOSCAS",0));
 
+        List<ElementoUtilizado> elementoUtilizadoList = new ArrayList<>();
+        elementoUtilizadoList.add(new ElementoUtilizado(0,"Banda de neopreno"));
+        elementoUtilizadoList.add(new ElementoUtilizado(1,"Mallas"));
+        elementoUtilizadoList.add(new ElementoUtilizado(2,"Trampas adhesivas"));
+        elementoUtilizadoList.add(new ElementoUtilizado(3,"Insecticidas"));
+
         List<TecnicaAplicacion> tecnicaAplicacionList = new ArrayList<>();
         tecnicaAplicacionList.add(new TecnicaAplicacion(0,"ASPERSION","",0));
         tecnicaAplicacionList.add(new TecnicaAplicacion(1,"DISOLUCIÓN","",0));
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
             AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);
             AppDataBase.getInstance(getApplicationContext()).getTecnicaAplicacionDAO().insertAll(tecnicaAplicacionList);
+            AppDataBase.getInstance(getApplicationContext()).getElementoUtilizadoDAO().insertAll(elementoUtilizadoList);
 
             runOnUiThread(() -> {
                 obtenerUsuario();

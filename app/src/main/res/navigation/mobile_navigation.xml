@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/crearOrdenInspeccionFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment"
-        android:label="Crear orden inspección"
+        android:label="Orden de servicio"
         tools:layout="@layout/fragment_crear_orden" >
         <action
             android:id="@+id/action_crearOrdenInspeccionFragment_to_certificadoFragment"
