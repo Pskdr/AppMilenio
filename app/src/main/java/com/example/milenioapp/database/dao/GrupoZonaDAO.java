@@ -17,7 +17,7 @@ import java.util.List;
 @Dao
 public interface GrupoZonaDAO {
     @Query("select GrupoZonas.id as id, GrupoZonas.idzona as idZona, :idOrden as idOrden,zonas.descripcion as nombre,GrupoZonas.producto as producto,GrupoZonas.ingredienteActivo as ingredienteActivo," +
-            "GrupoZonas.docificacion as docificacion, grupozonas.tecnicaAplicacion as tecnicaAplicacion,grupozonas.fechaVencimientoProducto as fechaVencimiento " +
+            "GrupoZonas.dosificacion as docificacion, grupozonas.tecnicaAplicacion as tecnicaAplicacion,grupozonas.fechaVencimientoProducto as fechaVencimiento " +
             "from GrupoZonas inner join zonas on GrupoZonas.idZona = zonas.id " +
             "where GrupoZonas.idOrden = :idOrden")
     List<GrupoZonaMostrar> getZonasAgregadas(long idOrden);

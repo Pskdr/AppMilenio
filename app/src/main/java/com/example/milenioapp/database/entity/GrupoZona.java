@@ -11,16 +11,16 @@ public class GrupoZona {
     private long idOrden;
     private String producto;
     private String ingredienteActivo;
-    private String docificacion;
+    private String dosificacion;
     private String tecnicaAplicacion;
     private String fechaVencimientoProducto;
 
-    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String docificacion,String tecnicaAplicacion, String fechaVencimientoProducto) {
+    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String dosificacion, String tecnicaAplicacion, String fechaVencimientoProducto) {
         this.idZona = idZona;
         this.idOrden = idOrden;
         this.producto = producto;
         this.ingredienteActivo = ingredienteActivo;
-        this.docificacion = docificacion;
+        this.dosificacion = dosificacion;
         this.tecnicaAplicacion=tecnicaAplicacion;
         this.fechaVencimientoProducto = fechaVencimientoProducto;
     }
@@ -57,12 +57,12 @@ public class GrupoZona {
         this.ingredienteActivo = ingredienteActivo;
     }
 
-    public String getDocificacion() {
-        return docificacion;
+    public String getDosificacion() {
+        return dosificacion;
     }
 
-    public void setDocificacion(String docificacion) {
-        this.docificacion = docificacion;
+    public void setDosificacion(String dosificacion) {
+        this.dosificacion = dosificacion;
     }
 
     public long getId() {
