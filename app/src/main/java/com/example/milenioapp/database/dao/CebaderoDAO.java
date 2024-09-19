@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Cebadero;
-import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.AgregarObjeto;
 
 import java.util.List;
 

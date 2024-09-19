@@ -10,12 +10,17 @@ public class CebaderoGroup {
     @NonNull
     private long id;
     private long idOrden;
-    private long idCebadero;
+    private String zona;
+    private String nro;
+    private String estado;
+    private String observaciones;
 
-    public CebaderoGroup(long id, long idOrden, long idCebadero) {
-        this.id = id;
+    public CebaderoGroup(long idOrden, String zona, String nro, String estado, String observaciones) {
         this.idOrden = idOrden;
-        this.idCebadero = idCebadero;
+        this.zona = zona;
+        this.nro = nro;
+        this.estado = estado;
+        this.observaciones = observaciones;
     }
 
     public long getId() {
@@ -34,11 +39,35 @@ public class CebaderoGroup {
         this.idOrden = idOrden;
     }
 
-    public long getIdCebadero() {
-        return idCebadero;
+    public String getZona() {
+        return zona;
     }
 
-    public void setIdCebadero(long idCebadero) {
-        this.idCebadero = idCebadero;
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getNro() {
+        return nro;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 }

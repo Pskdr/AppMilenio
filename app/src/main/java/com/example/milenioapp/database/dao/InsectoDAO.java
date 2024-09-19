@@ -7,11 +7,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
-import com.example.milenioapp.ui.ordenes.crearOrden.AgregarObjeto;
-import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
-import com.example.milenioapp.ui.ordenes.crearOrden.insecto.InsectoGroupMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.AgregarObjeto;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.insecto.InsectoGroupMostrar;
 
 import java.util.List;
 

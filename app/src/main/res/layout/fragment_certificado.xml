@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ordenes.crearOrden.certificado.CertificadoFragment">
+    tools:context=".ui.ordenes.crearOrdenServicio.certificado.CertificadoFragment">
 
     <LinearLayout
         android:layout_margin="20px"

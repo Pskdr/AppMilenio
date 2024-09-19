@@ -8,9 +8,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.ElementoUtilizado;
-import com.example.milenioapp.database.entity.Insecto;
-import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
-import com.example.milenioapp.ui.ordenes.crearOrden.elementosUtilizados.ElementoUtilizadoMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.elementosUtilizados.ElementoUtilizadoMostrar;
 
 import java.util.List;
 

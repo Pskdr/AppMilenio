@@ -24,4 +24,12 @@
     <string name="firmacompañante"><u>Firma acompañante</u></string>
     <string name="firmaoperario"><u>Firma operario técnico</u></string>
     <string name="editarcorreo"><u>Editar correo electrónico</u></string>
+    <string name="fecha_20_04_20">Fecha: 20/04/20</string>
+    <string name="p_gina_1_1">Página 1-1</string>
+    <string name="c_digo_fo_gs_03">Código FO-GS-03</string>
+    <string name="versi_n_02">Versión 02</string>
+    <string name="inspecci_n_n">Inspección N° -</string>
+    <string name="lampara_n">Lampara N°</string>
+    <string name="n">N°</string>
+    <string name="estado">Estado:</string>
 </resources>

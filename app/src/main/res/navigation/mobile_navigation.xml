@@ -60,6 +60,9 @@
             app:destination="@id/ordenInspeccionFragment" />
         <action
             android:id="@+id/action_empresaDetalleFragment_to_crearOrdenFragment"
+            app:destination="@id/crearOrdenServicioFragment" />
+        <action
+            android:id="@+id/action_empresaDetalleFragment_to_crearOrdenInspeccionFragment"
             app:destination="@id/crearOrdenInspeccionFragment" />
     </fragment>
     <fragment
@@ -82,8 +85,8 @@
         android:label="Crear empleado"
         tools:layout="@layout/fragment_crear_empleado" />
     <fragment
-        android:id="@+id/crearOrdenInspeccionFragment"
-        android:name="com.example.milenioapp.ui.ordenes.crearOrden.CrearOrdenInspeccionFragment"
+        android:id="@+id/crearOrdenServicioFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrdenServicio.CrearOrdenServicioFragment"
         android:label="Orden de servicio"
         tools:layout="@layout/fragment_crear_orden" >
         <action
@@ -92,7 +95,12 @@
     </fragment>
     <fragment
         android:id="@+id/certificadoFragment"
-        android:name="com.example.milenioapp.ui.ordenes.crearOrden.certificado.CertificadoFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado.CertificadoFragment"
         android:label="fragment_certificado"
         tools:layout="@layout/fragment_certificado" />
+    <fragment
+        android:id="@+id/crearOrdenInspeccionFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.CrearOrdenInspeccionFragment"
+        android:label="fragment_crear_orden_inspeccion"
+        tools:layout="@layout/fragment_crear_orden_inspeccion" />
 </navigation>

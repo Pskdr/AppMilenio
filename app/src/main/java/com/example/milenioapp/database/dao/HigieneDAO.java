@@ -7,13 +7,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.milenioapp.database.entity.Factura;
 import com.example.milenioapp.database.entity.Higiene;
-import com.example.milenioapp.database.entity.Zona;
-import com.example.milenioapp.ui.ordenes.crearOrden.CustomDIalogAgregar.ItemMostrar;
-import com.example.milenioapp.ui.ordenes.crearOrden.hallazgos.HygieneItem;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.hallazgos.HygieneItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao

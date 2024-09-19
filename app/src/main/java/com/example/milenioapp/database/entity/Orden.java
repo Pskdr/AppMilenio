@@ -25,10 +25,11 @@ public class Orden {
     private String tipoServicio;
     private String objetivoDelServicio;
     private String estadoEnvio;
+    private String tipoOrden; //S (servicio) - I (Inspección)
 
     public Orden(long idEmpleado, long fechaInicio, long fechaUsuario, long idCebadero, long idFactura, long idUsuario, String serial, String operario,
                  long horaIngreso, long horaSalida, String observacionesTecnicas, String correctivos, String firmaOperario,
-                 String firmaAyudante, String tipoServicio,String objetivoDelServicio,String estadoEnvio) {
+                 String firmaAyudante, String tipoServicio,String objetivoDelServicio,String tipoOrden,String estadoEnvio) {
         this.idEmpleado = idEmpleado;
         this.fechaInicio = fechaInicio;
         this.fechaUsuario = fechaUsuario;
@@ -45,9 +46,17 @@ public class Orden {
         this.firmaAyudante = firmaAyudante;
         this.tipoServicio = tipoServicio;
         this.objetivoDelServicio = objetivoDelServicio;
+        this.tipoOrden = tipoOrden;
         this.estadoEnvio = estadoEnvio;
     }
 
+    public String getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(String tipoOrden) {
+        this.tipoOrden = tipoOrden;
+    }
 
     public String getObjetivoDelServicio() {
         return objetivoDelServicio;

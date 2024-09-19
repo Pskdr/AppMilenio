@@ -8,8 +8,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.GrupoZona;
-import com.example.milenioapp.ui.ordenes.crearOrden.certificado.ItemZonasMostrar;
-import com.example.milenioapp.ui.ordenes.crearOrden.zona.GrupoZonaMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado.ItemZonasMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.GrupoZonaMostrar;
 
 import java.util.ArrayList;
 import java.util.List;

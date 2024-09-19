@@ -24,4 +24,7 @@ public interface CebaderoGroupDAO {
 
     @Insert( onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CebaderoGroup> cebaderoGroups);
+
+    @Query("select * from cebaderosgroup where idOrden =:id")
+    List<CebaderoGroup> getByOrdenId(long id);
 }

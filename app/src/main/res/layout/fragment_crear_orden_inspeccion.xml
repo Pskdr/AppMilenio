@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.ordenes.crearOrdenServicio.CrearOrdenServicioFragment">
+    tools:context=".ui.ordenes.crearOrdenInspeccion.CrearOrdenInspeccionFragment">
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Orden de Servicio"
+                    android:text="Orden de Inspeccion"
                     android:layout_width="match_parent"
                     android:textStyle="bold"
                     android:textColor="@color/white"
@@ -49,7 +49,6 @@
                     android:layout_height="match_parent"
                     />
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -77,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/inspecci_n_n"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,6 +138,7 @@
                         android:text="@string/p_gina_1_1"/>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -341,118 +342,79 @@
             </LinearLayout>
 
             <LinearLayout
+                android:paddingLeft="5dp"
+                android:background="@color/greylight"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:gravity="center"
-                >
+                android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="70"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:text="Tipo de Servicio:"/>
-                <Spinner
-                    android:id="@+id/spinnerTipoDeServicio"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputOutlinedStyle"
-                    android:layout_weight="40"
-                    android:layout_width="0dp"
-                    android:background="@color/white"
                     android:layout_height="wrap_content"
-                    android:hint="Operario">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tiOperario"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        style="@style/CustomTextStyle"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
+                    android:text="ESPECIE ENCONTRADA"/>
 
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvInsectos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnAgregarEspecie"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar especie"/>
             <LinearLayout
-                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:background="@color/greylight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvTimeIngreso"
-                    android:layout_weight="50"
                     android:layout_width="0dp"
+                    android:layout_weight="70"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/editbox_background"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="Hora ingreso"
-                    android:textSize="25sp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/tvTimeSalida"
-                    android:layout_weight="50"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/editbox_background"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="Hora salida"
-                    android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:text="CEBADEROS Y TRAMPAS"/>
+
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCebaderos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btnAgregarZona"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agregar Zona"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:paddingLeft="5dp"
-                    android:id="@+id/tvPlagaEncontrada"
-                    android:text="Zonas "
-                    android:layout_width="0dp"
-                    android:background="@color/greylight"
-                    android:textColor="@color/black"
-                    android:layout_marginRight="5dp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"/>
-
-
-
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvZonas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btnAgregarAreaLocativa"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Agregar area locativa e higiene"/>
+                android:text="Agregar zona"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Observaciones">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiObservaciones"
+                    android:layout_width="match_parent"
+                    style="@style/CustomTextStyle"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -465,7 +427,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="AREAS LOCATIVAS E HIGIENE DE LAS INSTALACIONES"/>
+                    android:text="ASPECTO LOCATIVO E HIGIENE"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -503,14 +465,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
-                android:id="@+id/btnAgregarEspecie"
+                android:id="@+id/btnAgregarAreaLocativa"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:gravity="center"
-                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar especie"/>
+                android:layout_marginBottom="5dp"
+                android:text="Agregar area locativa e higiene"/>
 
             <LinearLayout
                 android:paddingLeft="5dp"
@@ -523,52 +485,127 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="ESPECIE ENCONTRADA"/>
+                    android:text="USO DE LAMPARAS ATRAPA INSECTOS"/>
 
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvInsectos"
+                android:id="@+id/rvLamparas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
-                android:id="@+id/btnAgregarElementeos"
+                android:id="@+id/btnAgregarLampara"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar elementos ultilizados"/>
+                android:text="Agregar lampara"/>
 
             <LinearLayout
-                android:paddingLeft="5dp"
-                android:background="@color/greylight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_weight="40"
                     android:layout_width="0dp"
-                    android:layout_weight="70"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:background="@color/white"
                     android:layout_height="wrap_content"
-                    android:text="ELEMENTOS UTILIZADOS"/>
+                    android:hint="# de roedores capturados">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiRoedores"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        style="@style/CustomTextStyle"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_weight="40"
+                    android:layout_width="0dp"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:hint="# de cebaderos con consumo">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiCebaderosConConsumo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        style="@style/CustomTextStyle"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_weight="40"
+                    android:layout_width="0dp"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:hint="# de cebaderos sucios">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiCebaderosSucios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        style="@style/CustomTextStyle"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_weight="40"
+                    android:layout_width="0dp"
+                    android:background="@color/white"                    android:layout_height="wrap_content"
+                    android:hint="# de cebaderos inactivos">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiCebaderosInactivos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        style="@style/CustomTextStyle"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvElementos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
-            <Button
-                android:id="@+id/btnSobreElServicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="Sobre el servicio ►"/>
+
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -596,23 +633,24 @@
 
                 </LinearLayout>
 
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:hint="Observacioens técnicas">
+                    android:hint="Observaciones tecnicas">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tiObservaciones"
+                        android:id="@+id/tiObservacionesTecnicas"
                         android:layout_width="match_parent"
                         style="@style/CustomTextStyle"
                         android:layout_height="wrap_content"
+                        android:minHeight="100dp"
                         android:inputType="text"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                     style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
@@ -625,22 +663,7 @@
                         android:layout_width="match_parent"
                         style="@style/CustomTextStyle"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColor="@color/black" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputOutlinedStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:hint="Objetivo del servicio">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tiObjetivoDelServicio"
-                        android:layout_width="match_parent"
-                        style="@style/CustomTextStyle"
-                        android:layout_height="wrap_content"
+                        android:minHeight="100dp"
                         android:inputType="text"
                         android:textColor="@color/black" />
 
@@ -667,5 +690,7 @@
         </LinearLayout>
 
     </ScrollView>
+
+
 
 </LinearLayout>

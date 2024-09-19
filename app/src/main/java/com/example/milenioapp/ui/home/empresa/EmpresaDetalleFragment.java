@@ -131,7 +131,17 @@ public class EmpresaDetalleFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putLong("id", cliente.getId());
-                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
+                switch (position){
+                    case 0:
+                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
+                        break;
+                    case 1:
+
+                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenInspeccionFragment, bundle);
+                        break;
+                    default:
+                        return;
+                }
 
             }
         },empresaArrayList);
