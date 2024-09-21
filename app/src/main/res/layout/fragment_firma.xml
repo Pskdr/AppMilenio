@@ -25,7 +25,7 @@
 
             <Button
                 android:id="@+id/btnBorrar"
-                android:layout_weight="33"
+                android:layout_weight="30"
                 android:textSize="12sp"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -36,7 +36,7 @@
             <Button
                 android:id="@+id/btnGuardar"
                 android:textSize="12sp"
-                android:layout_weight="33"
+                android:layout_weight="40"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_margin="10dp"
@@ -46,7 +46,7 @@
             <Button
                 android:id="@+id/btnCerrar"
                 android:textSize="12sp"
-                android:layout_weight="33"
+                android:layout_weight="30"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="0dp"

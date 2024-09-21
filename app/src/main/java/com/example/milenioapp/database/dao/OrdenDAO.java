@@ -23,6 +23,7 @@ public interface OrdenDAO {
 
     @Query("select * from ordenes where id = :idOrden")
     Orden getByid(long idOrden);
-    @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio,fechaInicio from ordenes")
+    @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio," +
+            "fechaInicio, tipoOrden from ordenes")
     List<OrdenMostrar> getAllMostrar();
 }

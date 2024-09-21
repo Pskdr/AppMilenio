@@ -51,6 +51,16 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
         holder.tvHoraSalida.setText(utilities.split(utilities.getFechaString(horaSalida),1));
         holder.tvFecha.setText(utilities.split(utilities.getFechaString(fechaEnvio),0));
         holder.tvEstadoEnvio.setText(ordenArrayList.get(position).getEstadoEnvio().equals("E")  ? "ENVIADO" : "PENDIENTE");
+        switch (ordenArrayList.get(position).getTipoOrden()){
+            case "S":
+                holder.tvTipoOrden.setText("Orden de servicio");
+                break;
+            case "I":
+                holder.tvTipoOrden.setText("Orden de inspeccion");
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -65,7 +75,7 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
     }
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvOperario,tvHoraIngreso,tvHoraSalida,tvFecha,tvEstadoEnvio;
+        private final TextView tvOperario,tvHoraIngreso,tvHoraSalida,tvFecha,tvEstadoEnvio,tvTipoOrden;
         private final AdapterOrdenes.onItemListener onItemListener;
         private final CardView cvCliente;
 
@@ -77,6 +87,7 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
             tvHoraSalida = itemView.findViewById(R.id.tvHoraSalida);
             tvFecha = itemView.findViewById(R.id.tvFecha);
             tvEstadoEnvio = itemView.findViewById(R.id.tvEstadoEnvio);
+            tvTipoOrden = itemView.findViewById(R.id.tvTipoOrden);
 
             cvCliente = itemView.findViewById(R.id.cvCliente);
 

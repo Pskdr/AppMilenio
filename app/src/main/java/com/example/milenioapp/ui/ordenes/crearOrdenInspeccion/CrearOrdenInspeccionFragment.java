@@ -25,6 +25,7 @@ import com.example.milenioapp.database.entity.HigieneGroup;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.LamparaGroup;
+import com.example.milenioapp.database.entity.NroCebaderos;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.cebaderos.AdapterCebaderos;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.cebaderos.CustomDialogCebaderos;
@@ -39,6 +40,7 @@ import com.example.milenioapp.ui.ordenes.crearOrdenServicio.insecto.InsectoGroup
 import com.example.milenioapp.ui.utilidades.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -174,12 +176,15 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             tiDireccion.setText(cliente.getDireccion());
             tiSede.setText(cliente.getSede());
 
+
             guardarFirmaOperario(utilities.stringToBitMap(orden.getFirmaOperario()));
             guardarFirmaAcompa(utilities.stringToBitMap(orden.getFirmaAyudante()));
 
+            tiObservacionesTecnicas.setText(orden.getObservacionesTecnicas());
             tiObservaciones.setText(orden.getObservacionesTecnicas());
             tiCorrectivos.setText(orden.getCorrectivos());
 
+            traerDatosNroCebaderos(orden);
             traerLamparasAgregadas(orden);
             traerDatosHigiene(orden);
             traerDatosEspecies(orden);
@@ -241,6 +246,21 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
         }
     }
+    NroCebaderos nroCebaderos;
+    private void traerDatosNroCebaderos(Orden orden) {
+        new Thread(() -> {
+
+            nroCebaderos = AppDataBase.getInstance(getContext()).getNroCebaderoDAO().getByIdOrden(orden.getId());
+
+            getActivity().runOnUiThread(() -> {
+                tiRoedores.setText(nroCebaderos.getNroRoedoresCapturados());
+                tiCebaderosConConsumo.setText(nroCebaderos.getNroCebaderosConsumo());
+                tiCebaderosSucios.setText(nroCebaderos.getNroCebaderosSucios());
+                tiCebaderosInactivos.setText(nroCebaderos.getNroCebaderosInactivos());
+            });
+
+        }).start();
+    }
 
 
     ArrayList<LamparaGroup> lamparaGroupArrayList;
@@ -261,12 +281,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
     private boolean validarDatos() {
 
-        if(tiRoedores.getText().toString().equals("") || tiCebaderosConConsumo.getText().toString().equals("")
-                || tiCebaderosSucios.getText().toString().equals("")|| tiCebaderosInactivos.getText().toString().equals("") ){
 
-            Toast.makeText(getContext(),"Tiene que llenar todos los campos de #",Toast.LENGTH_LONG).show();
-            return false;
-        }
         for (int i = 0; i < hygieneItems.size(); i++) {
             if(hygieneItems.get(i).getS().equals("")){
                 Toast.makeText(getContext(),"Tiene que seleccionar todas las areas locativas ",Toast.LENGTH_LONG).show();
@@ -284,6 +299,12 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
         if(firmaOperario == null || firmaAyudante == null){
             Toast.makeText(getContext(),"Las firmas son obligatorias",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(tiRoedores.getText().toString().equals("") || tiCebaderosConConsumo.getText().toString().equals("")
+                || tiCebaderosSucios.getText().toString().equals("")|| tiCebaderosInactivos.getText().toString().equals("") ){
+
+            Toast.makeText(getContext(),"Tiene que llenar todos los campos de # de cebaderos",Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -372,7 +393,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
     public void abrirCustomDialogLampara( int position) {
 
-        final CustomDialogLampara dialog = new CustomDialogLampara(CrearOrdenInspeccionFragment.this, position,lamparaGroupArrayList != null ? lamparaGroupArrayList.get(position): null,
+        final CustomDialogLampara dialog = new CustomDialogLampara(CrearOrdenInspeccionFragment.this, position,position != -1 ? lamparaGroupArrayList.get(position): null,
                 lamparaGroupArrayList.get(position).getIdOrden(), (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
         dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
     }
@@ -503,36 +524,37 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             long idOrden = AppDataBase.getInstance(getContext()).getOrdenDAO().insert(orden);
 
             getActivity().runOnUiThread(() -> {
-
+                nroCebaderos = new NroCebaderos(tiRoedores.getText().toString(),tiCebaderosConConsumo.getText().toString(),tiCebaderosSucios.getText().toString(),tiCebaderosInactivos.getText().toString(),idOrden);
                 ArrayList<LamparaGroup> lamparaGroups = new ArrayList<>();
                 for (int i = 0; i < lamparaGroupArrayList.size(); i++) {
-                    lamparaGroups.add(new LamparaGroup(lamparaGroupArrayList.get(i).getTipoDeInsecto(),lamparaGroupArrayList.get(i).getLamparaN(),
+                    lamparaGroups.add(new LamparaGroup(lamparaGroupArrayList.get(i).getTipoDeInsecto(), lamparaGroupArrayList.get(i).getLamparaN(),
                             lamparaGroupArrayList.get(i).getUbicacionLampara(),
-                            lamparaGroupArrayList.get(i).getCantadidadEncontrada(),lamparaGroupArrayList.get(i).getObservaciones(),idOrden));
+                            lamparaGroupArrayList.get(i).getCantadidadEncontrada(), lamparaGroupArrayList.get(i).getObservaciones(), idOrden));
                 }
 
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < hygieneItems.size(); i++) {
-                    higieneGroupsInsert.add(new HigieneGroup(idOrden,hygieneItems.get(i).getIdHigiene(),
+                    higieneGroupsInsert.add(new HigieneGroup(idOrden, hygieneItems.get(i).getIdHigiene(),
                             hygieneItems.get(i).getS()));
                 }
 
                 ArrayList<InsectoGroup> insectoGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < insectoGroupArrayList.size(); i++) {
-                    insectoGroupsInsert.add(new InsectoGroup(idOrden,insectoGroupArrayList.get(i).getIdInsecto(),
-                            insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
+                    insectoGroupsInsert.add(new InsectoGroup(idOrden, insectoGroupArrayList.get(i).getIdInsecto(),
+                            insectoGroupArrayList.get(i).getS(), insectoGroupArrayList.get(i).getNivelInfestacion()));
                 }
                 ArrayList<CebaderoGroup> cebaderosInsert = new ArrayList<>();
                 for (int i = 0; i < cebaderoGroups.size(); i++) {
-                    cebaderosInsert.add(new CebaderoGroup(idOrden,cebaderoGroups.get(i).getZona(),
-                            cebaderoGroups.get(i).getNro(),cebaderoGroups.get(i).getEstado(),cebaderoGroups.get(i).getObservaciones()));
+                    cebaderosInsert.add(new CebaderoGroup(idOrden, cebaderoGroups.get(i).getZona(),
+                            cebaderoGroups.get(i).getNro(), cebaderoGroups.get(i).getEstado(), cebaderoGroups.get(i).getObservaciones()));
                 }
+
                 new Thread(() -> {
                     AppDataBase.getInstance(getContext()).getLamparoGroupDAO().insertAll(lamparaGroups);
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
                     AppDataBase.getInstance(getContext()).getCebaderoGroupDAO().insertAll(cebaderosInsert);
-
+                    AppDataBase.getInstance(getContext()).getNroCebaderoDAO().insert(nroCebaderos);
                     getActivity().runOnUiThread(() -> {
 
                         Toast.makeText(getContext(),"Inserto exitoso",Toast.LENGTH_LONG).show();
@@ -551,7 +573,10 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
             getActivity().runOnUiThread(() -> {
 
-
+                nroCebaderos.setNroRoedoresCapturados(tiRoedores.getText().toString());
+                nroCebaderos.setNroCebaderosConsumo(tiCebaderosConConsumo.getText().toString());
+                nroCebaderos.setNroCebaderosSucios(tiCebaderosSucios.getText().toString());
+                nroCebaderos.setNroCebaderosInactivos(tiCebaderosInactivos.getText().toString());
                 ArrayList<LamparaGroup> lamparaGroups = new ArrayList<>();
                 for (int i = 0; i < lamparaGroupArrayList.size(); i++) {
                     lamparaGroups.add(new LamparaGroup(lamparaGroupArrayList.get(i).getTipoDeInsecto(),lamparaGroupArrayList.get(i).getLamparaN(),
@@ -586,7 +611,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
                     AppDataBase.getInstance(getContext()).getCebaderoGroupDAO().insertAll(cebaderoGroupsInsert);
-
+                    AppDataBase.getInstance(getContext()).getNroCebaderoDAO().insert(nroCebaderos);
                     getActivity().runOnUiThread(() -> {
 
                         Toast.makeText(getContext(),"Inserto exitoso",Toast.LENGTH_LONG).show();
@@ -600,6 +625,10 @@ public class CrearOrdenInspeccionFragment extends Fragment {
 
     public void actualizarLamparaGroup(int position, LamparaGroup lamparaGroup) {
         lamparaGroupArrayList.set(position,lamparaGroup);
+        llenarAdapterLampara();
+    }
+   public void agregarLampara(LamparaGroup lamparaGroup) {
+        lamparaGroupArrayList.add(lamparaGroup);
         llenarAdapterLampara();
     }
 
@@ -635,8 +664,11 @@ public class CrearOrdenInspeccionFragment extends Fragment {
     }
 
     public void actualizarCebadero(int position, CebaderoGroup cebaderoGroup) {
-
         cebaderoGroups.set(position,cebaderoGroup);
+        llenarAdapterCebadero();
+    }
+    public void insertarCebadero( CebaderoGroup cebaderoGroup) {
+        cebaderoGroups.add(cebaderoGroup);
         llenarAdapterCebadero();
     }
 
@@ -646,7 +678,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
     }
 
     public void abrirCustomDialogCebadero(int position) {
-        final CustomDialogCebaderos dialog = new CustomDialogCebaderos(this, position,cebaderoGroups == null ? null : cebaderoGroups.get(position),
+        final CustomDialogCebaderos dialog = new CustomDialogCebaderos(this, position,position == -1 ? null : cebaderoGroups.get(position),
                 idOrden, (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
         dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
     }

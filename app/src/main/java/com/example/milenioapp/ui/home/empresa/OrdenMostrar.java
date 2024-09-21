@@ -7,14 +7,24 @@ public class OrdenMostrar {
     private long horaSalida;
     private String estadoEnvio;
     private long fechaInicio;
+    private String tipoOrden;
 
-    public OrdenMostrar(long id, String nombre, long horaEntrada, long horaSalida, String estadoEnvio, long fechaInicio) {
+    public OrdenMostrar(long id, String nombre, long horaEntrada, long horaSalida, String estadoEnvio, long fechaInicio,String tipoOrden) {
         this.id = id;
         this.nombre = nombre;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
         this.estadoEnvio = estadoEnvio;
         this.fechaInicio = fechaInicio;
+        this.tipoOrden = tipoOrden;
+    }
+
+    public String getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(String tipoOrden) {
+        this.tipoOrden = tipoOrden;
     }
 
     public long getId() {

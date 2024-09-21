@@ -123,7 +123,7 @@
                     android:id="@+id/tiObservaciones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     style="@style/CustomTextStyle"
                     android:textColor="@color/black" />
 

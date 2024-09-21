@@ -100,7 +100,16 @@ public class EmpresaDetalleFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putLong("id", cliente.getId());
                         bundle.putLong("idOrden", ordenArrayList.get(position).getId());
-                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
+                        switch (ordenArrayList.get(position).getTipoOrden()){
+                            case "S":
+                                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenFragment, bundle);
+                                break;
+                            case "I":
+                                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenInspeccionFragment, bundle);
+                                break;
+                            default:
+                                return;
+                        }
                     }
                 },ordenArrayList);
 

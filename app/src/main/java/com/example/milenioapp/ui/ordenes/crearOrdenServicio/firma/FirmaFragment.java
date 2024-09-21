@@ -176,10 +176,18 @@ public class FirmaFragment extends DialogFragment {
                     if(instancia instanceof  CrearOrdenServicioFragment) {
                         ((CrearOrdenServicioFragment) instancia).guardarFirmaAcompa(bitmap);
                     }
+
+                    if(instancia instanceof  CrearOrdenInspeccionFragment) {
+                        ((CrearOrdenInspeccionFragment) instancia).guardarFirmaAcompa(bitmap);
+                    }
                 }else{
 
                     if(instancia instanceof  CrearOrdenServicioFragment) {
                         ((CrearOrdenServicioFragment) instancia).guardarFirmaOperario(bitmap);
+                    }
+
+                    if(instancia instanceof  CrearOrdenInspeccionFragment) {
+                        ((CrearOrdenInspeccionFragment) instancia).guardarFirmaOperario(bitmap);
                     }
                 }
 

@@ -463,6 +463,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHigiene"
                 android:layout_width="match_parent"
+                android:minHeight="200dp"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btnAgregarAreaLocativa"

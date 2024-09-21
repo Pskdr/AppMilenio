@@ -94,8 +94,9 @@ public class CustomDialogLampara extends DialogFragment {
                             tiUbicacion.getText().toString(),Integer.parseInt(tiCantidad.getText().toString()),
                             tiObservaciones.getText().toString(),idOrden);
 
-                    crearOrdenInspeccionFragment.actualizarLamparaGroup(position,lamparaGroup);
+                    crearOrdenInspeccionFragment.agregarLampara(lamparaGroup);
 
+                    dismiss();
                 }
             });
         }
@@ -115,7 +116,7 @@ public class CustomDialogLampara extends DialogFragment {
         tiTipoDeInsecto.setText(lamparaGroup.getTipoDeInsecto());
         tiLamparaNro.setText(lamparaGroup.getLamparaN());
         tiUbicacion.setText(lamparaGroup.getUbicacionLampara());
-        tiCantidad.setText(lamparaGroup.getCantadidadEncontrada());
+        tiCantidad.setText(lamparaGroup.getCantadidadEncontrada() + "");
         tiObservaciones.setText(lamparaGroup.getObservaciones());
 
         btnGuardar.setOnClickListener(view -> {
@@ -132,7 +133,7 @@ public class CustomDialogLampara extends DialogFragment {
         });
     }
     private boolean validarDatos() {
-        if(tiTipoDeInsecto.getText().toString().equals("") || tiLamparaNro.getText().toString().equals("") || tiUbicacion.getText().toString().equals("") || tiCantidad.getText().toString().equals("") || tiObservaciones.getText().toString().equals("")){
+        if(tiTipoDeInsecto.getText().toString().equals("") || tiLamparaNro.getText().toString().equals("") || tiUbicacion.getText().toString().equals("") || tiCantidad.getText().toString().equals("")){
             errorText.setText("ERROR FALTA UN DATO");
             errorText.setVisibility(View.VISIBLE);
             return false;
