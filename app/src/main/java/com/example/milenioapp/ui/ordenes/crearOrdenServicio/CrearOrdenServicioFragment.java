@@ -348,7 +348,7 @@ public class CrearOrdenServicioFragment extends Fragment {
                         if (orden == null){
                             Calendar calendar = Calendar.getInstance();
                             orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
-                                    0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
+                                    cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                     horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
                                     tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),
                                     utilities.bitMapToString(firmaAyudante),tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"S","N");
@@ -611,7 +611,7 @@ public class CrearOrdenServicioFragment extends Fragment {
                     if (orden == null){
                        Calendar calendar2 = Calendar.getInstance();
                         orden = new Orden(0,calendar2.getTimeInMillis(),calendar2.getTimeInMillis(),
-                                0,0,cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
+                                cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                 horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
                                 tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante)
                                 ,tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"S","N");

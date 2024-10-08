@@ -353,7 +353,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                         if (orden == null){
                             Calendar calendar = Calendar.getInstance();
                             orden = new Orden(0,calendar.getTimeInMillis(),calendar.getTimeInMillis(),
-                                    0,0,cliente.getId(),utilities.generarSerial(),"",
+                                    cliente.getId(),utilities.generarSerial(),"",
                                     0,0, Objects.requireNonNull(tiObservaciones.getText()).toString(),
                                     Objects.requireNonNull(tiCorrectivos.getText()).toString(),utilities.bitMapToString(firmaOperario),
                                     utilities.bitMapToString(firmaAyudante),"","","I","N");

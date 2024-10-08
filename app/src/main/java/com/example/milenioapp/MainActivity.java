@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import android.provider.Settings.Secure;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnIngresar;
@@ -109,10 +111,12 @@ public class MainActivity extends AppCompatActivity {
         List<TecnicaAplicacion> tecnicaAplicacionList = new ArrayList<>();
         tecnicaAplicacionList.add(new TecnicaAplicacion(0,"ASPERSION","",0));
         tecnicaAplicacionList.add(new TecnicaAplicacion(1,"DISOLUCIÓN","",0));
-
+        String uuid = Secure.getString(this.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+        Usuario usuario = new Usuario(0,"correo@ejemplo.com","Olga Cecilia","",uuid,"A");
         new Thread(() -> {
 
-            AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
+            //AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
+            AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insert(usuario);
             AppDataBase.getInstance(getApplicationContext()).getZonaDAO().insertAll(zonaList);
             AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
             AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);

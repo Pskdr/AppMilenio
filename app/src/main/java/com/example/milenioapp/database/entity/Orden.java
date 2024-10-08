@@ -11,8 +11,6 @@ public class Orden {
     private long idEmpleado;
     private long fechaInicio;
     private long fechaUsuario;
-    private long idCebadero;
-    private long idFactura;
     private long idUsuario;
     private String serial;
     private String operario;
@@ -27,14 +25,12 @@ public class Orden {
     private String estadoEnvio;
     private String tipoOrden; //S (servicio) - I (Inspección)
 
-    public Orden(long idEmpleado, long fechaInicio, long fechaUsuario, long idCebadero, long idFactura, long idUsuario, String serial, String operario,
+    public Orden(long idEmpleado, long fechaInicio, long fechaUsuario, long idUsuario, String serial, String operario,
                  long horaIngreso, long horaSalida, String observacionesTecnicas, String correctivos, String firmaOperario,
                  String firmaAyudante, String tipoServicio,String objetivoDelServicio,String tipoOrden,String estadoEnvio) {
         this.idEmpleado = idEmpleado;
         this.fechaInicio = fechaInicio;
         this.fechaUsuario = fechaUsuario;
-        this.idCebadero = idCebadero;
-        this.idFactura = idFactura;
         this.idUsuario = idUsuario;
         this.serial = serial;
         this.operario = operario;
@@ -176,22 +172,6 @@ public class Orden {
 
     public void setFechaUsuario(long fechaUsuario) {
         this.fechaUsuario = fechaUsuario;
-    }
-
-    public long getIdCebadero() {
-        return idCebadero;
-    }
-
-    public void setIdCebadero(long idCebadero) {
-        this.idCebadero = idCebadero;
-    }
-
-    public long getIdFactura() {
-        return idFactura;
-    }
-
-    public void setIdFactura(long idFactura) {
-        this.idFactura = idFactura;
     }
 
     public long getIdUsuario() {

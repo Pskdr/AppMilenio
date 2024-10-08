@@ -16,12 +16,33 @@ public class Usuario {
     private String nombre;
     @NonNull
     private String password;
+    private String idDevice;
+    private String aprobado;
 
-    public Usuario(long id, @NonNull String correo,String nombre, @NonNull String password) {
+    public Usuario(long id, @NonNull String correo,String nombre, @NonNull String password,
+                   @NonNull String idDevice, String aprobado) {
         this.id = id;
         this.correo = correo;
         this.nombre = nombre;
         this.password = password;
+        this.idDevice = idDevice;
+        this.aprobado = aprobado;
+    }
+
+    public String getIdDevice() {
+        return idDevice;
+    }
+
+    public void setIdDevice(String idDevice) {
+        this.idDevice = idDevice;
+    }
+
+    public String getAprobado() {
+        return aprobado;
+    }
+
+    public void setAprobado(String aprobado) {
+        this.aprobado = aprobado;
     }
 
     public String getNombre() {
