@@ -6,14 +6,13 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "Insectos")
 public class Insecto {
 
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     private long id;
 
     private String descripcion;
     private long idTipoInsecto;
 
-    public Insecto(long id, String descripcion, long idTipoInsecto) {
-        this.id = id;
+    public Insecto( String descripcion, long idTipoInsecto) {
         this.descripcion = descripcion;
         this.idTipoInsecto = idTipoInsecto;
     }

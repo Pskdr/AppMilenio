@@ -92,4 +92,9 @@
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.CrearOrdenInspeccionFragment"
         android:label="Orden inspección"
         tools:layout="@layout/fragment_crear_orden_inspeccion" />
+    <fragment
+        android:id="@+id/agregarDatosFragment"
+        android:name="com.example.milenioapp.ui.agregarDatos.AgregarDatosFragment"
+        android:label="Agregar datos"
+        tools:layout="@layout/fragment_agregar_datos" />
 </navigation>

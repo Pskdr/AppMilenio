@@ -3,6 +3,7 @@ package com.example.milenioapp;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,19 +25,28 @@ import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
 import com.example.milenioapp.database.entity.Usuario;
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.utilidades.LoginTask;
+import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.*;
+
 import android.provider.Settings.Secure;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnIngresar;
     public String strDevice = "";
     private TextView tvRegistro;
+    private static final String LOGIN_URL = "http://192.168.56.1:3000/api/usuario/login"; 
 
     private ArrayList<String> permissionsList;
     String[] permissionsStr = {android.Manifest.permission.CAMERA,
@@ -43,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             android.Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.POST_NOTIFICATIONS};
     private int permissionsCount = 0;
+    private TextInputEditText ticorreo, tiPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +63,24 @@ public class MainActivity extends AppCompatActivity {
 
         btnIngresar = findViewById(R.id.btnIniciarsesion);
         tvRegistro = findViewById(R.id.tvRegistro);
+        ticorreo = findViewById(R.id.tiCorreo);
+        tiPassword = findViewById(R.id.tiPassword);
 
-        btnIngresar.setOnClickListener(view ->  {
-            Intent intent = new Intent(MainActivity.this, MainMenu.class);
+        btnIngresar.setOnClickListener(view -> {
 
-            Bundle miBundle = new Bundle();
-            miBundle.putString("device", strDevice);
-            intent.putExtras(miBundle);
-            startActivity(intent);
-            finish();
+            if (validarDatos()) {
+                Intent intent = new Intent(MainActivity.this, MainMenu.class);
+
+                Bundle miBundle = new Bundle();
+                miBundle.putString("device", strDevice);
+                intent.putExtras(miBundle);
+                //startActivity(intent);
+                //finish();
+
+                String uuid = Settings.Secure.getString(this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                loginUsuario(ticorreo.getText().toString(), tiPassword.getText().toString(),uuid);
+            }
+
         });
 
         tvRegistro.setOnClickListener(view -> {
@@ -79,38 +101,46 @@ public class MainActivity extends AppCompatActivity {
         askForPermissions(permissionsList);
     }
 
+    private boolean validarDatos() {
+        if (ticorreo.getText().toString().equals("") || tiPassword.getText().toString().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void insertarDatosIniciales() {
         List<Zona> zonaList = new ArrayList<>();
-        zonaList.add(new Zona(0, "Sala vísceras blancas Sifón", "E1",0));
-        zonaList.add(new Zona(1, "Lockers", "E2",0));
-        zonaList.add(new Zona(2, "Oficinas", "E3",0));
-        zonaList.add(new Zona(3, "Baños", "E4",0));
+        zonaList.add(new Zona(0, "Sala vísceras blancas Sifón", "E1", 0));
+        zonaList.add(new Zona(1, "Lockers", "E2", 0));
+        zonaList.add(new Zona(2, "Oficinas", "E3", 0));
+        zonaList.add(new Zona(3, "Baños", "E4", 0));
 
         List<Higiene> higieneList = new ArrayList<>();
-        higieneList.add(new Higiene(0, "Area libre de residuos" ,0));
-        higieneList.add(new Higiene(1, "Area sin acumulación de basura" ,0));
-        higieneList.add(new Higiene(2, "Zona sucia sifón", 0));
-        higieneList.add(new Higiene(3, "Baños", 0));
-        higieneList.add(new Higiene(4, "Areas comunes", 0));
+        higieneList.add(new Higiene( "Area libre de residuos", 0));
+        higieneList.add(new Higiene( "Area sin acumulación de basura", 0));
+        higieneList.add(new Higiene( "Zona sucia sifón", 0));
+        higieneList.add(new Higiene( "Baños", 0));
+        higieneList.add(new Higiene( "Areas comunes", 0));
 
         List<Insecto> insectoList = new ArrayList<>();
-        insectoList.add(new Insecto(0,"CUCARACHA AMERICANA",0));
-        insectoList.add(new Insecto(1,"CUCARACHA ALEMANA",0));
-        insectoList.add(new Insecto(2,"HORMIGAS",1));
-        insectoList.add(new Insecto(3,"ROEDORES",1));
-        insectoList.add(new Insecto(4,"PULGAS",1));
-        insectoList.add(new Insecto(5,"CHINCHE",0));
-        insectoList.add(new Insecto(6,"MOSCAS",0));
+        insectoList.add(new Insecto( "CUCARACHA AMERICANA", 0));
+        insectoList.add(new Insecto( "CUCARACHA ALEMANA", 0));
+        insectoList.add(new Insecto( "HORMIGAS", 1));
+        insectoList.add(new Insecto( "ROEDORES", 1));
+        insectoList.add(new Insecto( "PULGAS", 1));
+        insectoList.add(new Insecto( "CHINCHE", 0));
+        insectoList.add(new Insecto("MOSCAS", 0));
 
         List<ElementoUtilizado> elementoUtilizadoList = new ArrayList<>();
-        elementoUtilizadoList.add(new ElementoUtilizado(0,"Banda de neopreno"));
-        elementoUtilizadoList.add(new ElementoUtilizado(1,"Mallas"));
-        elementoUtilizadoList.add(new ElementoUtilizado(2,"Trampas adhesivas"));
-        elementoUtilizadoList.add(new ElementoUtilizado(3,"Insecticidas"));
+        elementoUtilizadoList.add(new ElementoUtilizado( "Banda de neopreno"));
+        elementoUtilizadoList.add(new ElementoUtilizado( "Mallas"));
+        elementoUtilizadoList.add(new ElementoUtilizado( "Trampas adhesivas"));
+        elementoUtilizadoList.add(new ElementoUtilizado( "Insecticidas"));
 
         List<TecnicaAplicacion> tecnicaAplicacionList = new ArrayList<>();
-        tecnicaAplicacionList.add(new TecnicaAplicacion(0,"ASPERSION","",0));
-        tecnicaAplicacionList.add(new TecnicaAplicacion(1,"DISOLUCIÓN","",0));
+        tecnicaAplicacionList.add(new TecnicaAplicacion(0, "ASPERSION", "", 0));
+        tecnicaAplicacionList.add(new TecnicaAplicacion(1, "DISOLUCIÓN", "", 0));
         String uuid = Secure.getString(this.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
         Usuario usuario = new Usuario(0,"correo@ejemplo.com","Olga Cecilia","",uuid,"A");
         new Thread(() -> {
@@ -141,12 +171,13 @@ public class MainActivity extends AppCompatActivity {
             ///showPermissionDialog();
         }
     }
+
     ActivityResultLauncher<String[]> permissionsLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
                     new ActivityResultCallback<Map<String, Boolean>>() {
                         @RequiresApi(api = Build.VERSION_CODES.M)
                         @Override
-                        public void onActivityResult(Map<String,Boolean> result) {
+                        public void onActivityResult(Map<String, Boolean> result) {
 
                             ArrayList<Boolean> list = new ArrayList<>(result.values());
                             permissionsList = new ArrayList<>();
@@ -154,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < list.size(); i++) {
                                 if (shouldShowRequestPermissionRationale(permissionsStr[i])) {
                                     permissionsList.add(permissionsStr[i]);
-                                }else if (!hasPermission(MainActivity.this, permissionsStr[i])){
+                                } else if (!hasPermission(MainActivity.this, permissionsStr[i])) {
                                     permissionsCount++;
                                 }
                             }
@@ -177,15 +208,15 @@ public class MainActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
 
-                if(usuario != null){
+                if (usuario != null) {
                     Intent intent = new Intent(MainActivity.this, MainMenu.class);
                     Bundle miBundle = new Bundle();
                     miBundle.putString("device", strDevice);
-                    miBundle.putLong("id",usuario.getId());
+                    miBundle.putLong("id", usuario.getId());
                     intent.putExtras(miBundle);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     insertarDatosIniciales();
                 }
 
@@ -193,8 +224,82 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
     }
+
     private boolean hasPermission(Context context, String permissionStr) {
         return ContextCompat.checkSelfPermission(context, permissionStr) == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+
+    private void loginUsuario(String correo, String password, String strDevice) {
+        OkHttpClient client = new OkHttpClient();
+
+        // Crear el cuerpo de la solicitud (payload JSON)
+        JSONObject loginData = new JSONObject();
+        try {
+            loginData.put("correo", correo);
+            loginData.put("password", password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(loginData.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        // Crear la solicitud POST
+        Request request = new Request.Builder()
+                .url(LOGIN_URL)
+                .post(body)
+                .build();
+
+        // Ejecutar la solicitud en un hilo separado
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+                e.printStackTrace();
+                // Manejar el error de la solicitud fallida
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                // Manejar la respuesta del servidor
+                if (response.isSuccessful()) {
+                    // Si la respuesta es exitosa
+                    String responseData = response.body().string();
+                    runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(responseData);
+                            String mensaje = jsonResponse.getString("mensaje");
+
+                            // Verificar si el login es exitoso
+                            if (mensaje.equals("Login exitoso")) {
+
+                                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+
+                                Bundle miBundle = new Bundle();
+                                miBundle.putString("device", strDevice);
+                                intent.putExtras(miBundle);
+                                startActivity(intent);
+                                finish();
+
+                            } else {
+                                // Si el login falla
+                                Toast.makeText(MainActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                } else {
+                    // Si la respuesta no es exitosa (error en login)
+                    runOnUiThread(() -> {
+                        Toast.makeText(MainActivity.this, "Login fallido: " + response.message(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+        });
     }
 
 }

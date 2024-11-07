@@ -12,8 +12,7 @@ public class Higiene {
     private String nombre;
     private long idTipoOrden;
 
-    public Higiene(long id, String nombre,long idTipoOrden) {
-        this.id = id;
+    public Higiene( String nombre,long idTipoOrden) {
         this.nombre = nombre;
         this.idTipoOrden = idTipoOrden;
     }

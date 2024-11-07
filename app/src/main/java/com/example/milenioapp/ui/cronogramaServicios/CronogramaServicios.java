@@ -42,7 +42,7 @@ public class CronogramaServicios extends Fragment {
 
         tvFecha.setText(fecha);
 
-        llenarAdapterCronograma();
+        //llenarAdapterCronograma();
         return view;
     }
 

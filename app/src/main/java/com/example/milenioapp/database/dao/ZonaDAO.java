@@ -41,4 +41,6 @@ public interface ZonaDAO {
 
     @Query("select * from zonas where id = :idZona")
     Zona getById(long idZona);
+    @Query("select count(*) from zonas")
+    long getZonaCount();
 }

@@ -124,9 +124,6 @@ public class EmpresaDetalleFragment extends Fragment {
         empresaArrayList.clear();
         empresaArrayList.add(new Empresa(0, "Fomato de orden"));
         empresaArrayList.add(new Empresa(1, "Fomato de inspección"));
-        empresaArrayList.add(new Empresa(2, "Fomato de inspección #2 planta"));
-        empresaArrayList.add(new Empresa(3, "Fomato de arreglos locativos"));
-        empresaArrayList.add(new Empresa(4, "Fomato de desinfección"));
         abierto = true;
 
         adapterEmpresa = new AdapterOpciones(new AdapterOpciones.onItemListener() {

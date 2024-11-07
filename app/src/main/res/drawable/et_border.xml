@@ -1,0 +1,13 @@
+<!-- res/drawable/border_radius_box.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Color de fondo (opcional) -->
+    <solid android:color="#FFFFFF" /> <!-- Cambia este color si necesitas un fondo distinto -->
+
+    <!-- Bordes y color del borde -->
+    <stroke
+        android:width="2dp"
+        android:color="#000000" /> <!-- Cambia este color y tamaño según tus necesidades -->
+
+    <!-- Radio de las esquinas -->
+    <corners android:radius="10dp" /> <!-- Ajusta el radio como necesites -->
+</shape>

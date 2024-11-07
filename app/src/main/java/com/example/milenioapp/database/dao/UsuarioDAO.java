@@ -23,6 +23,5 @@ public interface UsuarioDAO {
     @Update
     void update(Usuario usuario);
 
-    @Query("insert into usuarios values (0,'correo@ejemplo.com','Olga Cecilia','')")
-    void insertDatos();
+
 }

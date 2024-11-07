@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrarse.setOnClickListener(view -> {
             Intent intent = new Intent(RegisterActivity.this, MainMenu.class);
             if(validarDatos()){
-                Usuario usuario = new Usuario(0,tiCorreo.getText().toString(),tiNombre.getText().toString(),tiPassword.getText().toString());
+                String uuid = Settings.Secure.getString(this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                Usuario usuario = new Usuario(0,tiCorreo.getText().toString(),tiNombre.getText().toString(),tiPassword.getText().toString(),uuid,"P");
                 new Thread(() -> {
                     AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insert(usuario);
                     runOnUiThread(() -> {

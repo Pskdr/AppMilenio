@@ -6,13 +6,12 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ElementosUtilizados")
 public class ElementoUtilizado {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     @NonNull
     private String descripcion;
 
-    public ElementoUtilizado(long id, @NonNull String descripcion) {
-        this.id = id;
+    public ElementoUtilizado(@NonNull String descripcion) {
         this.descripcion = descripcion;
     }
 
