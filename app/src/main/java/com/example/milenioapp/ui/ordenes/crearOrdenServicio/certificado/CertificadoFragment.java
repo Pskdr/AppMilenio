@@ -41,11 +41,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CertificadoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CertificadoFragment extends Fragment {
 
 
@@ -238,6 +233,8 @@ public class CertificadoFragment extends Fragment {
             pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pdfIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+            acutualizarOrden(orden,fileContent);
             try{
                 startActivity(pdfIntent);
             }catch(ActivityNotFoundException e){
@@ -256,6 +253,17 @@ public class CertificadoFragment extends Fragment {
             getActivity().onBackPressed();
 
         }
+    }
+
+    private void acutualizarOrden(Orden orden, byte[] fileContent) {
+
+        orden.setPdfGenerado(fileContent);
+
+        new Thread(() -> {
+
+            AppDataBase.getInstance(getContext()).getOrdenDAO().update(orden);
+
+        }).start();
     }
 
 }

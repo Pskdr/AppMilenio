@@ -27,6 +27,7 @@ import com.example.milenioapp.database.entity.InsectoGroup;
 import com.example.milenioapp.database.entity.LamparaGroup;
 import com.example.milenioapp.database.entity.NroCebaderos;
 import com.example.milenioapp.database.entity.Orden;
+import com.example.milenioapp.ui.home.empresa.OrdenMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.cebaderos.AdapterCebaderos;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.cebaderos.CustomDialogCebaderos;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.lamparas.AdapterLamparas;
@@ -126,6 +127,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         if(idOrden != -1){
             obtenerEmpresa(id, idOrden);
         }else{
+            //No se seleccionó previamente nada
             obtenerEmpresa(id);
         }
         btnAgregarEspecie.setOnClickListener(v ->{
@@ -184,11 +186,14 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             tiObservaciones.setText(orden.getObservacionesTecnicas());
             tiCorrectivos.setText(orden.getCorrectivos());
 
+            /*
             traerDatosNroCebaderos(orden);
             traerLamparasAgregadas(orden);
             traerDatosHigiene(orden);
             traerDatosEspecies(orden);
             traerDatosCebaderos(orden);
+
+             */
 
             if(orden.getEstadoEnvio().equals("E")){
                 tiObservaciones.setEnabled(false);
@@ -356,7 +361,10 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                                     cliente.getId(),utilities.generarSerial(),"",
                                     0,0, Objects.requireNonNull(tiObservaciones.getText()).toString(),
                                     Objects.requireNonNull(tiCorrectivos.getText()).toString(),utilities.bitMapToString(firmaOperario),
-                                    utilities.bitMapToString(firmaAyudante),"","","I","N");
+                                    utilities.bitMapToString(firmaAyudante),"","","I","N",
+                                    null);
+
+
                             insertarOrdenNueva(orden);
                         }
                     }
@@ -681,5 +689,21 @@ public class CrearOrdenInspeccionFragment extends Fragment {
         final CustomDialogCebaderos dialog = new CustomDialogCebaderos(this, position,position == -1 ? null : cebaderoGroups.get(position),
                 idOrden, (orden != null ? (orden.getEstadoEnvio().equals("S") ? true : false ) : false));
         dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
+    }
+
+    public void traerDatosAnterior(OrdenMostrar seleccionado) {
+        new Thread(() -> {
+
+        }).start();
+
+    }
+
+    public void llenarDatosNormal() {
+
+        traerDatosNroCebaderos(orden);
+        traerLamparasAgregadas(orden);
+        traerDatosHigiene(orden);
+        traerDatosEspecies(orden);
+        traerDatosCebaderos(orden);
     }
 }

@@ -351,7 +351,8 @@ public class CrearOrdenServicioFragment extends Fragment {
                                     cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                     horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
                                     tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),
-                                    utilities.bitMapToString(firmaAyudante),tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"S","N");
+                                    utilities.bitMapToString(firmaAyudante),tipoDeServicio,tiObjetivoDelServicio.getText().toString(),
+                                    "S","N",null);
                             insertarOrdenNueva(orden);
                         }
                     }
@@ -614,7 +615,7 @@ public class CrearOrdenServicioFragment extends Fragment {
                                 cliente.getId(),utilities.generarSerial(),tiOperario.getText().toString(),
                                 horaEntrada.getTimeInMillis(),horaSalida.getTimeInMillis(),tiObservaciones.getText().toString(),
                                 tiCorrectivos.getText().toString(),utilities.bitMapToString(firmaOperario),utilities.bitMapToString(firmaAyudante)
-                                ,tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"S","N");
+                                ,tipoDeServicio,tiObjetivoDelServicio.getText().toString(),"S","N",null);
                         insertarOrdenNueva(orden);
                     }else{
                         orden.setOperario(tiOperario.getText().toString());

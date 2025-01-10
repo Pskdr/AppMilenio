@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
             android.Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.POST_NOTIFICATIONS};
     private int permissionsCount = 0;
-    private TextInputEditText ticorreo, tiPassword;
+    public TextInputEditText ticorreo;
+    public TextInputEditText tiPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         askForPermissions(permissionsList);
     }
 
-    private boolean validarDatos() {
+    public boolean validarDatos() {
         if (ticorreo.getText().toString().equals("") || tiPassword.getText().toString().equals("")) {
             return false;
         } else {

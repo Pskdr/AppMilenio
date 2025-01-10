@@ -23,11 +23,13 @@ public class Orden {
     private String tipoServicio;
     private String objetivoDelServicio;
     private String estadoEnvio;
-    private String tipoOrden; //S (servicio) - I (Inspección)
+    private String tipoOrden; //S (servicio) - I (Inspección)+
+    private byte[] pdfGenerado;
 
     public Orden(long idEmpleado, long fechaInicio, long fechaUsuario, long idUsuario, String serial, String operario,
                  long horaIngreso, long horaSalida, String observacionesTecnicas, String correctivos, String firmaOperario,
-                 String firmaAyudante, String tipoServicio,String objetivoDelServicio,String tipoOrden,String estadoEnvio) {
+                 String firmaAyudante, String tipoServicio,String objetivoDelServicio,String tipoOrden,String estadoEnvio,
+                 byte[] pdfGenerado) {
         this.idEmpleado = idEmpleado;
         this.fechaInicio = fechaInicio;
         this.fechaUsuario = fechaUsuario;
@@ -44,6 +46,15 @@ public class Orden {
         this.objetivoDelServicio = objetivoDelServicio;
         this.tipoOrden = tipoOrden;
         this.estadoEnvio = estadoEnvio;
+        this.pdfGenerado = pdfGenerado;
+    }
+
+    public byte[] getPdfGenerado() {
+        return pdfGenerado;
+    }
+
+    public void setPdfGenerado(byte[] pdfGenerado) {
+        this.pdfGenerado = pdfGenerado;
     }
 
     public String getTipoOrden() {

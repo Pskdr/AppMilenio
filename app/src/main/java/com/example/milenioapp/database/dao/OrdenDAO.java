@@ -26,4 +26,8 @@ public interface OrdenDAO {
     @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio," +
             "fechaInicio, tipoOrden from ordenes")
     List<OrdenMostrar> getAllMostrar();
+
+    @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio," +
+            "fechaInicio, tipoOrden from ordenes  order by id DESC")
+    List<OrdenMostrar> getAllByDate();
 }
