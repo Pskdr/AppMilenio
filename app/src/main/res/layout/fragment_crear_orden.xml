@@ -414,7 +414,7 @@
             <Button
                 android:id="@+id/btnAgregarZona"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -448,7 +448,7 @@
                 android:id="@+id/btnAgregarAreaLocativa"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -505,8 +505,7 @@
             <Button
                 android:id="@+id/btnAgregarEspecie"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_gravity="left"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -535,8 +534,7 @@
             <Button
                 android:id="@+id/btnAgregarElementeos"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_gravity="left"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

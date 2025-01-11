@@ -77,7 +77,6 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
 
         private final TextView tvOperario,tvHoraIngreso,tvHoraSalida,tvFecha,tvEstadoEnvio,tvTipoOrden;
         private final AdapterOrdenes.onItemListener onItemListener;
-        private final CardView cvCliente;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterOrdenes.onItemListener onItemListener) {
             super(itemView);
@@ -89,7 +88,6 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
             tvEstadoEnvio = itemView.findViewById(R.id.tvEstadoEnvio);
             tvTipoOrden = itemView.findViewById(R.id.tvTipoOrden);
 
-            cvCliente = itemView.findViewById(R.id.cvCliente);
 
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);

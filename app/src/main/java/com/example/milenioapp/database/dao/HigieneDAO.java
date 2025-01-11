@@ -23,6 +23,11 @@ public interface HigieneDAO {
             "from higienesgroup inner join higiene on higiene.id = higienesgroup.idHigiene " +
             "where idOrden = :idOrden")
     List<HygieneItem> getAgregados(long idOrden);
+
+    @Query("select higienesgroup.id as id,higiene.id as idHigiene,higiene.nombre as itemName,higienesgroup.s as s " +
+            "from higienesgroup inner join higiene on higiene.id = higienesgroup.idHigiene " +
+            "where idOrden = :idOrden and s != 'NA'")
+    List<HygieneItem> getAgregadosSinNA(long idOrden);
     @Insert
     long insert(Higiene higiene);
     @Update

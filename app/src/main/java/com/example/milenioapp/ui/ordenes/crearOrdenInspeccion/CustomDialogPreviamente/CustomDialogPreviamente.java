@@ -39,34 +39,24 @@ import java.util.List;
 public class CustomDialogPreviamente extends DialogFragment {
 
     private Fragment instancia;
-    private Cliente cliente;
-    private final long opcion; // Z(0) - H(1) - I(2)
-    private TextView tvAgregarNombre;
     private RecyclerView rvOrdenesAll;
-    private LinearLayout lyTipo;
     private Button btnManual;
 
-    public CustomDialogPreviamente(Fragment instancia, Cliente cliente, long opcion) {
+    public CustomDialogPreviamente(Fragment instancia) {
         this.instancia = instancia;
-        this.cliente = cliente;
-        this.opcion = opcion;
     }
 
-    private Spinner spinnerTipo,spinnerInfestacion;
-
-    private String infestacionNivel;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.custom_dialog_agregar_previamente, container, false);
 
-        tvAgregarNombre = view.findViewById(R.id.tvAgregarNombre);
-        lyTipo = view.findViewById(R.id.lyTipo);
         rvOrdenesAll = view.findViewById(R.id.rvOrdenesAll);
         btnManual = view.findViewById(R.id.btnManual);
 
         btnManual.setOnClickListener((view1) -> {
             ((CrearOrdenInspeccionFragment) instancia).llenarDatosNormal();
+            dismiss();
         });
 
         ((MainMenu) getActivity()).noGirarPantalla();
@@ -83,24 +73,21 @@ public class CustomDialogPreviamente extends DialogFragment {
     private void traerDatos() {
         new Thread(() -> {
 
+            ordenesSeleccionar = (ArrayList<OrdenMostrar>) AppDataBase.getInstance(getContext()).getOrdenDAO().getAllByDate();
+
             getActivity().runOnUiThread(() -> {
+                adapterOrdenes = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
+                    @Override
+                    public void onItemClick(int position) {
 
-                ordenesSeleccionar = (ArrayList<OrdenMostrar>) AppDataBase.getInstance(getContext()).getOrdenDAO().getAllByDate();
+                        seleccionado = ordenesSeleccionar.get(position);
 
-                getActivity().runOnUiThread(() -> {
+                        ((CrearOrdenInspeccionFragment) instancia).traerDatosAnterior(seleccionado);
+                        dismiss();
+                    }
+                },ordenesSeleccionar);
 
-
-                    adapterOrdenes = new AdapterOrdenes(new AdapterOrdenes.onItemListener() {
-                        @Override
-                        public void onItemClick(int position) {
-
-                            seleccionado = ordenesSeleccionar.get(position);
-
-                            ((CrearOrdenInspeccionFragment) instancia).traerDatosAnterior(seleccionado);
-                        }
-                    },ordenesSeleccionar);
-                });
-
+                rvOrdenesAll.setAdapter(adapterOrdenes);
             });
 
         }).start();

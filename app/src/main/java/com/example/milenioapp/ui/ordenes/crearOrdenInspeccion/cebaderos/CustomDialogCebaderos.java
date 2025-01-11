@@ -219,7 +219,7 @@ public class CustomDialogCebaderos extends DialogFragment {
                 cebaderoGroup.setObservaciones(tiObservaciones.getText().toString());
 
                 crearOrdenInspeccionFragment.actualizarCebadero(position, cebaderoGroup);
-
+                dismiss();
             }
         });
     }
