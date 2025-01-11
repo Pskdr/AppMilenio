@@ -447,7 +447,6 @@
             <Button
                 android:id="@+id/btnAgregarAreaLocativa"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
                 android:layout_gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
