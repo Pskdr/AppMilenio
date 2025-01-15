@@ -71,7 +71,6 @@ public class CrearOrdenServicioFragment extends Fragment {
 
     private Button btnGuardar, btnFirmaAyudante, btnFirmaOperario,btnCertificado;
     private  ArrayList<HygieneItem> hygieneItems;
-    private List<Zona> zonasTratadas;
     private Orden orden;
 
     private TextInputEditText tiEmpresa, tiFecha, tiCliente,
@@ -336,7 +335,6 @@ public class CrearOrdenServicioFragment extends Fragment {
                     dialog.show(getActivity().getSupportFragmentManager(), "Dialogo");
                 });
                 traerZonasDefault();
-                zonasTratadas = new ArrayList<>();
 
                 traerDatosHigiene();
                 traerDatosEspecies();
@@ -793,9 +791,14 @@ public class CrearOrdenServicioFragment extends Fragment {
                 }
 
                 new Thread(() -> {
+
+                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
+                    AppDataBase.getInstance(getContext()).getHigieneGroupDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getInsectoGroupDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
+                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().insertAll(elementoUtilizadoInsert);
 
                     getActivity().runOnUiThread(() -> {

@@ -28,8 +28,9 @@
     <string name="p_gina_1_1">Página 1-1</string>
     <string name="c_digo_fo_gs_03">Código FO-GS-03</string>
     <string name="versi_n_02">Versión 02</string>
-    <string name="inspecci_n_n">Inspección N°</string>
     <string name="lampara_n">Lampara N°</string>
     <string name="n">N°</string>
     <string name="estado">Estado:</string>
+    <string name="inspecci_n_n">Inspección N°</string>
+    <string name="datos">Datos del servicio</string>
 </resources>

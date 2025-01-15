@@ -34,4 +34,7 @@ public interface GrupoZonaDAO {
     void delete(GrupoZona grupoZona);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ArrayList<GrupoZona> grupoZonaInsert);
+
+    @Query("delete from grupozonas where idOrden = :id")
+    void deleteByOrden(long id);
 }

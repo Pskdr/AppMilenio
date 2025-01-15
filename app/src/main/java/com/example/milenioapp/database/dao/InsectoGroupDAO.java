@@ -26,4 +26,7 @@ public interface InsectoGroupDAO {
     void update(InsectoGroup insectoGroup);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ArrayList<InsectoGroup> insectoGroupsInsert);
+
+    @Query("delete from insectosgroup where idOrden = :id")
+    void deleteByOrden(long id);
 }

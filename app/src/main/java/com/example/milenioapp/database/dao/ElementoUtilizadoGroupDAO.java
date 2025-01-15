@@ -28,4 +28,7 @@ public interface ElementoUtilizadoGroupDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ElementoUtilizadoGroup> elementoUtilizadoGroups);
+
+    @Query("delete from elementosutilizadosgroup where idOrden = :id")
+    void deleteByOrden(long id);
 }

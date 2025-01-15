@@ -24,4 +24,7 @@ public interface HigieneGroupDAO {
 
     @Insert( onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<HigieneGroup> higieneGroups);
+
+    @Query("delete from higienesgroup where idOrden =:id")
+    void deleteByOrden(long id);
 }

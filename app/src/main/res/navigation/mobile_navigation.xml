@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_empresaDetalleFragment_to_crearOrdenInspeccionFragment"
             app:destination="@id/crearOrdenInspeccionFragment" />
+        <action
+            android:id="@+id/action_empresaDetalleFragment_to_crearOrdenLocativosFragment"
+            app:destination="@id/crearOrdenLocativosFragment" />
     </fragment>
     <fragment
         android:id="@+id/asignarServicioFragment"
@@ -97,4 +100,9 @@
         android:name="com.example.milenioapp.ui.agregarDatos.AgregarDatosFragment"
         android:label="Agregar datos"
         tools:layout="@layout/fragment_agregar_datos" />
+    <fragment
+        android:id="@+id/crearOrdenLocativosFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrdenLocativos.CrearOrdenLocativosFragment"
+        android:label="fragment_crear_orden_locativos"
+        tools:layout="@layout/fragment_crear_orden_locativos" />
 </navigation>
