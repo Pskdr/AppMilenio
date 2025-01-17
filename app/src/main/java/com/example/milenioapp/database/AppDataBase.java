@@ -22,6 +22,7 @@ import com.example.milenioapp.database.dao.LamparaGroupDAO;
 import com.example.milenioapp.database.dao.NroCebaderosDAO;
 import com.example.milenioapp.database.dao.OrdenDAO;
 import com.example.milenioapp.database.dao.TecnicaAplicacionDAO;
+import com.example.milenioapp.database.dao.TipoClienteDAO;
 import com.example.milenioapp.database.dao.TipoInsectoDAO;
 import com.example.milenioapp.database.dao.UsuarioDAO;
 import com.example.milenioapp.database.dao.ZonaDAO;
@@ -40,6 +41,7 @@ import com.example.milenioapp.database.entity.LamparaGroup;
 import com.example.milenioapp.database.entity.NroCebaderos;
 import com.example.milenioapp.database.entity.Orden;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
+import com.example.milenioapp.database.entity.TipoCliente;
 import com.example.milenioapp.database.entity.TipoInsecto;
 import com.example.milenioapp.database.entity.Usuario;
 import com.example.milenioapp.database.entity.Zona;
@@ -47,7 +49,8 @@ import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class,
         Higiene.class, CebaderoGroup.class, HigieneGroup.class, GrupoZona.class, InsectoGroup.class,
-        ElementoUtilizado.class, ElementoUtilizadoGroup.class, LamparaGroup.class, NroCebaderos.class},
+        ElementoUtilizado.class, ElementoUtilizadoGroup.class, LamparaGroup.class, NroCebaderos.class,
+        TipoCliente.class},
         version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class AppDataBase extends RoomDatabase {
@@ -73,6 +76,8 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract ElementoUtilizadoGroupDAO getElementoUtilizadoGroupDAO();
     public abstract LamparaGroupDAO getLamparoGroupDAO();
     public abstract NroCebaderosDAO getNroCebaderoDAO();
+
+    public abstract TipoClienteDAO getTipoClienteDAO();
 
 
     public static AppDataBase getInstance(Context context) {

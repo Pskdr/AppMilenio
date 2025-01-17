@@ -23,11 +23,14 @@ import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.ElementoUtilizado;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.database.entity.TipoCliente;
 import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.TipoInsectosAgregar;
+import com.example.milenioapp.ui.utilidades.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AgregarDatosFragment extends Fragment {
 
@@ -37,10 +40,10 @@ public class AgregarDatosFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Spinner spinnerTipo;
+    Spinner spinnerTipo, spinnerTipoCliente;
     private long tipoInsecto;
     private Button btnAgregarInsecto, btnAgregarHigiene, btnAgregarZona, btnAgregarElementos;
-    private TextInputEditText tiInsecto, tiHigiene, tiZona,tiAbreviacion,tiElementos;
+    private TextInputEditText tiInsecto, tiHigiene, tiZona, tiElementos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,11 +58,11 @@ public class AgregarDatosFragment extends Fragment {
         tiInsecto = view.findViewById(R.id.tiInsecto);
         tiHigiene = view.findViewById(R.id.tiHigiene);
         tiZona = view.findViewById(R.id.tiZona);
-        tiAbreviacion = view.findViewById(R.id.tiAbreviacion);
         tiElementos = view.findViewById(R.id.tiElementos);
         tiElementos = view.findViewById(R.id.tiElementos);
 
         spinnerTipo = view.findViewById(R.id.spinnerTipo);
+        spinnerTipoCliente = view.findViewById(R.id.spinnerTipoCliente);
         llenarTipoInsecto();
 
         btnAgregarInsecto.setOnClickListener(view1 -> {
@@ -117,7 +120,7 @@ public class AgregarDatosFragment extends Fragment {
             }
         });
         btnAgregarZona.setOnClickListener(view1 -> {
-            if(!tiZona.getText().toString().trim().equals("") && !tiAbreviacion.getText().toString().trim().equals("")  ){
+            if (!tiZona.getText().toString().trim().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Seguro que desea agregar esta zona")
                         .setTitle("Confirmación")
@@ -126,7 +129,7 @@ public class AgregarDatosFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Acción a realizar al aceptar
-                                agregarZona(tiZona.getText().toString(),tiAbreviacion.getText().toString());
+                                agregarZona(tiZona.getText().toString(), tipoClienteId);
                                 dialog.dismiss();// Llamada a la función para agregar el insecto
                             }
                         })
@@ -190,22 +193,16 @@ public class AgregarDatosFragment extends Fragment {
     }
 
     long zonaId;
-    private void agregarZona(String tiZona, String tiAbreviacion) {
-        new Thread(() -> {
 
-            zonaId= AppDataBase.getInstance(getContext()).getZonaDAO().getZonaCount();
+    private void agregarZona(String tiZona, long tipoClienteId) {
+        new Thread(() -> {
+            AppDataBase.getInstance(getContext()).getZonaDAO().insert(new Zona(tiZona, tipoClienteId));
 
             getActivity().runOnUiThread(() -> {
-                new Thread(() -> {
-                    AppDataBase.getInstance(getContext()).getZonaDAO().insert(new Zona(zonaId,tiZona,tiAbreviacion,0));
-
-                    getActivity().runOnUiThread(() -> {
-                        Toast.makeText(getContext(),"Zona agregada con éxito.",Toast.LENGTH_LONG).show();
-                    });
-                }).start();
+                Toast.makeText(getContext(), "Zona agregada con éxito.", Toast.LENGTH_LONG).show();
             });
-
         }).start();
+
     }
 
     private void agregarHigiene(String string) {
@@ -237,7 +234,56 @@ public class AgregarDatosFragment extends Fragment {
             }).start();
     }
 
+    Utilities utilities = new Utilities();
+    private List<TipoCliente> tipoClienteList;
+    private long tipoClienteId;
     private void llenarTipoInsecto() {
+
+        new Thread(() -> {
+
+            tipoClienteList = AppDataBase.getInstance(getContext()).getTipoClienteDAO().getAll();
+
+            getActivity().runOnUiThread(() -> {
+
+                ArrayAdapter<TipoCliente> arrayTipoCliente = new ArrayAdapter<TipoCliente>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tipoClienteList) {
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        TipoCliente producto = getItem(position);
+                        label.setHint(producto.getNombre());
+                        label.setText(utilities.abreviarTexto(producto.getNombre()));
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        TipoCliente producto = getItem(position);
+                        label.setText(producto.getNombre());
+                        return label;
+                    }
+                };
+                spinnerTipoCliente.setAdapter(arrayTipoCliente);
+
+                spinnerTipoCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        tipoClienteId = ((TipoCliente) adapterView.getSelectedItem()).getId();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+            });
+        }).start();
+
         ArrayList<TipoInsectosAgregar> tipoInsectosAgregars = new ArrayList<>();
         tipoInsectosAgregars.add(new TipoInsectosAgregar(0,"Volador"));
         tipoInsectosAgregars.add(new TipoInsectosAgregar(1,"Terrestre"));

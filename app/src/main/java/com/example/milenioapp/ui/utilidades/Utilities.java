@@ -62,6 +62,16 @@ public class Utilities {
 
     }
 
+    public String abreviarTexto(String texto) {
+        // Verificar si el texto tiene más de 12 caracteres
+        if (texto.length() > 12) {
+            // Tomar los primeros 12 caracteres y añadir "..."
+            return texto.substring(0, 12) + "...";
+        }
+        // Si el texto tiene 12 o menos caracteres, retornarlo sin cambios
+        return texto;
+    }
+
     public String spliWith(String texto, int num) {
         String[] split = texto.split(":");
         return (split[num]);

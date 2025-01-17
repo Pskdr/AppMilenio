@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_empresaDetalleFragment_to_crearOrdenLocativosFragment"
             app:destination="@id/crearOrdenLocativosFragment" />
+        <action
+            android:id="@+id/action_empresaDetalleFragment_to_crearOrdenDesinfeccionFragment"
+            app:destination="@id/crearOrdenDesinfeccionFragment" />
     </fragment>
     <fragment
         android:id="@+id/asignarServicioFragment"
@@ -105,4 +108,9 @@
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenLocativos.CrearOrdenLocativosFragment"
         android:label="fragment_crear_orden_locativos"
         tools:layout="@layout/fragment_crear_orden_locativos" />
+    <fragment
+        android:id="@+id/crearOrdenDesinfeccionFragment"
+        android:name="com.example.milenioapp.ui.ordenes.crearOrdenDesinfeccion.CrearOrdenDesinfeccionFragment"
+        android:label="fragment_crear_orden_desinfeccion"
+        tools:layout="@layout/fragment_crear_orden_desinfeccion" />
 </navigation>

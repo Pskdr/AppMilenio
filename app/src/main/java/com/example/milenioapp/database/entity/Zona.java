@@ -7,17 +7,14 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 @Entity(tableName = "Zonas")
 public class Zona {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private long id;
     private String descripcion;
-    private String defalt;
     private long idTipo;
 
-    public Zona(long id, String descripcion, String defalt, long idTipo) {
-        this.id = id;
+    public Zona(String descripcion, long idTipo) {
         this.descripcion = descripcion;
-        this.defalt = defalt;
         this.idTipo = idTipo;
     }
 
@@ -35,14 +32,6 @@ public class Zona {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getDefalt() {
-        return defalt;
-    }
-
-    public void setDefalt(String defalt) {
-        this.defalt = defalt;
     }
 
     public long getIdTipo() {

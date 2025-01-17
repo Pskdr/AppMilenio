@@ -20,9 +20,12 @@ import com.example.milenioapp.MainMenu;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cliente;
+import com.example.milenioapp.database.entity.TipoCliente;
+import com.example.milenioapp.ui.utilidades.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CrearClienteFragment extends Fragment {
 
@@ -61,7 +64,7 @@ public class CrearClienteFragment extends Fragment {
                 if(validarDatos()){
                     Cliente cliente = new Cliente(tiRut.getText().toString(),tiNit.getText().toString(),
                             tiDireccion.getText().toString(),tiTelefono.getText().toString(),tiNombre.getText().toString(),
-                            tiSede.getText().toString(),tiEmail.getText().toString(), tipoSeleccionado.getId());
+                            tiSede.getText().toString(), tiEmail.getText().toString(), tipoSeleccionado);
 
                     ingresarCliente(cliente);
                 }
@@ -75,53 +78,64 @@ public class CrearClienteFragment extends Fragment {
         return view;
     }
 
+    Utilities utilities = new Utilities();
+    private List<TipoCliente> tipoClienteList;
     private void llenarSpinner() {
 
-        ArrayList<TipoEmpresa> tipoEmpresas = new ArrayList<>();
+        new Thread(() -> {
 
-        tipoEmpresas.add(new TipoEmpresa(0, "Carnicería"));
-        ArrayAdapter<TipoEmpresa> arrayAdapter = new ArrayAdapter<TipoEmpresa>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoEmpresas){
+            tipoClienteList = AppDataBase.getInstance(getContext()).getTipoClienteDAO().getAll();
 
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getView(position, convertView, parent);
+            getActivity().runOnUiThread(() -> {
 
-                TipoEmpresa estadoActividad = getItem(position);
-                label.setHint(estadoActividad.getDescripcion());
-                label.setText(estadoActividad.getDescripcion());
+                ArrayAdapter<TipoCliente> arrayAdapter = new ArrayAdapter<TipoCliente>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tipoClienteList) {
 
-                return label;
-            }
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
 
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+                        TipoCliente estadoActividad = getItem(position);
+                        label.setHint(estadoActividad.getNombre());
+                        label.setText(utilities.abreviarTexto(estadoActividad.getNombre()));
 
-                TipoEmpresa estadoActividad = getItem(position);
-                label.setText(estadoActividad.getDescripcion());
+                        return label;
+                    }
 
-                return label;
-            }
-        };
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
-        spinnerTipo.setAdapter(arrayAdapter);
+                        TipoCliente estadoActividad = getItem(position);
+                        label.setText(estadoActividad.getNombre());
 
-        spinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tipoSeleccionado = (TipoEmpresa) adapterView.getSelectedItem();
-            }
+                        return label;
+                    }
+                };
+                spinnerTipo.setAdapter(arrayAdapter);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                spinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        tipoSeleccionado = ((TipoCliente) adapterView.getSelectedItem()).getId();
+                    }
 
-            }
-        });
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
+            });
+        }).start();
+
+
+        ;
 
 
     }
-    private TipoEmpresa tipoSeleccionado;
+
+    private long tipoSeleccionado;
     private void ingresarCliente(Cliente cliente) {
         new Thread(() -> {
 
