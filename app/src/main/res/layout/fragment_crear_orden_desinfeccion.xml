@@ -15,7 +15,7 @@
             android:background="@color/blueMilenio"
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="200px">
+            android:layout_height="80dp">
 
             <LinearLayout
                 android:layout_weight="30"
@@ -425,8 +425,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:paddingLeft="5dp"
-                    android:text="Zona tratada"
+                    android:text="Ambientes y superficies"
                     android:layout_width="wrap_content"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -434,7 +433,7 @@
                     android:layout_height="wrap_content" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvAreas"
+                    android:id="@+id/rvAmbientes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

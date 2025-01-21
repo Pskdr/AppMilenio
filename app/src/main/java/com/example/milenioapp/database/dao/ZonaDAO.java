@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Zona;
+import com.example.milenioapp.ui.ordenes.crearOrdenLocativos.adapterscheck.ObjetoAdapter;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.GrupoZonaMostrar;
 
@@ -43,4 +44,7 @@ public interface ZonaDAO {
     Zona getById(long idZona);
     @Query("select count(*) from zonas")
     long getZonaCount();
+
+    @Query("select id as idPrincipal, 0 as idGroup, descripcion as nombre, 'N' as hallado from zonas")
+    List<ObjetoAdapter> getZonaMostrar();
 }

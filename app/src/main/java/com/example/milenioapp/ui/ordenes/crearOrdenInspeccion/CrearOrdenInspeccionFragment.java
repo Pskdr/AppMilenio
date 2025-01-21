@@ -43,9 +43,6 @@ import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.GrupoZonaMostra
 import com.example.milenioapp.ui.utilidades.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -610,7 +607,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
                 for (int i = 0; i < insectoGroupArrayList.size(); i++) {
                     insectoGroupsInsert.add(new InsectoGroup(orden.getId(),insectoGroupArrayList.get(i).getIdInsecto(),
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
-                    insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getId());
+                    insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getIdInsectoGroup());
                 }
                 ArrayList<CebaderoGroup> cebaderoGroupsInsert = new ArrayList<>();
                 for (int i = 0; i < cebaderoGroups.size(); i++) {

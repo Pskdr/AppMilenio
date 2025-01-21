@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
-import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.Cliente;
 import com.example.milenioapp.database.entity.ElementoUtilizado;
 import com.example.milenioapp.database.entity.ElementoUtilizadoGroup;
@@ -784,7 +783,7 @@ public class CrearOrdenServicioFragment extends Fragment {
                 for (int i = 0; i < insectoGroupArrayList.size(); i++) {
                     insectoGroupsInsert.add(new InsectoGroup(orden.getId(),insectoGroupArrayList.get(i).getIdInsecto(),
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
-                    insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getId());
+                    insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getIdInsectoGroup());
                 }
                 ArrayList<ElementoUtilizadoGroup> elementoUtilizadoInsert = new ArrayList<>();
                 for (int i = 0; i < elementoUtilizadoArray.size(); i++) {

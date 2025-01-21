@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.Insecto;
+import com.example.milenioapp.ui.ordenes.crearOrdenLocativos.adapterscheck.ObjetoAdapter;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.AgregarObjeto;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.insecto.InsectoGroupMostrar;
@@ -46,4 +47,7 @@ public interface InsectoDAO {
 
     @Query("select * from insectos where id = :idInsecto")
     Insecto getById(long idInsecto);
+
+    @Query("select id as idInsecto, 0 as idInsectoGrup, descripcion as nombre, 'N' as hallado from insectos")
+    List<ObjetoAdapter> getPlagaMostrar();
 }

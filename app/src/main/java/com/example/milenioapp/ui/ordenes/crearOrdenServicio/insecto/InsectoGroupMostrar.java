@@ -1,14 +1,14 @@
 package com.example.milenioapp.ui.ordenes.crearOrdenServicio.insecto;
 
 public class InsectoGroupMostrar {
-    private long id;
+    private long idInsectoGroup;
     private String nombre;
     private long idInsecto;
     private String s; //S - N - NA
     private String nivelInfestacion; //ALTO - MEDIO - BAJO
 
-    public InsectoGroupMostrar(long id, String nombre, long idInsecto, String s, String nivelInfestacion) {
-        this.id = id;
+    public InsectoGroupMostrar(long idInsectoGroup, String nombre, long idInsecto, String s, String nivelInfestacion) {
+        this.idInsectoGroup = idInsectoGroup;
         this.nombre = nombre;
         this.idInsecto = idInsecto;
         this.s = s;
@@ -32,12 +32,12 @@ public class InsectoGroupMostrar {
         this.s = s;
     }
 
-    public long getId() {
-        return id;
+    public long getIdInsectoGroup() {
+        return idInsectoGroup;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdInsectoGroup(long idInsectoGroup) {
+        this.idInsectoGroup = idInsectoGroup;
     }
 
     public String getNombre() {

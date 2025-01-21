@@ -22,7 +22,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.milenioapp.database.AppDataBase;
+import com.example.milenioapp.database.entity.Ambiente;
 import com.example.milenioapp.database.entity.ElementoUtilizado;
+import com.example.milenioapp.database.entity.Hallazgo;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.TecnicaAplicacion;
@@ -273,10 +275,16 @@ public class MainActivity extends AppCompatActivity {
         insectoList.add(new Insecto("MOSCAS", 0));
 
         List<ElementoUtilizado> elementoUtilizadoList = new ArrayList<>();
-        elementoUtilizadoList.add(new ElementoUtilizado( "Banda de neopreno"));
-        elementoUtilizadoList.add(new ElementoUtilizado( "Mallas"));
-        elementoUtilizadoList.add(new ElementoUtilizado( "Trampas adhesivas"));
-        elementoUtilizadoList.add(new ElementoUtilizado( "Insecticidas"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Alambre"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Banda de Neopreno"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Malla Inoxidable"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Malla plástica"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Bisel de Aluminio"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Rejillas"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Cemento"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Resinas"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Silicona"));
+        elementoUtilizadoList.add(new ElementoUtilizado("Otros"));
 
         List<TecnicaAplicacion> tecnicaAplicacionList = new ArrayList<>();
         tecnicaAplicacionList.add(new TecnicaAplicacion(0, "ASPERSION", "", 0));
@@ -288,6 +296,43 @@ public class MainActivity extends AppCompatActivity {
         tecnicaAplicacionList.add(new TecnicaAplicacion(6, "APLICACION GEL", "", 0));
         String uuid = Secure.getString(this.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
         Usuario usuario = new Usuario(0,"correo@ejemplo.com","Olga Cecilia","",uuid,"A");
+
+        List<Ambiente> ambienteList = new ArrayList<>();
+
+        ambienteList.add(new Ambiente(1, "AREA SOCIAL"));
+        ambienteList.add(new Ambiente(2, "BAÑOS"));
+        ambienteList.add(new Ambiente(3, "COCINETA"));
+        ambienteList.add(new Ambiente(4, "ZONAS COMUNES"));
+        ambienteList.add(new Ambiente(5, "SIFONES"));
+        ambienteList.add(new Ambiente(6, "PATIO"));
+        ambienteList.add(new Ambiente(7, "PAREDES"));
+        ambienteList.add(new Ambiente(8, "PISOS"));
+        ambienteList.add(new Ambiente(9, "AMBIENTES"));
+        ambienteList.add(new Ambiente(10, "SUPERFICIES"));
+        ambienteList.add(new Ambiente(11, "VENTANAS"));
+        ambienteList.add(new Ambiente(12, "ESCALERAS"));
+        ambienteList.add(new Ambiente(13, "BODEGA"));
+        ambienteList.add(new Ambiente(14, "OFICINA"));
+        ambienteList.add(new Ambiente(15, "CAFETIN"));
+        ambienteList.add(new Ambiente(16, "PARQUEADERO"));
+        ambienteList.add(new Ambiente(17, "SALA BENEFICIO BOVINO"));
+        ambienteList.add(new Ambiente(18, "SALA BENEFICIO PORCINO"));
+        ambienteList.add(new Ambiente(19, "ZONA SUBPRODUCTO"));
+        ambienteList.add(new Ambiente(20, "SALIDA A CORRALES"));
+        ambienteList.add(new Ambiente(21, "INGRESOS"));
+        ambienteList.add(new Ambiente(22, "AREA PTAR"));
+        ambienteList.add(new Ambiente(23, "ZONAS COMUNES"));
+        ambienteList.add(new Ambiente(24, "ZONA MOTOBOMBA"));
+        ambienteList.add(new Ambiente(25, "OTROS"));
+
+        List<Hallazgo> hallazgoList = new ArrayList<>();
+
+// Agregar los datos a la lista
+        hallazgoList.add(new Hallazgo(1, "Bacteria"));
+        hallazgoList.add(new Hallazgo(2, "Hongos"));
+        hallazgoList.add(new Hallazgo(3, "Levaduras"));
+        hallazgoList.add(new Hallazgo(4, "Virus"));
+        hallazgoList.add(new Hallazgo(5, "Otro"));
         new Thread(() -> {
 
             //AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
@@ -298,7 +343,8 @@ public class MainActivity extends AppCompatActivity {
             AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);
             AppDataBase.getInstance(getApplicationContext()).getTecnicaAplicacionDAO().insertAll(tecnicaAplicacionList);
             AppDataBase.getInstance(getApplicationContext()).getElementoUtilizadoDAO().insertAll(elementoUtilizadoList);
-
+            AppDataBase.getInstance(getApplicationContext()).getAmbienteDAO().insertAll(ambienteList);
+            AppDataBase.getInstance(getApplicationContext()).getHallazgoDAO().insertAll(hallazgoList);
 
         }).start();
     }

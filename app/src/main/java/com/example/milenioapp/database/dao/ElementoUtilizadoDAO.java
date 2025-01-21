@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.ElementoUtilizado;
+import com.example.milenioapp.ui.ordenes.crearOrdenLocativos.adapterscheck.ObjetoAdapter;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CustomDIalogAgregar.ItemMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.elementosUtilizados.ElementoUtilizadoMostrar;
 
@@ -32,6 +33,9 @@ public interface ElementoUtilizadoDAO {
     List<ElementoUtilizadoMostrar> getElementosGuardados(long id);
     @Query("select elementosutilizados.id as id, elementosutilizados.descripcion as nombre from elementosutilizados")
     List<ItemMostrar> gettAllAgregar();
+
+    @Query("select elementosutilizados.id as idPrincipal, 0 as idGroup, elementosutilizados.descripcion as nombre, 'N' as hallado from elementosutilizados")
+    List<ObjetoAdapter> getAgregar();
 
     @Query("select * from elementosutilizados where id = :idElemento")
     ElementoUtilizado getById(long idElemento);
