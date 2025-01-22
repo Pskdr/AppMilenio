@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
-import com.example.milenioapp.database.entity.ElementoUtilizado;
+import com.example.milenioapp.database.entity.Material;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.Insecto;
 import com.example.milenioapp.database.entity.TipoCliente;
@@ -177,11 +177,11 @@ public class AgregarDatosFragment extends Fragment {
 
     private void agregarElementos(String string) {
 
-        ElementoUtilizado elementoUtilizado = new ElementoUtilizado(string);
+        Material material = new Material(string);
 
         new Thread(() -> {
 
-            AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().insert(elementoUtilizado);
+            AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().insert(material);
 
             getActivity().runOnUiThread(() -> {
 

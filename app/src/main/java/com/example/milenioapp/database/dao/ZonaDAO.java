@@ -45,6 +45,11 @@ public interface ZonaDAO {
     @Query("select count(*) from zonas")
     long getZonaCount();
 
-    @Query("select id as idPrincipal, 0 as idGroup, descripcion as nombre, 'N' as hallado from zonas")
-    List<ObjetoAdapter> getZonaMostrar();
+    @Query("select id as idPrincipal, 0 as idGroup, descripcion as nombre, 'N' as hallado from zonas where idTipo = :idTipo")
+    List<ObjetoAdapter> getZonaMostrar(long idTipo);
+
+    @Query("select zonas.id as idPrincipal, zonagroup.id as idGroup, descripcion as nombre, zonagroup.producto as hallado from zonas " +
+            "inner join zonagroup on zonas.id = zonagroup.idZona " +
+            "where zonas.idTipo = :idTipo and zonagroup.idOrden = :idOrden")
+    List<ObjetoAdapter> getZonaMostrar(long idTipo, long idOrden);
 }

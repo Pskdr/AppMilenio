@@ -22,7 +22,7 @@ public interface InsectoDAO {
     @Query("select * from insectos")
     List<Insecto> getAll();
 
-    @Query("select insectosgroup.id as id,insectos.descripcion as nombre,insectos.id as idInsecto, insectosgroup.hallado as s, insectosgroup.nivelInfestacion as nivelInfestacion " +
+    @Query("select insectosgroup.id as idInsectoGroup,insectos.descripcion as nombre,insectos.id as idInsecto, insectosgroup.hallado as s, insectosgroup.nivelInfestacion as nivelInfestacion " +
             "from insectosgroup inner join insectos on insectos.id = insectosgroup.idInsecto " +
             "where insectosgroup.idOrden = :idOrden")
     List<InsectoGroupMostrar> getInsectosGuardados(long idOrden);
@@ -48,6 +48,11 @@ public interface InsectoDAO {
     @Query("select * from insectos where id = :idInsecto")
     Insecto getById(long idInsecto);
 
-    @Query("select id as idInsecto, 0 as idInsectoGrup, descripcion as nombre, 'N' as hallado from insectos")
+    @Query("select id as idPrincipal, 0 as idGroup, descripcion as nombre, 'N' as hallado from insectos")
     List<ObjetoAdapter> getPlagaMostrar();
+
+    @Query("select insectos.id as idPrincipal, insectosgroup.id as idGroup, insectos.descripcion as nombre, insectosgroup.hallado as hallado " +
+            "from insectos inner join insectosgroup on insectos.id = insectosgroup.idInsecto " +
+            "where insectosgroup.idOrden = :idOrden")
+    List<ObjetoAdapter> getPlagaMostrar(long idOrden);
 }

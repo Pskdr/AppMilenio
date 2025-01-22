@@ -106,11 +106,11 @@
     <fragment
         android:id="@+id/crearOrdenLocativosFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenLocativos.CrearOrdenLocativosFragment"
-        android:label="fragment_crear_orden_locativos"
+        android:label="Orden de Servicio Locativos"
         tools:layout="@layout/fragment_crear_orden_locativos" />
     <fragment
         android:id="@+id/crearOrdenDesinfeccionFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenDesinfeccion.CrearOrdenDesinfeccionFragment"
-        android:label="fragment_crear_orden_desinfeccion"
+        android:label="Orden de Servicio Desinfección"
         tools:layout="@layout/fragment_crear_orden_desinfeccion" />
 </navigation>

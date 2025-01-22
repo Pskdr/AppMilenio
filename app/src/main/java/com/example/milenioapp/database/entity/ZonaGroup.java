@@ -3,8 +3,8 @@ package com.example.milenioapp.database.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "GrupoZonas")
-public class GrupoZona {
+@Entity(tableName = "ZonaGroup")
+public class ZonaGroup {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long idZona;
@@ -15,7 +15,8 @@ public class GrupoZona {
     private String tecnicaAplicacion;
     private String fechaVencimientoProducto;
 
-    public GrupoZona(long idZona, long idOrden, String producto, String ingredienteActivo, String dosificacion, String tecnicaAplicacion, String fechaVencimientoProducto) {
+    public ZonaGroup(long idZona, long idOrden, String producto, String ingredienteActivo, String dosificacion,
+                     String tecnicaAplicacion, String fechaVencimientoProducto) {
         this.idZona = idZona;
         this.idOrden = idOrden;
         this.producto = producto;

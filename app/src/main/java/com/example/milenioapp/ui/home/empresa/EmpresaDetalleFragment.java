@@ -107,6 +107,14 @@ public class EmpresaDetalleFragment extends Fragment {
                             case "I":
                                 ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenInspeccionFragment, bundle);
                                 break;
+
+                            case "L":
+                                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenLocativosFragment, bundle);
+                                break;
+                            case "D":
+
+                                ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenDesinfeccionFragment, bundle);
+                                break;
                             default:
                                 return;
                         }
@@ -124,6 +132,8 @@ public class EmpresaDetalleFragment extends Fragment {
         empresaArrayList.clear();
         empresaArrayList.add(new Empresa(0, "Fomato de orden"));
         empresaArrayList.add(new Empresa(1, "Fomato de inspección"));
+        empresaArrayList.add(new Empresa(2, "Formato de Orden locativo"));
+        empresaArrayList.add(new Empresa(3, "Formato de Desinfección de ambientes"));
         abierto = true;
 
         adapterEmpresa = new AdapterOpciones(new AdapterOpciones.onItemListener() {
@@ -145,8 +155,15 @@ public class EmpresaDetalleFragment extends Fragment {
 
                         ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenInspeccionFragment, bundle);
                         break;
+                    case 2:
+
+                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenLocativosFragment, bundle);
+                        break;
+                    case 3:
+
+                        ViewKt.findNavController(getView()).navigate(R.id.action_empresaDetalleFragment_to_crearOrdenDesinfeccionFragment, bundle);
+                        break;
                     default:
-                        return;
                 }
 
             }

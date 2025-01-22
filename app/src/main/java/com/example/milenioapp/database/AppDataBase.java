@@ -12,10 +12,10 @@ import com.example.milenioapp.database.dao.AmbienteGroupDAO;
 import com.example.milenioapp.database.dao.CebaderoDAO;
 import com.example.milenioapp.database.dao.CebaderoGroupDAO;
 import com.example.milenioapp.database.dao.ClienteDAO;
-import com.example.milenioapp.database.dao.ElementoUtilizadoDAO;
-import com.example.milenioapp.database.dao.ElementoUtilizadoGroupDAO;
+import com.example.milenioapp.database.dao.MaterialDAO;
+import com.example.milenioapp.database.dao.MaterialGroupDAO;
 import com.example.milenioapp.database.dao.EmpleadoDAO;
-import com.example.milenioapp.database.dao.GrupoZonaDAO;
+import com.example.milenioapp.database.dao.ZonaGroupDAO;
 import com.example.milenioapp.database.dao.HallazgoDAO;
 import com.example.milenioapp.database.dao.HallazgoGroupDAO;
 import com.example.milenioapp.database.dao.HigieneDAO;
@@ -35,10 +35,10 @@ import com.example.milenioapp.database.entity.AmbienteGroup;
 import com.example.milenioapp.database.entity.Cebadero;
 import com.example.milenioapp.database.entity.CebaderoGroup;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.database.entity.ElementoUtilizado;
-import com.example.milenioapp.database.entity.ElementoUtilizadoGroup;
+import com.example.milenioapp.database.entity.Material;
+import com.example.milenioapp.database.entity.MaterialGroup;
 import com.example.milenioapp.database.entity.Empleado;
-import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.database.entity.ZonaGroup;
 import com.example.milenioapp.database.entity.Hallazgo;
 import com.example.milenioapp.database.entity.HallazgoGrup;
 import com.example.milenioapp.database.entity.Higiene;
@@ -56,8 +56,8 @@ import com.example.milenioapp.database.entity.Zona;
 import com.example.milenioapp.utilidades.Constants;
 @Database(entities = {Usuario.class, Empleado.class, Insecto.class, Orden.class, TipoInsecto.class,
         Cliente.class, Zona.class, TecnicaAplicacion.class, Cebadero.class,
-        Higiene.class, CebaderoGroup.class, HigieneGroup.class, GrupoZona.class, InsectoGroup.class,
-        ElementoUtilizado.class, ElementoUtilizadoGroup.class, LamparaGroup.class, NroCebaderos.class,
+        Higiene.class, CebaderoGroup.class, HigieneGroup.class, ZonaGroup.class, InsectoGroup.class,
+        Material.class, MaterialGroup.class, LamparaGroup.class, NroCebaderos.class,
         TipoCliente.class, Ambiente.class, AmbienteGroup.class, Hallazgo.class, HallazgoGrup.class},
         version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
@@ -78,10 +78,13 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract HigieneDAO getHigieneDAO();
     public abstract CebaderoGroupDAO getCebaderoGroupDAO();
     public abstract HigieneGroupDAO getHigieneGroupDAO();
-    public abstract GrupoZonaDAO getGrupoZonaDAO();
+
+    public abstract ZonaGroupDAO getGrupoZonaDAO();
     public abstract InsectoGroupDAO getInsectoGroupDAO();
-    public abstract ElementoUtilizadoDAO getElementoUtilizadoDAO();
-    public abstract ElementoUtilizadoGroupDAO getElementoUtilizadoGroupDAO();
+
+    public abstract MaterialDAO getElementoUtilizadoDAO();
+
+    public abstract MaterialGroupDAO getMaterialGroupDAO();
     public abstract LamparaGroupDAO getLamparoGroupDAO();
     public abstract NroCebaderosDAO getNroCebaderoDAO();
 

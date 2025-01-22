@@ -58,6 +58,9 @@ public class AdapterOrdenes extends RecyclerView.Adapter<AdapterOrdenes.ViewHold
             case "I":
                 holder.tvTipoOrden.setText("Orden de inspeccion");
                 break;
+            case "L":
+                holder.tvTipoOrden.setText("Orden de servicio Locativos");
+                break;
             default:
                 break;
         }

@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface HallazgoGroupDAO {
 
-    @Query("select * from higienesgroup")
+    @Query("select * from hallazgosgroup")
     List<HallazgoGrup> getAll();
 
     @Insert

@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.milenioapp.R;
 import com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.CrearOrdenInspeccionFragment;
+import com.example.milenioapp.ui.ordenes.crearOrdenLocativos.CrearOrdenLocativosFragment;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.CrearOrdenServicioFragment;
 
 import java.io.File;
@@ -88,12 +89,18 @@ public class FirmaFragment extends DialogFragment {
                 if(instancia instanceof CrearOrdenInspeccionFragment) {
                     ((CrearOrdenInspeccionFragment) instancia).guardarFirmaAcompa(null);
                 }
+                if (instancia instanceof CrearOrdenLocativosFragment) {
+                    ((CrearOrdenLocativosFragment) instancia).guardarFirmaAcompa(null);
+                }
             }else{
                 if(instancia instanceof  CrearOrdenServicioFragment) {
                     ((CrearOrdenServicioFragment) instancia).guardarFirmaOperario(null);
                 }
                 if(instancia instanceof  CrearOrdenInspeccionFragment) {
                     ((CrearOrdenInspeccionFragment) instancia).guardarFirmaOperario(null);
+                }
+                if (instancia instanceof CrearOrdenLocativosFragment) {
+                    ((CrearOrdenLocativosFragment) instancia).guardarFirmaOperario(null);
                 }
             }
             dismiss();
@@ -138,6 +145,9 @@ public class FirmaFragment extends DialogFragment {
                         if(instancia instanceof  CrearOrdenInspeccionFragment) {
                             ((CrearOrdenInspeccionFragment) instancia).guardarFirmaAcompa(null);
                         }
+                        if (instancia instanceof CrearOrdenLocativosFragment) {
+                            ((CrearOrdenLocativosFragment) instancia).guardarFirmaAcompa(null);
+                        }
                     }else{
 
                         if(instancia instanceof  CrearOrdenServicioFragment) {
@@ -145,6 +155,9 @@ public class FirmaFragment extends DialogFragment {
                         }
                         if(instancia instanceof  CrearOrdenInspeccionFragment) {
                             ((CrearOrdenInspeccionFragment) instancia).guardarFirmaOperario(null);
+                        }
+                        if (instancia instanceof CrearOrdenLocativosFragment) {
+                            ((CrearOrdenLocativosFragment) instancia).guardarFirmaOperario(null);
                         }
                     }
                     if(path != null) {
@@ -180,6 +193,9 @@ public class FirmaFragment extends DialogFragment {
                     if(instancia instanceof  CrearOrdenInspeccionFragment) {
                         ((CrearOrdenInspeccionFragment) instancia).guardarFirmaAcompa(bitmap);
                     }
+                    if (instancia instanceof CrearOrdenLocativosFragment) {
+                        ((CrearOrdenLocativosFragment) instancia).guardarFirmaAcompa(bitmap);
+                    }
                 }else{
 
                     if(instancia instanceof  CrearOrdenServicioFragment) {
@@ -188,6 +204,9 @@ public class FirmaFragment extends DialogFragment {
 
                     if(instancia instanceof  CrearOrdenInspeccionFragment) {
                         ((CrearOrdenInspeccionFragment) instancia).guardarFirmaOperario(bitmap);
+                    }
+                    if (instancia instanceof CrearOrdenLocativosFragment) {
+                        ((CrearOrdenLocativosFragment) instancia).guardarFirmaOperario(bitmap);
                     }
                 }
 

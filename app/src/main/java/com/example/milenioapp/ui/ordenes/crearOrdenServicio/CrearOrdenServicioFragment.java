@@ -28,9 +28,9 @@ import android.widget.Toast;
 import com.example.milenioapp.R;
 import com.example.milenioapp.database.AppDataBase;
 import com.example.milenioapp.database.entity.Cliente;
-import com.example.milenioapp.database.entity.ElementoUtilizado;
-import com.example.milenioapp.database.entity.ElementoUtilizadoGroup;
-import com.example.milenioapp.database.entity.GrupoZona;
+import com.example.milenioapp.database.entity.Material;
+import com.example.milenioapp.database.entity.MaterialGroup;
+import com.example.milenioapp.database.entity.ZonaGroup;
 import com.example.milenioapp.database.entity.Higiene;
 import com.example.milenioapp.database.entity.HigieneGroup;
 import com.example.milenioapp.database.entity.Insecto;
@@ -472,9 +472,9 @@ public class CrearOrdenServicioFragment extends Fragment {
 
             getActivity().runOnUiThread(() -> {
 
-                ArrayList<GrupoZona> grupoZonaInsert = new ArrayList<>();
+                ArrayList<ZonaGroup> zonaGroupInsert = new ArrayList<>();
                 for (int i = 0; i < grupoZonas.size(); i++) {
-                    grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
+                    zonaGroupInsert.add(new ZonaGroup(grupoZonas.get(i).getIdZona(),
                             idOrden,grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
                             grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion(),grupoZonas.get(i).getFechaVencimiento()));
                 }
@@ -490,15 +490,15 @@ public class CrearOrdenServicioFragment extends Fragment {
                     insectoGroupsInsert.add(new InsectoGroup(idOrden,insectoGroupArrayList.get(i).getIdInsecto(),
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                 }
-                ArrayList<ElementoUtilizadoGroup> elementoUtilizadoInsert = new ArrayList<>();
+                ArrayList<MaterialGroup> elementoUtilizadoInsert = new ArrayList<>();
                 for (int i = 0; i < elementoUtilizadoArray.size(); i++) {
-                    elementoUtilizadoInsert.add(new ElementoUtilizadoGroup(elementoUtilizadoArray.get(i).getIdElemento(),idOrden));
+                    elementoUtilizadoInsert.add(new MaterialGroup(elementoUtilizadoArray.get(i).getIdElemento(), idOrden, ""));
                 }
                 new Thread(() -> {
-                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
+                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(zonaGroupInsert);
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
-                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().insertAll(elementoUtilizadoInsert);
+                    AppDataBase.getInstance(getContext()).getMaterialGroupDAO().insertAll(elementoUtilizadoInsert);
 
                     getActivity().runOnUiThread(() -> {
 
@@ -764,12 +764,12 @@ public class CrearOrdenServicioFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
 
 
-                ArrayList<GrupoZona> grupoZonaInsert = new ArrayList<>();
+                ArrayList<ZonaGroup> zonaGroupInsert = new ArrayList<>();
                 for (int i = 0; i < grupoZonas.size(); i++) {
-                    grupoZonaInsert.add(new GrupoZona(grupoZonas.get(i).getIdZona(),
+                    zonaGroupInsert.add(new ZonaGroup(grupoZonas.get(i).getIdZona(),
                             orden.getId(),grupoZonas.get(i).getProducto(),grupoZonas.get(i).getIngredienteActivo(),
                             grupoZonas.get(i).getDocificacion(),grupoZonas.get(i).getTecnicaAplicacion(),grupoZonas.get(i).getFechaVencimiento()));
-                    grupoZonaInsert.get(i).setId(grupoZonas.get(i).getId());
+                    zonaGroupInsert.get(i).setId(grupoZonas.get(i).getId());
                 }
 
                 ArrayList<HigieneGroup> higieneGroupsInsert = new ArrayList<>();
@@ -785,21 +785,21 @@ public class CrearOrdenServicioFragment extends Fragment {
                             insectoGroupArrayList.get(i).getS(),insectoGroupArrayList.get(i).getNivelInfestacion()));
                     insectoGroupsInsert.get(i).setId(insectoGroupArrayList.get(i).getIdInsectoGroup());
                 }
-                ArrayList<ElementoUtilizadoGroup> elementoUtilizadoInsert = new ArrayList<>();
+                ArrayList<MaterialGroup> elementoUtilizadoInsert = new ArrayList<>();
                 for (int i = 0; i < elementoUtilizadoArray.size(); i++) {
-                    elementoUtilizadoInsert.add(new ElementoUtilizadoGroup(elementoUtilizadoArray.get(i).getIdElemento(),idOrden));
+                    elementoUtilizadoInsert.add(new MaterialGroup(elementoUtilizadoArray.get(i).getIdElemento(), idOrden, ""));
                 }
 
                 new Thread(() -> {
 
                     AppDataBase.getInstance(getContext()).getGrupoZonaDAO().deleteByOrden(orden.getId());
-                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(grupoZonaInsert);
+                    AppDataBase.getInstance(getContext()).getGrupoZonaDAO().insertAll(zonaGroupInsert);
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getHigieneGroupDAO().insertAll(higieneGroupsInsert);
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().deleteByOrden(orden.getId());
                     AppDataBase.getInstance(getContext()).getInsectoGroupDAO().insertAll(insectoGroupsInsert);
-                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().deleteByOrden(orden.getId());
-                    AppDataBase.getInstance(getContext()).getElementoUtilizadoGroupDAO().insertAll(elementoUtilizadoInsert);
+                    AppDataBase.getInstance(getContext()).getMaterialGroupDAO().deleteByOrden(orden.getId());
+                    AppDataBase.getInstance(getContext()).getMaterialGroupDAO().insertAll(elementoUtilizadoInsert);
 
                     getActivity().runOnUiThread(() -> {
 
@@ -841,11 +841,11 @@ public class CrearOrdenServicioFragment extends Fragment {
     public void agregarElemento(long idElemento) {
         new Thread(() -> {
 
-            ElementoUtilizado elementoUtilizado = AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().getById(idElemento);
+            Material material = AppDataBase.getInstance(getContext()).getElementoUtilizadoDAO().getById(idElemento);
 
             getActivity().runOnUiThread(() -> {
 
-                elementoUtilizadoArray.add(new ElementoUtilizadoMostrar(0,elementoUtilizado.getId(),elementoUtilizado.getDescripcion()));
+                elementoUtilizadoArray.add(new ElementoUtilizadoMostrar(0, material.getId(), material.getDescripcion()));
                 llenarAdapterElementos();
 
             });

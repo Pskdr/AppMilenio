@@ -1,5 +1,6 @@
 package com.example.milenioapp.ui.ordenes.crearOrdenLocativos.adapterscheck;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,13 +22,13 @@ public class AdapterCheckin extends RecyclerView.Adapter<AdapterCheckin.ViewHold
 
     private final AdapterCheckin.onItemListener onItemListener;
     private final Fragment instancia;
-    ArrayList<ObjetoAdapter> insectosArraylist;
+    ArrayList<ObjetoAdapter> itemArrayList;
     private boolean bloquear;
     private String letra;
 
     public AdapterCheckin(AdapterCheckin.onItemListener onItemListener, ArrayList<ObjetoAdapter> arrayList, Fragment instancia, boolean bloquear, String letra) {
         this.onItemListener = onItemListener;
-        this.insectosArraylist = arrayList;
+        this.itemArrayList = arrayList;
         this.instancia = instancia;
         this.bloquear = bloquear;
         this.letra = letra;
@@ -45,10 +47,38 @@ public class AdapterCheckin extends RecyclerView.Adapter<AdapterCheckin.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCliente holder, int position) {
         int finalPosition = position;
-        holder.tvNombre.setText(insectosArraylist.get(position).getNombre());
+        holder.tvNombre.setText(itemArrayList.get(position).getNombre());
+
+        if (itemArrayList.get(finalPosition).getHallado().equals("S")) {
+            holder.rbSeleccionar.setChecked(true);
+        }
+
+        holder.tvNombre.setOnClickListener(view -> {
+            if (instancia instanceof CrearOrdenLocativosFragment) {
+                switch (letra) {
+                    case "P":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoPlagaMostrar(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                        }
+                        break;
+                    case "A":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoArea(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                        }
+                        break;
+                    case "E":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoElemento(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                        }
+                        break;
+                }
+            }
+        });
+
         holder.rbSeleccionar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.d("Psk", "onCheckedChanged: " + itemArrayList.get(finalPosition).getNombre() + " estado: " + b);
                 if (instancia instanceof CrearOrdenLocativosFragment) {
                     switch (letra) {
                         case "P":
@@ -65,11 +95,36 @@ public class AdapterCheckin extends RecyclerView.Adapter<AdapterCheckin.ViewHold
                 }
             }
         });
+
+        holder.cvCliente.setOnClickListener(view -> {
+            if (instancia instanceof CrearOrdenLocativosFragment) {
+                switch (letra) {
+                    case "P":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoPlagaMostrar(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                            ((CrearOrdenLocativosFragment) instancia).cambiarPlagaMostrar(false, finalPosition);
+                        }
+                        break;
+                    case "A":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoArea(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                            ((CrearOrdenLocativosFragment) instancia).cambiarZonaMostrar(false, finalPosition);
+                        }
+                        break;
+                    case "E":
+                        if (((CrearOrdenLocativosFragment) instancia).getEstadoElemento(finalPosition)) {
+                            holder.rbSeleccionar.setChecked(false);
+                            ((CrearOrdenLocativosFragment) instancia).cambiarMaterialesMostrar(false, finalPosition);
+                        }
+                        break;
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return insectosArraylist.size();
+        return itemArrayList.size();
     }
 
     public interface onItemListener {
@@ -78,16 +133,17 @@ public class AdapterCheckin extends RecyclerView.Adapter<AdapterCheckin.ViewHold
 
     public static class ViewHolderCliente extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView tvNombre, tvNivelDeInfestacion;
+        private final TextView tvNombre;
         private final RadioButton rbSeleccionar;
+        private final CardView cvCliente;
         private final AdapterCheckin.onItemListener onItemListener;
 
         public ViewHolderCliente(@NonNull View itemView, AdapterCheckin.onItemListener onItemListener) {
             super(itemView);
 
             tvNombre = itemView.findViewById(R.id.itemName);
-            tvNivelDeInfestacion = itemView.findViewById(R.id.tvNivelDeInfestacion);
             rbSeleccionar = itemView.findViewById(R.id.rbSelect);
+            cvCliente = itemView.findViewById(R.id.cvCliente);
 
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);

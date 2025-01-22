@@ -4,14 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ElementosUtilizados")
-public class ElementoUtilizado {
+@Entity(tableName = "Materiales")
+public class Material {
     @PrimaryKey(autoGenerate = true)
     private long id;
     @NonNull
     private String descripcion;
 
-    public ElementoUtilizado(@NonNull String descripcion) {
+    public Material(@NonNull String descripcion) {
         this.descripcion = descripcion;
     }
 

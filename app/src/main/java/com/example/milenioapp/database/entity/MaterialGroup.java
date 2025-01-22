@@ -4,18 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ElementosUtilizadosGroup")
-public class ElementoUtilizadoGroup {
+@Entity(tableName = "MaterialesGroup")
+public class MaterialGroup {
     @PrimaryKey(autoGenerate = true)
     private long id;
     @NonNull
     private long idElemento;
     @NonNull
     private long idOrden;
+    private String hallado;
 
-    public ElementoUtilizadoGroup(long idElemento, long idOrden) {
+    public MaterialGroup(long idElemento, long idOrden, String hallado) {
         this.idElemento = idElemento;
         this.idOrden = idOrden;
+        this.hallado = hallado;
+    }
+
+    public String getHallado() {
+        return hallado;
+    }
+
+    public void setHallado(String hallado) {
+        this.hallado = hallado;
     }
 
     public long getId() {
