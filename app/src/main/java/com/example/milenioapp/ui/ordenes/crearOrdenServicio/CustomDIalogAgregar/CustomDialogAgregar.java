@@ -98,92 +98,99 @@ public class CustomDialogAgregar extends DialogFragment {
         return view;
     }
 
+    ArrayList<TipoInsectosAgregar> tipoInsectosAgregars;
     private void llenarTipoInsectos() {
 
-        ArrayList<TipoInsectosAgregar> tipoInsectosAgregars = new ArrayList<>();
-        tipoInsectosAgregars.add(new TipoInsectosAgregar(0,"Volador"));
-        tipoInsectosAgregars.add(new TipoInsectosAgregar(1,"Terrestre"));
-        ArrayAdapter<TipoInsectosAgregar> ArrayAdapterInsecto = new ArrayAdapter<TipoInsectosAgregar>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,tipoInsectosAgregars){
+        tipoInsectosAgregars = new ArrayList<>();
 
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getView(position, convertView, parent);
+        new Thread(() -> {
+            tipoInsectosAgregars = (ArrayList<TipoInsectosAgregar>) AppDataBase.getInstance(getContext()).getTipoInsectoDAO().getTipoAgregar();
 
-                TipoInsectosAgregar producto = getItem(position);
-                label.setHint(producto.getNombre());
-                label.setText(producto.getNombre());
+            getActivity().runOnUiThread(() -> {
+                ArrayAdapter<TipoInsectosAgregar> ArrayAdapterInsecto = new ArrayAdapter<TipoInsectosAgregar>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tipoInsectosAgregars) {
 
-                return label;
-            }
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
 
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+                        TipoInsectosAgregar producto = getItem(position);
+                        label.setHint(producto.getNombre());
+                        label.setText(producto.getNombre());
 
-                TipoInsectosAgregar producto = getItem(position);
-                label.setText(producto.getNombre());
-                return label;
-            }
-        };
+                        return label;
+                    }
 
-        spinnerTipo.setAdapter(ArrayAdapterInsecto);
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
-        spinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tipoInsecto  = tipoInsectosAgregars.get(position).getId();
-                traerDatos();
-            }
+                        TipoInsectosAgregar producto = getItem(position);
+                        label.setText(producto.getNombre());
+                        return label;
+                    }
+                };
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                spinnerTipo.setAdapter(ArrayAdapterInsecto);
 
-            }
-        });
+                spinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        tipoInsecto = tipoInsectosAgregars.get(position).getId();
+                        traerDatos();
+                    }
 
-        List<String> nivelInfestacion = new ArrayList<>();
-        nivelInfestacion.add("ALTO");
-        nivelInfestacion.add("MEDIO");
-        nivelInfestacion.add("BAJO");
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                List<String> nivelInfestacion = new ArrayList<>();
+                nivelInfestacion.add("ALTO");
+                nivelInfestacion.add("MEDIO");
+                nivelInfestacion.add("BAJO");
 
 
-        ArrayAdapter<String> arrayAdapterDocis = new ArrayAdapter<String>(getContext(),androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,nivelInfestacion){
+                ArrayAdapter<String> arrayAdapterDocis = new ArrayAdapter<String>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, nivelInfestacion) {
 
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getView(position, convertView, parent);
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
 
-                String producto = getItem(position);
-                label.setHint(producto);
-                label.setText(producto);
+                        String producto = getItem(position);
+                        label.setHint(producto);
+                        label.setText(producto);
 
-                return label;
-            }
+                        return label;
+                    }
 
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
 
-                String producto = getItem(position);
-                label.setText(producto);
-                return label;
-            }
-        };
+                        String producto = getItem(position);
+                        label.setText(producto);
+                        return label;
+                    }
+                };
 
-        spinnerInfestacion.setAdapter(arrayAdapterDocis);
-        spinnerInfestacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                infestacionNivel = arrayAdapterDocis.getItem(position);
-            }
+                spinnerInfestacion.setAdapter(arrayAdapterDocis);
+                spinnerInfestacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        infestacionNivel = arrayAdapterDocis.getItem(position);
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                    }
+                });
+            });
+        }).start();
+
 
     }
     private long tipoInsecto;
