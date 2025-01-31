@@ -341,6 +341,15 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnAgregarEspecie"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar especie" />
             <LinearLayout
                 android:paddingLeft="5dp"
                 android:background="@color/greylight"
@@ -361,15 +370,16 @@
                 android:id="@+id/rvInsectos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
             <Button
-                android:id="@+id/btnAgregarEspecie"
+                android:id="@+id/btnAgregarZona"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="left"
                 android:gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar especie"/>
+                android:text="Agregar zona" />
             <LinearLayout
                 android:paddingLeft="5dp"
                 android:background="@color/greylight"
@@ -391,15 +401,6 @@
                 android:layout_width="match_parent"
                 android:minHeight="200dp"
                 android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/btnAgregarZona"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="left"
-                android:gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agregar zona"/>
             <com.google.android.material.textfield.TextInputLayout
                 style="?attr/textInputOutlinedStyle"
                 android:layout_width="match_parent"
@@ -417,6 +418,15 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/btnAgregarAreaLocativa"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Agregar area locativa e higiene" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@color/greylight"
@@ -466,16 +476,16 @@
                 android:layout_width="match_parent"
                 android:minHeight="200dp"
                 android:layout_height="wrap_content"/>
+
             <Button
-                android:id="@+id/btnAgregarAreaLocativa"
+                android:id="@+id/btnAgregarLampara"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="left"
                 android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Agregar area locativa e higiene"/>
-
+                android:text="Agregar lampara" />
             <LinearLayout
                 android:paddingLeft="5dp"
                 android:background="@color/greylight"
@@ -496,15 +506,6 @@
                 android:id="@+id/rvLamparas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/btnAgregarLampara"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="left"
-                android:gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agregar lampara"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

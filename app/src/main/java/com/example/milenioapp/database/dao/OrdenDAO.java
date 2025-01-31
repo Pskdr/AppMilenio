@@ -28,8 +28,9 @@ public interface OrdenDAO {
     List<OrdenMostrar> getAllMostrar();
 
     @Query("select id, operario as nombre, horaIngreso as horaEntrada, horaSalida,estadoEnvio," +
-            "fechaInicio, tipoOrden from ordenes  order by id DESC")
+            "fechaInicio, tipoOrden from ordenes where tipoOrden = 'S'  order by id DESC")
     List<OrdenMostrar> getAllByDate();
+
     @Query("select COUNT(id) from ordenes")
     int getNum();
 }

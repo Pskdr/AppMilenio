@@ -45,7 +45,7 @@ public class CertificadoFragment extends Fragment {
 
 
     private TextView tvFecha,tvNombre,tvNit,tvDireccion,tvFechaServicio,
-            tvPlagaEncontrada,tvTecnico, tvSede,tvObservaciones;
+            tvPlagaEncontrada, tvTecnico, tvSede, tvTtite, tvObservaciones;
     private ImageView ivFirmaOperario,ivFirmaAyudante;
     private RecyclerView rvZonas;
     private Orden orden;
@@ -55,6 +55,7 @@ public class CertificadoFragment extends Fragment {
     }
 
 
+    private TextView tv1, tv2, tv3;
     public ProgressDialog prgDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,12 +75,19 @@ public class CertificadoFragment extends Fragment {
         rvZonas = view.findViewById(R.id.rvZonas);
         ivFirmaAyudante = view.findViewById(R.id.ivFirmaAyudante);
         ivFirmaOperario = view.findViewById(R.id.ivFirmaOperario);
+        tvTtite = view.findViewById(R.id.tvTitle);
+        tv1 = view.findViewById(R.id.tv1);
+        tv2 = view.findViewById(R.id.tv2);
+        tv3 = view.findViewById(R.id.tv3);
 
         rvZonas.setLayoutManager(new LinearLayoutManager(getContext()));
         Bundle bundle = getArguments();
 
         long idOrden = bundle.getLong("idOrden",-1);
         long idCliente = bundle.getLong("idCliente",-1);
+        String title = bundle.getString("title");
+
+        tvTtite.setText(title);
 
         if(idOrden != -1){
             traerOrdenCliente(idOrden,idCliente);
@@ -107,6 +115,17 @@ public class CertificadoFragment extends Fragment {
             cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(idCliente);
 
             getActivity().runOnUiThread(() -> {
+
+                switch (orden.getTipoOrden()) {
+                    case "S":
+                        tv1.setText("Zona tratada");
+                        tv2.setText("Tecnica aplicación");
+                        tv3.setText("Ingrediente activo");
+                        break;
+
+                    case "I":
+                        break;
+                }
 
                 Utilities utilities = new Utilities();
                 Calendar fecha = Calendar.getInstance();
@@ -138,7 +157,17 @@ public class CertificadoFragment extends Fragment {
 
         new Thread(() -> {
 
-            itemZonasMostrars = (ArrayList<ItemZonasMostrar>) AppDataBase.getInstance(getContext()).getGrupoZonaDAO().getZonasAgregadasPdf(orden.getId());
+            switch (orden.getTipoOrden()) {
+                case "S":
+                    itemZonasMostrars = (ArrayList<ItemZonasMostrar>) AppDataBase.getInstance(getContext()).getGrupoZonaDAO().getZonasAgregadasPdf(orden.getId());
+
+                    break;
+
+                case "I":
+
+                    break;
+            }
+
 
             getActivity().runOnUiThread(() -> {
 

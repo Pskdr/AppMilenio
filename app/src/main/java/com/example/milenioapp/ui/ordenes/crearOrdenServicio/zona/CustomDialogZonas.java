@@ -148,7 +148,12 @@ public class CustomDialogZonas extends DialogFragment {
 
             ArrayList<String> tecnicaAplicacion = new ArrayList<>();
             tecnicaAplicacion.add("ASPERSIÓN");
-            tecnicaAplicacion.add("DISOLUCIÓN");
+            tecnicaAplicacion.add("NEBULIZACIÓN");
+            tecnicaAplicacion.add("TERMONEBULIZACIÓN");
+            tecnicaAplicacion.add("POLVO SECO");
+            tecnicaAplicacion.add("INSPECCIÓN");
+            tecnicaAplicacion.add("DESRATIZACIÓN");
+            tecnicaAplicacion.add("APLICACIÓN DE GEL");
             getActivity().runOnUiThread(() -> {
 
                 if(zonaAgregada.getProducto().equals("") && zonaAgregada.getIngredienteActivo().equals("") && zonaAgregada.getDocificacion().equals("") && zonaAgregada.getTecnicaAplicacion().equals("")) {

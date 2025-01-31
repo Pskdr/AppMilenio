@@ -87,6 +87,9 @@
         <action
             android:id="@+id/action_crearOrdenInspeccionFragment_to_certificadoFragment"
             app:destination="@id/certificadoFragment" />
+        <action
+            android:id="@+id/action_crearOrdenServicioFragment_to_certificadosMobileFragment"
+            app:destination="@id/certificadosMobileFragment" />
     </fragment>
     <fragment
         android:id="@+id/certificadoFragment"
@@ -97,7 +100,14 @@
         android:id="@+id/crearOrdenInspeccionFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenInspeccion.CrearOrdenInspeccionFragment"
         android:label="Orden inspección"
-        tools:layout="@layout/fragment_crear_orden_inspeccion" />
+        tools:layout="@layout/fragment_crear_orden_inspeccion">
+        <action
+            android:id="@+id/action_crearOrdenInspeccionFragment_to_certificadoFragment2"
+            app:destination="@id/certificadoFragment" />
+        <action
+            android:id="@+id/action_crearOrdenInspeccionFragment_to_certificadosMobileFragment"
+            app:destination="@id/certificadosMobileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/agregarDatosFragment"
         android:name="com.example.milenioapp.ui.agregarDatos.AgregarDatosFragment"
@@ -112,5 +122,17 @@
         android:id="@+id/crearOrdenDesinfeccionFragment"
         android:name="com.example.milenioapp.ui.ordenes.crearOrdenDesinfeccion.CrearOrdenDesinfeccionFragment"
         android:label="Orden de Servicio Desinfección"
-        tools:layout="@layout/fragment_crear_orden_desinfeccion" />
+        tools:layout="@layout/fragment_crear_orden_desinfeccion">
+        <action
+            android:id="@+id/action_crearOrdenDesinfeccionFragment_to_certificadoFragment"
+            app:destination="@id/certificadoFragment" />
+        <action
+            android:id="@+id/action_crearOrdenDesinfeccionFragment_to_certificadosMobileFragment"
+            app:destination="@id/certificadosMobileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/certificadosMobileFragment"
+        android:name="com.example.milenioapp.ui.ordenes.certificado.CertificadosMobileFragment"
+        android:label="fragment_certificados_mobile"
+        tools:layout="@layout/fragment_certificados_mobile" />
 </navigation>

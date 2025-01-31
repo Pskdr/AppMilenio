@@ -45,13 +45,14 @@
                 android:background="@drawable/et_style_header_pdf">
 
                 <TextView
+                    android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:text="CERTIFICADO DE CONTROL Y PREVENCION DE PLAGAS "
+                    android:text=" "
                     android:textColor="@color/black"
                     android:textSize="15px"
                     android:textStyle="bold" />
@@ -506,11 +507,12 @@
                 android:background="@drawable/et_style_header_grey">
 
                 <TextView
+                    android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Zona tratada"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="15px" />
@@ -524,11 +526,12 @@
                 android:background="@drawable/et_style_header_grey">
 
                 <TextView
+                    android:id="@+id/tv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Tecnica aplicación"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="15px"
                     android:textStyle="bold" />
@@ -541,11 +544,12 @@
                 android:background="@drawable/et_style_header_grey">
 
                 <TextView
+                    android:id="@+id/tv3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Ingrediente activo"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="15px"
                     android:textStyle="bold" />
@@ -651,7 +655,7 @@
             android:layout_gravity="center"
             android:background="@drawable/et_style_header_pdf"
             android:gravity="center"
-            android:text="Dirección: Calle 19 N. 52-61 Barrio San Pablo - Teléfono: 5952180- 3122541748- Medellín"
+            android:text="Dirección: carrera 53 # 21 - 23 Barrio santa fé 604 7779902  - 312 2541748 - Medellin"
             android:textColor="@color/black"
             android:textSize="15px"
             android:textStyle="bold" />

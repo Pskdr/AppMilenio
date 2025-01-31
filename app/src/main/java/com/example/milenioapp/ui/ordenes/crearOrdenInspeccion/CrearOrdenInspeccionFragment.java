@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ViewKt;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +55,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
     }
 
     long idOrden,id;
+
 
     private TextView tvInspección;
     private TextInputEditText tiEmpresa, tiFecha, tiCliente,
@@ -159,7 +161,16 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             getActivity().runOnUiThread(() -> {
 
                 llenarDatos();
-
+                btnCertificado.setEnabled(true);
+                btnCertificado.setOnClickListener(v -> {
+                    if (validarDatos()) {
+                        Bundle enviar = new Bundle();
+                        enviar.putLong("idCliente", cliente.getId());
+                        enviar.putLong("idOrden", orden.getId());
+                        enviar.putString("title", "CERTIFICADO DE CONTROL Y PREVENCION DE PLAGAS");
+                        ViewKt.findNavController(getView()).navigate(R.id.action_crearOrdenInspeccionFragment_to_certificadoFragment2, enviar);
+                    }
+                });
             });
 
         }).start();
