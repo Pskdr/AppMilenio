@@ -52,7 +52,7 @@ public class CustomDialogCebaderos extends DialogFragment {
     }
     private Button btnGuardar, btnCerrar;
 
-    private TextView errorText;
+    private TextView errorText, tvEstadoCebadro;
     private EstadoCebadero estadoCebadero;
     private TextInputEditText tiZona,tiNro,tiObservaciones;
     private Spinner spinnerEstado;
@@ -66,6 +66,7 @@ public class CustomDialogCebaderos extends DialogFragment {
 
 
         tiZona = view.findViewById(R.id.tiZona);
+        tvEstadoCebadro = view.findViewById(R.id.tvEstadoCebadro);
         tiNro = view.findViewById(R.id.tiNro);
         spinnerEstado = view.findViewById(R.id.spinnerEstado);
         tiObservaciones = view.findViewById(R.id.tiObservaciones);
@@ -81,7 +82,7 @@ public class CustomDialogCebaderos extends DialogFragment {
             dismiss();
         });
 
-
+        tvEstadoCebadro.setText("Estado Cebadero:");
 
         if(cebaderoGroup != null){
             llenarDatos();
@@ -89,7 +90,7 @@ public class CustomDialogCebaderos extends DialogFragment {
 
             List<EstadoCebadero> estadoCebaderoList = new ArrayList<>();
             estadoCebaderoList.add(new EstadoCebadero("- Seleccione una opción -",""));
-            estadoCebaderoList.add(new EstadoCebadero("I","Inactiva"));
+            estadoCebaderoList.add(new EstadoCebadero("I  ", "Inactiva"));
             estadoCebaderoList.add(new EstadoCebadero("CA","Captura"));
             estadoCebaderoList.add(new EstadoCebadero("CO","Consumo"));
             estadoCebaderoList.add(new EstadoCebadero("SU","Sucia"));
@@ -159,7 +160,7 @@ public class CustomDialogCebaderos extends DialogFragment {
         tiObservaciones.setText(cebaderoGroup.getObservaciones());
 
         List<EstadoCebadero> estadoCebaderoList = new ArrayList<>();
-        estadoCebaderoList.add(new EstadoCebadero("I","Inactiva"));
+        estadoCebaderoList.add(new EstadoCebadero("I  ", "Inactiva"));
         estadoCebaderoList.add(new EstadoCebadero("CA","Captura"));
         estadoCebaderoList.add(new EstadoCebadero("CO","Consumo"));
         estadoCebaderoList.add(new EstadoCebadero("SU","Sucia"));

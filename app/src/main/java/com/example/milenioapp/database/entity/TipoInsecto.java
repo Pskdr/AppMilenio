@@ -10,8 +10,7 @@ public class TipoInsecto {
     private String descripcion;
     private String abreviado;
 
-    public TipoInsecto(long id, String descripcion, String abreviado) {
-        this.id = id;
+    public TipoInsecto(String descripcion, String abreviado) {
         this.descripcion = descripcion;
         this.abreviado = abreviado;
     }

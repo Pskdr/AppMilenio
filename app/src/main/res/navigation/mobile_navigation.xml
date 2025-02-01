@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/certificadoFragment"
-        android:name="com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado.CertificadoFragment"
+        android:name="com.example.milenioapp.ui.ordenes.certificado.CertificadoFragment"
         android:label="fragment_certificado"
         tools:layout="@layout/fragment_certificado" />
     <fragment

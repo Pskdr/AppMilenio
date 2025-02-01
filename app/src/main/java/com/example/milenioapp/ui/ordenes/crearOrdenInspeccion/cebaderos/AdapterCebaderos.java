@@ -47,9 +47,6 @@ public class AdapterCebaderos extends RecyclerView.Adapter<AdapterCebaderos.View
         holder.tvNro.setText(cebaderoGroups.get(position).getNro());
         holder.tvEstado.setText(cebaderoGroups.get(position).getEstado());
 
-        holder.cvCliente.setOnClickListener(v -> {
-            instancia.abrirCustomDialogCebadero(position);
-        });
 
         holder.tvBorrar.setOnClickListener(v -> {
             instancia.eliminarCebadero(position);

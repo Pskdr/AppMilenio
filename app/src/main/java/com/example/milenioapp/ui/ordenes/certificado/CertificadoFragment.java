@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado;
+package com.example.milenioapp.ui.ordenes.certificado;
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -124,6 +124,9 @@ public class CertificadoFragment extends Fragment {
                         break;
 
                     case "I":
+                        tv1.setText("Roedores");
+                        tv2.setText("Estaciones");
+                        tv3.setText("");
                         break;
                 }
 
@@ -164,7 +167,7 @@ public class CertificadoFragment extends Fragment {
                     break;
 
                 case "I":
-
+                    itemZonasMostrars = (ArrayList<ItemZonasMostrar>) AppDataBase.getInstance(getContext()).getCebaderoGroupDAO().getItemsMostrar(orden.getId());
                     break;
             }
 

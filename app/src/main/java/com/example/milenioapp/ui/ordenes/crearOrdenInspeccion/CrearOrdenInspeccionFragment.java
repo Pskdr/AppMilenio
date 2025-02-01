@@ -457,6 +457,7 @@ public class CrearOrdenInspeccionFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
 
+                abrirCustomDialogCebadero(position);
             }
         },this,( orden != null ? orden.getEstadoEnvio().equals("E") : false));
 

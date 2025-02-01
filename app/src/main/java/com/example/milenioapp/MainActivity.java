@@ -330,59 +330,60 @@ public class MainActivity extends AppCompatActivity {
 
         List<Insecto> insectoList = new ArrayList<>();
         // Insectos Rastreros (Tipo 1)
-        tipoInsectoList.add(new TipoInsecto(1, "Insectos Rastreros", "IR"));
-        insectoList.add(new Insecto("Cucaracha Americana", 1));
-        insectoList.add(new Insecto("Cucaracha Alemana", 1));
-        insectoList.add(new Insecto("Cucaracha Banda Café", 1));
-        insectoList.add(new Insecto("Cucaracha Oriental", 1));
-        insectoList.add(new Insecto("Chinche de Cama", 1));
-        insectoList.add(new Insecto("Pescadito de la Plata", 1));
-        insectoList.add(new Insecto("Termitas", 1));
-        insectoList.add(new Insecto("Alacranes", 1));
-        insectoList.add(new Insecto("Tijerilla", 1));
-        insectoList.add(new Insecto("Escarabajo", 1));
-        insectoList.add(new Insecto("Pulga de Perro", 1));
-        insectoList.add(new Insecto("Garrapata", 1));
-        insectoList.add(new Insecto("Hormigas", 1));
+        insectoList.add(new Insecto("Cucaracha Americana", 2));
+        insectoList.add(new Insecto("Cucaracha Alemana", 2));
+        insectoList.add(new Insecto("Cucaracha Banda Café", 2));
+        insectoList.add(new Insecto("Cucaracha Oriental", 2));
+        insectoList.add(new Insecto("Chinche de Cama", 2));
+        insectoList.add(new Insecto("Pescadito de la Plata", 2));
+        insectoList.add(new Insecto("Termitas", 2));
+        insectoList.add(new Insecto("Alacranes", 2));
+        insectoList.add(new Insecto("Tijerilla", 2));
+        insectoList.add(new Insecto("Escarabajo", 2));
+        insectoList.add(new Insecto("Pulga de Perro", 2));
+        insectoList.add(new Insecto("Garrapata", 2));
+        insectoList.add(new Insecto("Hormigas", 2));
 
         // Insectos Voladores (Tipo 0)
 
-        tipoInsectoList.add(new TipoInsecto(0, "Voladores", "VO"));
-        insectoList.add(new Insecto("Mosca del Drenaje", 0));
-        insectoList.add(new Insecto("Mosca de la Fruta", 0));
-        insectoList.add(new Insecto("Mosca de la Carne", 0));
-        insectoList.add(new Insecto("Mosca Doméstica", 0));
-        insectoList.add(new Insecto("Mosquito", 0));
-        insectoList.add(new Insecto("Larva", 0));
-        insectoList.add(new Insecto("Avispa", 0));
-        insectoList.add(new Insecto("Abeja", 0));
-        insectoList.add(new Insecto("Aves Plagas", 0));
-        insectoList.add(new Insecto("Gallinazos", 0));
-        insectoList.add(new Insecto("Murciélagos", 0));
+        insectoList.add(new Insecto("Mosca del Drenaje", 1));
+        insectoList.add(new Insecto("Mosca de la Fruta", 1));
+        insectoList.add(new Insecto("Mosca de la Carne", 1));
+        insectoList.add(new Insecto("Mosca Doméstica", 1));
+        insectoList.add(new Insecto("Mosquito", 1));
+        insectoList.add(new Insecto("Larva", 1));
+        insectoList.add(new Insecto("Avispa", 1));
+        insectoList.add(new Insecto("Abeja", 1));
+        insectoList.add(new Insecto("Aves Plagas", 1));
+        insectoList.add(new Insecto("Gallinazos", 1));
+        insectoList.add(new Insecto("Murciélagos", 1));
 
         // Plagas de Granos Almacenados (Tipo 2)
 
-        tipoInsectoList.add(new TipoInsecto(2, "Plagas de Granos Almacenados", "PGA"));
-        insectoList.add(new Insecto("Gorgojo del Maíz", 2));
-        insectoList.add(new Insecto("Gorgojo del Pan", 2));
-        insectoList.add(new Insecto("Gorgojo Confuso de la Harina", 2));
-        insectoList.add(new Insecto("Gorgojo Aserrado del Grano", 2));
-        insectoList.add(new Insecto("Gorgojo del Frijol", 2));
-        insectoList.add(new Insecto("Gorgojo Plano de los Granos", 2));
-        insectoList.add(new Insecto("Escarabajo de los Molinos", 2));
-        insectoList.add(new Insecto("Barrenador Menor de los Granos", 2));
-        insectoList.add(new Insecto("Barrenador Mayor de los Granos", 2));
-        insectoList.add(new Insecto("Picudo del Grano", 2));
-        insectoList.add(new Insecto("Palomilla Mediterránea de la Harina", 2));
-        insectoList.add(new Insecto("Palomilla India", 2));
-        insectoList.add(new Insecto("Palomilla de la Ropa", 2));
+        insectoList.add(new Insecto("Gorgojo del Maíz", 3));
+        insectoList.add(new Insecto("Gorgojo del Pan", 3));
+        insectoList.add(new Insecto("Gorgojo Confuso de la Harina", 3));
+        insectoList.add(new Insecto("Gorgojo Aserrado del Grano", 3));
+        insectoList.add(new Insecto("Gorgojo del Frijol", 3));
+        insectoList.add(new Insecto("Gorgojo Plano de los Granos", 3));
+        insectoList.add(new Insecto("Escarabajo de los Molinos", 3));
+        insectoList.add(new Insecto("Barrenador Menor de los Granos", 3));
+        insectoList.add(new Insecto("Barrenador Mayor de los Granos", 3));
+        insectoList.add(new Insecto("Picudo del Grano", 3));
+        insectoList.add(new Insecto("Palomilla Mediterránea de la Harina", 3));
+        insectoList.add(new Insecto("Palomilla India", 3));
+        insectoList.add(new Insecto("Palomilla de la Ropa", 3));
 
         // Roedores (Tipo 3)
-        tipoInsectoList.add(new TipoInsecto(3, "Roedores", "R"));
-        insectoList.add(new Insecto("Ratón Doméstico", 3));
-        insectoList.add(new Insecto("Ratón de Campo", 3));
-        insectoList.add(new Insecto("Rata de los Tejados", 3));
-        insectoList.add(new Insecto("Rata Parda / Noruega", 3));
+        tipoInsectoList.add(new TipoInsecto("Voladores", "VO"));
+        tipoInsectoList.add(new TipoInsecto("Insectos Rastreros", "IR"));
+        tipoInsectoList.add(new TipoInsecto("Plagas de Granos Almacenados", "PGA"));
+        tipoInsectoList.add(new TipoInsecto("Roedores", "R"));
+
+        insectoList.add(new Insecto("Ratón Doméstico", 4));
+        insectoList.add(new Insecto("Ratón de Campo", 4));
+        insectoList.add(new Insecto("Rata de los Tejados", 4));
+        insectoList.add(new Insecto("Rata Parda / Noruega", 4));
         new Thread(() -> {
 
             //AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();
@@ -391,11 +392,18 @@ public class MainActivity extends AppCompatActivity {
             AppDataBase.getInstance(getApplicationContext()).getZonaDAO().insertAll(zonaList);
             AppDataBase.getInstance(getApplicationContext()).getHigieneDAO().insertAll(higieneList);
             AppDataBase.getInstance(getApplicationContext()).getInsectoDAO().insertAll(insectoList);
-            AppDataBase.getInstance(getApplicationContext()).getTecnicaAplicacionDAO().insertAll(tecnicaAplicacionList);
-            AppDataBase.getInstance(getApplicationContext()).getElementoUtilizadoDAO().insertAll(materialList);
-            AppDataBase.getInstance(getApplicationContext()).getAmbienteDAO().insertAll(ambienteList);
-            AppDataBase.getInstance(getApplicationContext()).getHallazgoDAO().insertAll(hallazgoList);
-            AppDataBase.getInstance(getApplicationContext()).getTipoInsectoDAO().insertAll(tipoInsectoList);
+
+
+            runOnUiThread(() -> {
+                new Thread(() -> {
+
+                    AppDataBase.getInstance(getApplicationContext()).getTecnicaAplicacionDAO().insertAll(tecnicaAplicacionList);
+                    AppDataBase.getInstance(getApplicationContext()).getElementoUtilizadoDAO().insertAll(materialList);
+                    AppDataBase.getInstance(getApplicationContext()).getAmbienteDAO().insertAll(ambienteList);
+                    AppDataBase.getInstance(getApplicationContext()).getHallazgoDAO().insertAll(hallazgoList);
+                    AppDataBase.getInstance(getApplicationContext()).getTipoInsectoDAO().insertAll(tipoInsectoList);
+                }).start();
+            });
 
         }).start();
     }

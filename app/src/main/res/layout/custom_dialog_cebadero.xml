@@ -79,6 +79,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tvEstadoCebadro"
                     android:layout_width="0dp"
                     android:layout_weight="50"
                     android:layout_height="wrap_content"

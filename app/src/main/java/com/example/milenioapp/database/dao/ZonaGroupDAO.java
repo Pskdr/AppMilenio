@@ -8,10 +8,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.ZonaGroup;
-import com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado.ItemZonasMostrar;
+import com.example.milenioapp.ui.ordenes.certificado.ItemZonasMostrar;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.GrupoZonaMostrar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao

@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.milenioapp.database.entity.CebaderoGroup;
+import com.example.milenioapp.ui.ordenes.certificado.ItemZonasMostrar;
 
 import java.util.List;
 
@@ -27,4 +28,11 @@ public interface CebaderoGroupDAO {
 
     @Query("select * from cebaderosgroup where idOrden =:id")
     List<CebaderoGroup> getByOrdenId(long id);
+
+    @Query("SELECT  cebaderosgroup.id as id, insectos.descripcion AS nombre, cebaderosgroup.zona as tecnica, '' as ingredienteActivo  " +
+            "            FROM insectosgroup " +
+            "            INNER JOIN insectos ON insectosgroup.idInsecto = insectos.id " +
+            "            INNER JOIN cebaderosgroup ON insectosgroup.idOrden = cebaderosgroup.idOrden " +
+            "            WHERE insectosgroup.idOrden = :idOrden AND cebaderosgroup.idOrden = :idOrden")
+    List<ItemZonasMostrar> getItemsMostrar(long idOrden);
 }

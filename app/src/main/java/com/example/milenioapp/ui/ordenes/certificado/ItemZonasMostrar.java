@@ -1,4 +1,4 @@
-package com.example.milenioapp.ui.ordenes.crearOrdenServicio.certificado;
+package com.example.milenioapp.ui.ordenes.certificado;
 
 public class ItemZonasMostrar {
     private long id;
