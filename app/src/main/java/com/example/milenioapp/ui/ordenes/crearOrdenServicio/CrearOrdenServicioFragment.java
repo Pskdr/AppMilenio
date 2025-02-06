@@ -48,6 +48,7 @@ import com.example.milenioapp.ui.ordenes.crearOrdenServicio.insecto.InsectoGroup
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.AdapterZonas;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.CustomDialogZonas;
 import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.GrupoZonaMostrar;
+import com.example.milenioapp.ui.ordenes.crearOrdenServicio.zona.ProductoMostrar;
 import com.example.milenioapp.ui.utilidades.Utilities;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -77,9 +78,10 @@ public class CrearOrdenServicioFragment extends Fragment {
             tiNit,tiContacto,tiTelefono,tiDireccion, tiSede,
             tiFechaActual, tiOperario;
 
+    private Spinner spinnerProducto, spinnerdocificacion, spinnerTecnica;
     private TextInputEditText tiObservaciones, tiCorrectivos,tiObjetivoDelServicio;
 
-    private TextView tvHoraIngreso, tvHoraSalida;
+    private TextView tvHoraIngreso, tvHoraSalida, tvIngredienteActivo;
     int thour, tminute;
 
     private Button btnAgregarZona, btnAgregarAreaLocativa, btnAgregarEspecie,btnAgregarElementos;
@@ -102,6 +104,12 @@ public class CrearOrdenServicioFragment extends Fragment {
         tiOperario = view.findViewById(R.id.tiOperario);
         tvHoraIngreso = view.findViewById(R.id.tvTimeIngreso);
         tvHoraSalida = view.findViewById(R.id.tvTimeSalida);
+
+        tvIngredienteActivo = view.findViewById(R.id.tvIngredienteActivo);
+
+        spinnerProducto = view.findViewById(R.id.spinnerProducto);
+        spinnerdocificacion = view.findViewById(R.id.spinnerDocis);
+        spinnerTecnica = view.findViewById(R.id.spinnerTecnica);
 
         spinnerTipoDeServicio = view.findViewById(R.id.spinnerTipoDeServicio);
 
@@ -285,7 +293,8 @@ public class CrearOrdenServicioFragment extends Fragment {
             getActivity().runOnUiThread(() ->{
                 
                 cargarAdapterZonas();
-               
+
+                llenarSpinners();
             });
 
         }).start();
@@ -309,7 +318,6 @@ public class CrearOrdenServicioFragment extends Fragment {
             cliente = AppDataBase.getInstance(getContext()).getClienteDAO().getById(id);
 
             getActivity().runOnUiThread(() -> {
-
 
                 Utilities utilities = new Utilities();
                 Calendar calendarActual = Calendar.getInstance();
@@ -461,6 +469,178 @@ public class CrearOrdenServicioFragment extends Fragment {
         }).start();
     }
 
+    private void llenarSpinners() {
+        new Thread(() -> {
+
+            ArrayList<ProductoMostrar> productosList = new ArrayList<>();
+
+            productosList.add(new ProductoMostrar("MURDER 10%", "ALFACIPERMETRINA"));
+            productosList.add(new ProductoMostrar("HAWKER PLUS", "TETRAMETRINA+CIPERMETRINA"));
+            productosList.add(new ProductoMostrar("TEMPRID SC", "BETACYFLUTHRIN+IMIDACLOPRID"));
+            productosList.add(new ProductoMostrar("STUKA GRANOS", "Deltametrina+ Pirimifox metil"));
+            productosList.add(new ProductoMostrar("SAMBAMETRINA", "ALFACIPERMETRINA"));
+            productosList.add(new ProductoMostrar("BECIBUX 10%", "Betacipermetrina+Butóxido de piperonilo"));
+            productosList.add(new ProductoMostrar("FENDONA SC", "ALFACIPERMETRINA"));
+            productosList.add(new ProductoMostrar("PYBUTHRIN 33", "Piretrina natural"));
+
+            ArrayList<String> ingredienteList = new ArrayList<>();
+
+            ArrayList<String> docis = new ArrayList<>();
+
+            docis.add("6 cm/ lt agua");
+            docis.add("4 cm/ lt agua");
+            docis.add("10 cm/ lt agua");
+            docis.add("puro");
+
+            ArrayList<String> tecnicaAplicacion = new ArrayList<>();
+            tecnicaAplicacion.add("ASPERSIÓN");
+            tecnicaAplicacion.add("NEBULIZACIÓN");
+            tecnicaAplicacion.add("TERMONEBULIZACIÓN");
+            tecnicaAplicacion.add("POLVO SECO");
+            tecnicaAplicacion.add("INSPECCIÓN");
+            tecnicaAplicacion.add("DESRATIZACIÓN");
+            tecnicaAplicacion.add("APLICACIÓN DE GEL");
+            getActivity().runOnUiThread(() -> {
+
+                if (grupoZonas.get(0).getProducto().equals("") && grupoZonas.get(0).getIngredienteActivo().equals("") &&
+                        grupoZonas.get(0).getDocificacion().equals("") &&
+                        grupoZonas.get(0).getTecnicaAplicacion().equals("")) {
+                    productosList.add(0, new ProductoMostrar("-Seleccione-", "-Seleccione-"));
+                    ingredienteList.add(0, "-Seleccione-");
+                    docis.add(0, "-Seleccione-");
+                    tecnicaAplicacion.add(0, "-Seleccione-");
+                } else {
+                    productosList.add(0, new ProductoMostrar(grupoZonas.get(0).getProducto(), grupoZonas.get(0).getIngredienteActivo()));
+                    ingredienteList.add(0, grupoZonas.get(0).getIngredienteActivo());
+                    docis.add(0, grupoZonas.get(0).getDocificacion());
+                    tecnicaAplicacion.add(0, grupoZonas.get(0).getTecnicaAplicacion());
+                }
+                ArrayAdapter<ProductoMostrar> arrayAdapterProducto = new ArrayAdapter<ProductoMostrar>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, productosList) {
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        ProductoMostrar producto = getItem(position);
+                        label.setHint(producto.getProducto());
+                        label.setText(producto.getProducto());
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        ProductoMostrar producto = getItem(position);
+                        label.setText(producto.getProducto());
+                        return label;
+                    }
+                };
+
+
+                ArrayAdapter<String> arrayAdapterDocis = new ArrayAdapter<String>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, docis) {
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setHint(producto);
+                        label.setText(producto);
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setText(producto);
+                        return label;
+                    }
+                };
+
+                ArrayAdapter<String> arrayAdapterTecnica = new ArrayAdapter<String>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, tecnicaAplicacion) {
+
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setHint(producto);
+                        label.setText(producto);
+
+                        return label;
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        TextView label = (TextView) super.getDropDownView(position, convertView, parent);
+
+                        String producto = getItem(position);
+                        label.setText(producto);
+                        return label;
+                    }
+                };
+
+                spinnerProducto.setAdapter(arrayAdapterProducto);
+                spinnerdocificacion.setAdapter(arrayAdapterDocis);
+                spinnerTecnica.setAdapter(arrayAdapterTecnica);
+
+                spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        for (int i = 0; i < grupoZonas.size(); i++) {
+                            grupoZonas.get(i).setProducto(productosList.get(position).getProducto());
+                            grupoZonas.get(i).setIngredienteActivo(productosList.get(position).getIngredienteActivo());
+                            tvIngredienteActivo.setText(productosList.get(position).getIngredienteActivo());
+                        }
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                spinnerdocificacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        for (int i = 0; i < grupoZonas.size(); i++) {
+                            grupoZonas.get(i).setDocificacion(docis.get(position));
+                        }
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                spinnerTecnica.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        for (int i = 0; i < grupoZonas.size(); i++) {
+                            grupoZonas.get(i).setTecnicaAplicacion(tecnicaAplicacion.get(position).toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            });
+
+        }).start();
+    }
 
 
     private String tipoDeServicio;
@@ -820,6 +1000,7 @@ public class CrearOrdenServicioFragment extends Fragment {
 
             getActivity().runOnUiThread(() -> {
                 cargarAdapterZonas();
+                llenarSpinners();
             });
         }).start();
     }

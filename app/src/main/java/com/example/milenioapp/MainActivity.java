@@ -259,11 +259,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         List<Higiene> higieneList = new ArrayList<>();
-        higieneList.add(new Higiene( "Area libre de residuos", 0));
-        higieneList.add(new Higiene( "Area sin acumulación de basura", 0));
-        higieneList.add(new Higiene( "Zona sucia sifón", 0));
-        higieneList.add(new Higiene( "Baños", 0));
-        higieneList.add(new Higiene( "Areas comunes", 0));
+        higieneList.add(new Higiene("Area libre de residuos", 0));
+        higieneList.add(new Higiene("Area sin acumulación de basura", 0));
+        higieneList.add(new Higiene("Zona sucia sifón", 0));
+        higieneList.add(new Higiene("Baños", 0));
+        higieneList.add(new Higiene("Areas comunes", 0));
 
 
         List<Material> materialList = new ArrayList<>();
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         tecnicaAplicacionList.add(new TecnicaAplicacion(5, "DESRATIZACION", "", 0));
         tecnicaAplicacionList.add(new TecnicaAplicacion(6, "APLICACION GEL", "", 0));
         String uuid = Secure.getString(this.getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-        Usuario usuario = new Usuario(0,"correo@ejemplo.com","Olga Cecilia","",uuid,"A");
+        Usuario usuario = new Usuario(0, "correo@ejemplo.com", "Olga Cecilia", "", uuid, "A");
 
         List<Ambiente> ambienteList = new ArrayList<>();
 
@@ -384,6 +384,197 @@ public class MainActivity extends AppCompatActivity {
         insectoList.add(new Insecto("Ratón de Campo", 4));
         insectoList.add(new Insecto("Rata de los Tejados", 4));
         insectoList.add(new Insecto("Rata Parda / Noruega", 4));
+
+
+        tipoClientes.add(new TipoCliente(9, "Polleria"));
+        tipoClientes.add(new TipoCliente(10, "Carnicería"));
+        tipoClientes.add(new TipoCliente(11, "Planta de Cárnicos"));
+        tipoClientes.add(new TipoCliente(12, "Planta de Beneficio"));
+        tipoClientes.add(new TipoCliente(13, "Planta de Granos Almacenados"));
+        tipoClientes.add(new TipoCliente(14, "Planta de Alimentos"));
+        tipoClientes.add(new TipoCliente(15, "Restaurantes"));
+        tipoClientes.add(new TipoCliente(16, "Supermercados"));
+        tipoClientes.add(new TipoCliente(17, "Comercializadora de Grasas"));
+        tipoClientes.add(new TipoCliente(18, "Hoteles"));
+        tipoClientes.add(new TipoCliente(19, "Atracciones Mecánicas"));
+
+
+        // Zonas para Polleria (ID: 9)
+        zonaList.add(new Zona("Bodega", 9));
+        zonaList.add(new Zona("Materia Prima", 9));
+        zonaList.add(new Zona("Producción", 9));
+        zonaList.add(new Zona("Empaque", 9));
+        zonaList.add(new Zona("Despacho", 9));
+        zonaList.add(new Zona("Oficinas", 9));
+        zonaList.add(new Zona("Cafetín", 9));
+        zonaList.add(new Zona("Lockers", 9));
+        zonaList.add(new Zona("Exteriores", 9));
+        zonaList.add(new Zona("Estantería", 9));
+        zonaList.add(new Zona("Recepción", 9));
+        zonaList.add(new Zona("Zócalos", 9));
+        zonaList.add(new Zona("Área Social", 9));
+        zonaList.add(new Zona("Otros", 9));
+
+        // Zonas para Carnicería (ID: 10)
+        zonaList.add(new Zona("Oficinas", 10));
+        zonaList.add(new Zona("Cuarto de Residuos", 10));
+        zonaList.add(new Zona("Producción", 10));
+        zonaList.add(new Zona("Áreas Comunes", 10));
+        zonaList.add(new Zona("Exteriores", 10));
+        zonaList.add(new Zona("Bodegas", 10));
+        zonaList.add(new Zona("Lockers", 10));
+        zonaList.add(new Zona("Baños", 10));
+        zonaList.add(new Zona("Cafetín", 10));
+        zonaList.add(new Zona("Recepción", 10));
+        zonaList.add(new Zona("Despachos", 10));
+
+        // Zonas para Planta de Cárnicos (ID: 11)
+        zonaList.add(new Zona("Lavado de Canastillas", 11));
+        zonaList.add(new Zona("Puerta de Cava", 11));
+        zonaList.add(new Zona("Refrigeradores", 11));
+        zonaList.add(new Zona("Cuarto Químicos", 11));
+        zonaList.add(new Zona("Zona de Motores", 11));
+        zonaList.add(new Zona("Ingreso Principal", 11));
+        zonaList.add(new Zona("Bodega Materia Prima", 11));
+        zonaList.add(new Zona("Despostes", 11));
+        zonaList.add(new Zona("Cámaras", 11));
+        zonaList.add(new Zona("Cuarto de Residuos", 11));
+        zonaList.add(new Zona("Zona Oreo", 11));
+        zonaList.add(new Zona("Oficinas", 11));
+        zonaList.add(new Zona("Mantenimiento", 11));
+        zonaList.add(new Zona("Unidades Sanitarias", 11));
+        zonaList.add(new Zona("Área Social", 11));
+        zonaList.add(new Zona("Área de Canastillas", 11));
+        zonaList.add(new Zona("Área de Reciclaje", 11));
+
+        // Zonas para Planta de Beneficio (ID: 12)
+        zonaList.add(new Zona("Sala de Vísceras Blancas Sifón", 12));
+        zonaList.add(new Zona("Sala Vísceras Rojas Sifón", 12));
+        zonaList.add(new Zona("Lockers", 12));
+        zonaList.add(new Zona("Oficinas", 12));
+        zonaList.add(new Zona("Comedor", 12));
+        zonaList.add(new Zona("Cuartos Almacenamiento", 12));
+        zonaList.add(new Zona("Zona Sucia Sifón", 12));
+        zonaList.add(new Zona("Zona Intermedia Sifón", 12));
+        zonaList.add(new Zona("Ingreso de Áreas", 12));
+        zonaList.add(new Zona("Despacho Subproducto", 12));
+        zonaList.add(new Zona("Área Insumos", 12));
+        zonaList.add(new Zona("Áreas Comunes", 12));
+        zonaList.add(new Zona("Baños", 12));
+        zonaList.add(new Zona("Zócalos", 12));
+        zonaList.add(new Zona("Cafetín", 12));
+        zonaList.add(new Zona("Área Subproducto", 12));
+        zonaList.add(new Zona("Sifón Sala Bovinos", 12));
+        zonaList.add(new Zona("Sifón Sala Porcinos", 12));
+        zonaList.add(new Zona("Parqueadero", 12));
+        zonaList.add(new Zona("Salida a Corrales", 12));
+        zonaList.add(new Zona("Ingreso Instalaciones", 12));
+        zonaList.add(new Zona("Área PTAR", 12));
+        zonaList.add(new Zona("Zonas Comunes", 12));
+        zonaList.add(new Zona("Zona Motobomba", 12));
+        zonaList.add(new Zona("Pasillos", 12));
+        zonaList.add(new Zona("Ingresos", 12));
+        zonaList.add(new Zona("Exteriores", 12));
+
+        // Zonas para Planta de Granos Almacenados (ID: 13)
+        zonaList.add(new Zona("Oficinas", 13));
+        zonaList.add(new Zona("Cocineta", 13));
+        zonaList.add(new Zona("Vestier", 13));
+        zonaList.add(new Zona("Ingresos", 13));
+        zonaList.add(new Zona("Área de Producción", 13));
+        zonaList.add(new Zona("Área de Empaque", 13));
+        zonaList.add(new Zona("Área de Almacenamiento", 13));
+        zonaList.add(new Zona("Área de Recepción", 13));
+        zonaList.add(new Zona("Muelles de Carga y Descarga", 13));
+        zonaList.add(new Zona("Área de Manejo de Residuos", 13));
+        zonaList.add(new Zona("Baños", 13));
+        zonaList.add(new Zona("Lavado de Canastillas", 13));
+        zonaList.add(new Zona("Bodega", 13));
+
+        // Zonas para Planta de Alimentos (ID: 14)
+        zonaList.add(new Zona("Cafetín", 14));
+        zonaList.add(new Zona("Baños", 14));
+        zonaList.add(new Zona("Bodega", 14));
+        zonaList.add(new Zona("Pisos", 14));
+        zonaList.add(new Zona("Producción", 14));
+        zonaList.add(new Zona("Zona de Residuos", 14));
+        zonaList.add(new Zona("Lockers", 14));
+        zonaList.add(new Zona("Paredes", 14));
+        zonaList.add(new Zona("Eléctricos", 14));
+        zonaList.add(new Zona("Bodega de Materia Prima", 14));
+        zonaList.add(new Zona("Recepción de Leche", 14));
+        zonaList.add(new Zona("Pasteurizador", 14));
+        zonaList.add(new Zona("Empaque", 14));
+        zonaList.add(new Zona("Patio Trasero", 14));
+        zonaList.add(new Zona("Oficinas", 14));
+        zonaList.add(new Zona("Exteriores", 14));
+
+        // Zonas para Restaurantes (ID: 15)
+        zonaList.add(new Zona("Cocina", 15));
+        zonaList.add(new Zona("Baños", 15));
+        zonaList.add(new Zona("Bodega Materia Prima", 15));
+        zonaList.add(new Zona("Lockers", 15));
+        zonaList.add(new Zona("Mesas", 15));
+        zonaList.add(new Zona("Áreas Comunes", 15));
+        zonaList.add(new Zona("Exteriores", 15));
+        zonaList.add(new Zona("Eléctricos", 15));
+        zonaList.add(new Zona("Zócalos", 15));
+        zonaList.add(new Zona("Pasillos", 15));
+        zonaList.add(new Zona("Recepción", 15));
+
+        // Zonas para Supermercados (ID: 16)
+        zonaList.add(new Zona("Carnicería", 16));
+        zonaList.add(new Zona("Legumbrería", 16));
+        zonaList.add(new Zona("Bodegas", 16));
+        zonaList.add(new Zona("Gerencia", 16));
+        zonaList.add(new Zona("Oficinas", 16));
+        zonaList.add(new Zona("Registradora", 16));
+        zonaList.add(new Zona("Cafetería", 16));
+        zonaList.add(new Zona("Estanterías", 16));
+        zonaList.add(new Zona("Refrigeradores", 16));
+        zonaList.add(new Zona("Pasillos", 16));
+        zonaList.add(new Zona("Área Social", 16));
+        zonaList.add(new Zona("Lockers", 16));
+
+        // Zonas para Comercializadora de Grasas (ID: 17)
+        zonaList.add(new Zona("Bodega", 17));
+        zonaList.add(new Zona("Oficinas", 17));
+        zonaList.add(new Zona("Producción", 17));
+        zonaList.add(new Zona("PTARL", 17));
+        zonaList.add(new Zona("Calderas", 17));
+        zonaList.add(new Zona("Pasillos", 17));
+        zonaList.add(new Zona("Zonas Verdes", 17));
+        zonaList.add(new Zona("Zona Social", 17));
+        zonaList.add(new Zona("Baños", 17));
+        zonaList.add(new Zona("Lockers", 17));
+
+        // Zonas para Hoteles (ID: 18)
+        zonaList.add(new Zona("Habitaciones", 18));
+        zonaList.add(new Zona("Baños", 18));
+        zonaList.add(new Zona("Closets", 18));
+        zonaList.add(new Zona("Recepción", 18));
+        zonaList.add(new Zona("Pasillos", 18));
+        zonaList.add(new Zona("Refrigeradores", 18));
+        zonaList.add(new Zona("Bodegas", 18));
+        zonaList.add(new Zona("Zócalos", 18));
+        zonaList.add(new Zona("Parqueaderos", 18));
+        zonaList.add(new Zona("Zonas Comunes", 18));
+        zonaList.add(new Zona("Ingresos", 18));
+        zonaList.add(new Zona("Lavandería", 18));
+
+        // Zonas para Atracciones Mecánicas (ID: 19)
+        zonaList.add(new Zona("Recepción", 19));
+        zonaList.add(new Zona("Baños", 19));
+        zonaList.add(new Zona("Bodega", 19));
+        zonaList.add(new Zona("Lockers", 19));
+        zonaList.add(new Zona("Oficinas", 19));
+        zonaList.add(new Zona("Áreas Comunes", 19));
+        zonaList.add(new Zona("Zonas de Juego", 19));
+        zonaList.add(new Zona("Eléctricos", 19));
+        zonaList.add(new Zona("Taquillas", 19));
+        zonaList.add(new Zona("Happy Food’s", 19));
+        zonaList.add(new Zona("Sala de Eventos", 19));
+        zonaList.add(new Zona("Otros", 19));
         new Thread(() -> {
 
             //AppDataBase.getInstance(getApplicationContext()).getUsuarioDAO().insertDatos();

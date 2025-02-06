@@ -59,7 +59,7 @@ public class AdapterZonas extends RecyclerView.Adapter<AdapterZonas.ViewHolderCl
         holder.cvCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                instancia.abrirCustomDialog(grupoZonas.get(finalPosition), finalPosition);
+                // instancia.abrirCustomDialog(grupoZonas.get(finalPosition), finalPosition);
             }
         });
 
